@@ -1,0 +1,38 @@
+# Descargas de terceros
+data/raw/*
+!data/raw/README.md
+
+# Cache de OSM / osmnx
+data/cache/
+cache/
+
+# Intermedios
+data/interim/
+*.tmp
+*.log
+
+# Entornos
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
+# Secretos
+.env
+*.key
+
+# IDE y sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Archivos grandes
+*.osm
+*.pbf

@@ -1,0 +1,15 @@
+# Python 3.12 (el stack geoespacial no está fijado contra el 3.14 del sistema).
+# Instalar con: uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -r requirements.txt
+#
+# osmnx: descarga y simplificación de la red vial de OpenStreetMap.
+# geopandas/shapely/pyproj: los trae osmnx; hacen falta para el join espacial.
+# pandas/numpy: tabla de tramos y variables sintéticas (Poisson vía numpy).
+# scikit-learn: solo el chequeo de sanity en scripts/validate_dataset.py.
+# networkx: lo trae osmnx; grafo no dirigido y GraphML.
+osmnx==2.1.1
+pandas==3.1.0
+numpy==2.5.4
+scikit-learn==1.9.1
+networkx==3.7
+geopandas==1.2.0
+shapely==2.2.0
