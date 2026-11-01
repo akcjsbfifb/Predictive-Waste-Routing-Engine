@@ -1,0 +1,1248 @@
+paso,tramo_id,desde,hasta,distancia_m,nombre_calle,tipo_zona,prioridad_recoleccion,agregado,visita
+1,4,32382075,11518717752,25.97,Teniente General Juan Domingo Perón,residencial,baja,True,1
+2,690,11518717752,237634305,7.09,Teniente General Juan Domingo Perón,residencial,media,False,1
+3,692,237634305,11570710143,9.45,Cerrito,residencial,baja,True,1
+4,926,11570710143,1399347866,103.18,Cerrito,residencial,alta,False,1
+5,925,1399347866,3043451067,6.09,Cerrito,residencial,baja,True,1
+6,685,3043451067,237634293,6.82,Cerrito,residencial,media,False,1
+7,688,237634293,14231509746,8.78,Sarmiento,residencial,baja,True,1
+8,1240,14231509746,12297165289,48.72,Sarmiento,residencial,media,False,1
+9,273,12297165289,195645729,79.41,Sarmiento,residencial,media,False,1
+10,274,195645729,14227665175,126.65,Libertad,comercial,alta,False,1
+11,1205,14227665175,10923019572,11.38,Libertad,comercial,baja,True,1
+12,1189,10923019572,9322125977,7.84,Libertad,comercial,baja,True,1
+13,1190,9322125977,14227665181,9.9,Avenida Corrientes,comercial,baja,True,1
+14,289,14227665181,195720857,28.69,Avenida Corrientes,comercial,media,True,1
+15,288,195720857,12361777964,36.7,Avenida Corrientes,comercial,media,True,1
+16,288,12361777964,195720857,36.7,Avenida Corrientes,comercial,media,False,2
+17,289,195720857,14227665181,28.69,Avenida Corrientes,comercial,media,False,2
+18,1190,14227665181,9322125977,9.9,Avenida Corrientes,comercial,baja,True,2
+19,1192,9322125977,14227665190,8.97,Libertad,comercial,baja,True,1
+20,1177,14227665190,6487934408,107.53,Libertad,comercial,alta,False,1
+21,88,6487934408,180512989,12.63,Libertad,residencial,media,False,1
+22,87,180512989,3075573710,14.53,Libertad,residencial,baja,True,1
+23,394,3075573710,195721788,115.61,Libertad,residencial,alta,True,1
+24,396,195721788,12631476078,10.1,Tucumán,residencial,baja,True,1
+25,894,12631476078,1167258272,5.86,Tucumán,residencial,media,True,1
+26,894,1167258272,12631476078,5.86,Tucumán,residencial,media,False,2
+27,396,12631476078,195721788,10.1,Tucumán,residencial,baja,True,2
+28,395,195721788,6672693075,12.3,Libertad,residencial,media,True,1
+29,1186,6672693075,6672693082,13.73,Libertad,residencial,media,True,1
+30,1186,6672693082,6672693075,13.73,Libertad,residencial,media,False,2
+31,395,6672693075,195721788,12.3,Libertad,residencial,media,False,2
+32,394,195721788,3075573710,115.61,Libertad,residencial,alta,False,2
+33,87,3075573710,180512989,14.53,Libertad,residencial,baja,True,2
+34,89,180512989,6487934409,11.08,Lavalle,residencial,alta,True,1
+35,89,6487934409,180512989,11.08,Lavalle,residencial,alta,False,2
+36,90,180512989,6672693093,54.84,Lavalle,residencial,alta,False,1
+37,556,6672693093,195738108,73.43,Lavalle,residencial,alta,False,1
+38,553,195738108,195738096,131.53,Lavalle,residencial,media,True,1
+39,553,195738096,195738108,131.53,Lavalle,residencial,media,False,2
+40,555,195738108,4868679921,9.26,Talcahuano,residencial,media,False,1
+41,152,4868679921,192907674,114.22,Talcahuano,residencial,media,False,1
+42,153,192907674,5387934174,12.48,Talcahuano,residencial,media,False,1
+43,1155,5387934174,5172889852,95.06,Talcahuano,residencial,alta,False,1
+44,44,5172889852,81600863,11.52,Talcahuano,residencial,baja,True,1
+45,46,81600863,14229680586,128.93,Talcahuano,residencial,media,False,1
+46,1147,14229680586,4971556115,10.31,Talcahuano,residencial,baja,True,1
+47,1146,4971556115,14229680585,12.29,Avenida Córdoba,residencial,baja,True,1
+48,1256,14229680585,14229680592,103.64,Avenida Córdoba,comercial,alta,False,1
+49,1142,14229680592,4971556114,11.68,Avenida Córdoba,comercial,baja,True,1
+50,1141,4971556114,4971564622,8.9,Uruguay,comercial,baja,True,1
+51,1107,4971564622,4475746394,9.15,Uruguay,comercial,media,False,1
+52,244,4475746394,195645561,97.49,Uruguay,comercial,alta,False,1
+53,243,195645561,195645632,113.64,Paraguay,residencial,media,False,1
+54,252,195645632,195722446,139.39,Paraguay,comercial,media,False,1
+55,497,195722446,14233074819,45.6,Paraguay,residencial,media,False,1
+56,1257,14233074819,14233074827,59.14,Paraguay,residencial,baja,True,1
+57,846,14233074827,479753191,14.07,Paraguay,residencial,baja,True,1
+58,845,479753191,14229721410,6.67,Arturo Capdevila,residencial,media,False,1
+59,1180,14229721410,6672560876,91.52,Arturo Capdevila,residencial,media,False,1
+60,842,6672560876,479753189,20.81,Arturo Capdevila,residencial,baja,True,1
+61,843,479753189,14229634823,31.28,Rodríguez Peña,residencial,media,False,1
+62,1150,14229634823,4971556118,7.77,Rodríguez Peña,residencial,baja,True,1
+63,829,4971556118,437539856,9.17,Rodríguez Peña,residencial,alta,False,1
+64,832,437539856,14229634822,8.34,Avenida Córdoba,residencial,baja,True,1
+65,1255,14229634822,14267501994,46.34,Avenida Córdoba,comercial,baja,True,1
+66,758,14267501994,243460956,75.31,Avenida Córdoba,comercial,alta,False,1
+67,757,243460956,14229634809,33.78,Avenida Córdoba,comercial,media,True,1
+68,757,14229634809,243460956,33.78,Avenida Córdoba,comercial,media,False,2
+69,755,243460956,243460955,138.13,Del Carmen,residencial,media,False,1
+70,756,243460955,243460958,90.29,Viamonte,comercial,media,False,1
+71,759,243460958,243460957,127.35,Pasaje Luis Dellepiane,comercial,media,False,1
+72,627,243460957,231794165,37.89,Tucumán,residencial,baja,True,1
+73,55,231794165,81600871,128.86,Rodríguez Peña,comercial,baja,True,1
+74,57,81600871,14229634818,116.4,Rodríguez Peña,comercial,alta,False,1
+75,830,14229634818,437539856,13.09,Rodríguez Peña,residencial,alta,False,1
+76,831,437539856,14229634819,8.94,Avenida Córdoba,residencial,baja,True,1
+77,1254,14229634819,14229634828,102.57,Avenida Córdoba,comercial,alta,False,1
+78,828,14229634828,437539853,14.18,Avenida Córdoba,residencial,baja,True,1
+79,827,437539853,4971556117,8.06,Avenida Callao,residencial,baja,True,1
+80,1149,4971556117,6672560855,126.25,Avenida Callao,residencial,media,True,1
+81,1149,6672560855,4971556117,126.25,Avenida Callao,residencial,media,False,2
+82,827,4971556117,437539853,8.06,Avenida Callao,residencial,baja,True,2
+83,59,437539853,81600874,128.67,Avenida Callao,comercial,alta,False,1
+84,58,81600874,195570640,130.16,Avenida Callao,comercial,alta,False,1
+85,229,195570640,195569931,133.48,Avenida Callao,comercial,alta,True,1
+86,230,195569931,231794140,110.93,Lavalle,residencial,alta,False,1
+87,626,231794140,231794165,133.46,Rodríguez Peña,residencial,alta,False,1
+88,232,231794165,195570640,119.36,Tucumán,comercial,alta,False,1
+89,229,195570640,195569931,133.48,Avenida Callao,comercial,alta,False,2
+90,231,195569931,14227266251,133.68,Avenida Callao,comercial,media,False,1
+91,1175,14227266251,6401393988,4.41,Avenida Callao,comercial,media,False,1
+92,1174,6401393988,14227266247,26.99,Avenida Corrientes,comercial,media,False,1
+93,1245,14227266247,14227266237,99.62,Avenida Corrientes,comercial,alta,False,1
+94,1173,14227266237,6383087156,9.89,Avenida Corrientes,comercial,media,False,1
+95,1172,6383087156,14227266232,7.6,Rodríguez Peña,comercial,baja,True,1
+96,228,14227266232,195569915,127.18,Rodríguez Peña,comercial,media,False,1
+97,226,195569915,195722531,127.06,Lavalle,residencial,alta,False,1
+98,505,195722531,195722513,133.07,Montevideo,comercial,baja,True,1
+99,502,195722513,195722490,122.14,Montevideo,comercial,media,True,1
+100,504,195722490,14229634813,127.31,Montevideo,comercial,media,False,1
+101,501,14229634813,195722469,11.6,Montevideo,comercial,media,False,1
+102,498,195722469,4971556119,10.15,Montevideo,comercial,baja,True,1
+103,1151,4971556119,14229634808,6.29,Montevideo,residencial,media,True,1
+104,1151,14229634808,4971556119,6.29,Montevideo,residencial,media,False,2
+105,498,4971556119,195722469,10.15,Montevideo,comercial,baja,True,2
+106,500,195722469,14229634812,6.63,Avenida Córdoba,comercial,media,False,1
+107,1252,14229634812,14229634801,121.86,Avenida Córdoba,comercial,media,False,1
+108,256,14229634801,195645645,10.6,Avenida Córdoba,comercial,baja,True,1
+109,257,195645645,14229634803,8.45,Avenida Córdoba,comercial,baja,True,1
+110,1253,14229634803,14229680594,99.88,Avenida Córdoba,comercial,media,True,1
+111,1253,14229680594,14229634803,99.88,Avenida Córdoba,comercial,media,False,2
+112,257,14229634803,195645645,8.45,Avenida Córdoba,comercial,baja,True,2
+113,254,195645645,4971564621,8.42,Paraná,comercial,media,True,1
+114,1152,4971564621,14229616699,8.76,Paraná,comercial,media,True,1
+115,1152,14229616699,4971564621,8.76,Paraná,comercial,media,False,2
+116,254,4971564621,195645645,8.42,Paraná,comercial,media,False,2
+117,255,195645645,14229616698,10.83,Paraná,comercial,baja,True,1
+118,52,14229616698,81600868,128.9,Paraná,comercial,alta,False,1
+119,53,81600868,14233274059,69.79,Viamonte,residencial,alta,False,1
+120,49,14233274059,81600864,53.47,Viamonte,residencial,media,False,1
+121,48,81600864,4475746395,129.78,Uruguay,comercial,alta,True,1
+122,1108,4475746395,4971556114,11.32,Uruguay,comercial,media,True,1
+123,1108,4971556114,4475746395,11.32,Uruguay,comercial,media,False,2
+124,48,4475746395,81600864,129.78,Uruguay,comercial,alta,False,2
+125,43,81600864,81600863,129.17,Viamonte,residencial,media,False,1
+126,45,81600863,5172889853,12.36,Viamonte,residencial,alta,False,1
+127,1156,5172889853,6672693086,66.78,Viamonte,residencial,baja,True,1
+128,466,6672693086,195722252,47.67,Viamonte,residencial,alta,False,1
+129,465,195722252,3189535590,18.61,Libertad,residencial,baja,True,1
+130,885,3189535590,1135635736,28.45,Libertad,residencial,media,True,1
+131,885,1135635736,3189535590,28.45,Libertad,residencial,media,False,2
+132,465,3189535590,195722252,18.61,Libertad,residencial,baja,True,2
+133,467,195722252,11335124361,8.85,Libertad,residencial,baja,True,1
+134,1209,11335124361,14229680578,116.14,Libertad,residencial,alta,False,1
+135,238,14229680578,195645519,12.98,Libertad,residencial,baja,True,1
+136,235,195645519,4971556107,10.75,Avenida Córdoba,residencial,baja,True,1
+137,1140,4971556107,11406260493,106.37,Avenida Córdoba,residencial,alta,False,1
+138,1145,11406260493,4971556115,12.52,Avenida Córdoba,residencial,alta,False,1
+139,1144,4971556115,4971564623,9.37,Talcahuano,residencial,media,False,1
+140,1153,4971564623,14229680583,7.36,Talcahuano,residencial,media,False,1
+141,241,14229680583,195645552,103.69,Talcahuano,residencial,alta,False,1
+142,240,195645552,195645588,134.27,Talcahuano,residencial,media,False,1
+143,248,195645588,11955985061,131.89,Talcahuano,comercial,alta,False,1
+144,393,11955985061,195721766,12.16,Talcahuano,comercial,media,False,1
+145,392,195721766,11955972160,12.2,Talcahuano,comercial,media,False,1
+146,133,11955972160,192905380,111.98,Talcahuano,comercial,alta,False,1
+147,131,192905380,195737988,211.25,Talcahuano,comercial,alta,True,1
+148,131,195737988,192905380,211.25,Talcahuano,comercial,alta,False,2
+149,132,192905380,11813126296,78.15,Arenales,comercial,media,False,1
+150,136,11813126296,192905382,49.08,Arenales,comercial,media,False,1
+151,134,192905382,2948319740,56.71,Libertad,comercial,media,True,1
+152,134,2948319740,192905382,56.71,Libertad,comercial,media,False,2
+153,135,192905382,4562188384,136.79,Arenales,comercial,alta,False,1
+154,660,4562188384,237634162,20.15,Arenales,residencial,baja,True,1
+155,662,237634162,11890622578,5.03,Cerrito,residencial,media,False,1
+156,1063,11890622578,3053646021,4.58,Cerrito,residencial,baja,True,1
+157,915,3053646021,1295516954,125.53,Cerrito,comercial,alta,False,1
+158,914,1295516954,3043436532,18.61,Cerrito,comercial,alta,False,1
+159,654,3043436532,237634137,9.64,Cerrito,residencial,baja,True,1
+160,536,237634137,195738007,46.74,Juncal,residencial,media,True,1
+161,538,195738007,3043447642,10.88,Avenida 9 de Julio,residencial,media,True,1
+162,538,3043447642,195738007,10.88,Avenida 9 de Julio,residencial,media,False,2
+163,537,195738007,1295516957,16.23,Avenida 9 de Julio,residencial,alta,True,1
+164,916,1295516957,3189430575,48.86,Avenida 9 de Julio,residencial,media,True,1
+165,916,3189430575,1295516957,48.86,Avenida 9 de Julio,residencial,media,False,2
+166,537,1295516957,195738007,16.23,Avenida 9 de Julio,residencial,alta,False,2
+167,536,195738007,237634137,46.74,Juncal,residencial,media,False,2
+168,653,237634137,2934976050,12.62,Cerrito,residencial,media,True,1
+169,653,2934976050,237634137,12.62,Cerrito,residencial,media,False,2
+170,655,237634137,3043447644,18.69,Juncal,comercial,media,False,1
+171,1053,3043447644,3175784861,131.08,Juncal,comercial,media,False,1
+172,120,3175784861,192903448,8.12,Juncal,comercial,media,False,1
+173,122,192903448,11813126298,113.08,Libertad,comercial,media,True,1
+174,122,11813126298,192903448,113.08,Libertad,comercial,media,False,2
+175,119,192903448,195737988,187.07,Juncal,comercial,media,False,1
+176,535,195737988,195738211,95.18,Juncal,residencial,media,False,1
+177,166,195738211,192910283,114.29,Juncal,residencial,baja,True,1
+178,168,192910283,3173678665,20.57,Paraná,residencial,baja,True,1
+179,1073,3173678665,3173678706,104.3,Paraná,residencial,media,True,1
+180,1073,3173678706,3173678665,104.3,Paraná,residencial,media,False,2
+181,168,3173678665,192910283,20.57,Paraná,residencial,baja,True,2
+182,167,192910283,232108455,96.66,Paraná,residencial,media,True,1
+183,635,232108455,3173678664,10.08,Montevideo,residencial,baja,True,1
+184,1072,3173678664,3077604533,53.13,Montevideo,comercial,baja,True,1
+185,637,3077604533,232108487,8.06,Montevideo,residencial,alta,True,1
+186,636,232108487,232201417,108.46,General Las Heras,comercial,baja,True,1
+187,639,232201417,232108510,263.32,General Las Heras,comercial,media,True,1
+188,639,232108510,232201417,263.32,General Las Heras,comercial,media,False,2
+189,648,232201417,232184319,200.7,Rodríguez Peña,comercial,media,False,1
+190,647,232184319,232184332,107.17,Rodríguez Peña,comercial,alta,False,1
+191,649,232184332,11955984997,91.02,Rodríguez Peña,comercial,baja,True,1
+192,644,11955984997,232184296,12.65,Rodríguez Peña,comercial,media,False,1
+193,643,232184296,11955972145,10.96,Avenida Santa Fe,comercial,baja,True,1
+194,900,11955972145,1246509138,81.11,Avenida Santa Fe,comercial,media,True,1
+195,900,1246509138,11955972145,81.11,Avenida Santa Fe,comercial,media,False,2
+196,643,11955972145,232184296,10.96,Avenida Santa Fe,comercial,baja,True,2
+197,645,232184296,11955985041,9.51,Rodríguez Peña,comercial,baja,True,1
+198,652,11955985041,232184358,143.68,Rodríguez Peña,comercial,media,True,1
+199,651,232184358,2836407148,81.22,Rodríguez Peña,residencial,media,True,1
+200,651,2836407148,232184358,81.22,Rodríguez Peña,residencial,media,False,2
+201,652,232184358,11955985041,143.68,Rodríguez Peña,comercial,media,False,2
+202,645,11955985041,232184296,9.51,Rodríguez Peña,comercial,baja,True,2
+203,646,232184296,11955985046,6.75,Avenida Santa Fe,comercial,baja,True,1
+204,1234,11955985046,11955972147,165.48,Avenida Santa Fe,comercial,media,False,1
+205,386,11955972147,195721748,14.02,Avenida Santa Fe,comercial,baja,True,1
+206,388,195721748,11955985000,9.63,Montevideo,comercial,baja,True,1
+207,630,11955985000,231794282,69.76,Montevideo,comercial,alta,False,1
+208,629,231794282,1435016224,39.77,Montevideo,comercial,baja,True,1
+209,124,1435016224,192905376,6.79,Montevideo,residencial,media,False,1
+210,123,192905376,1435016222,26.4,Arenales,residencial,media,False,1
+211,937,1435016222,4475487081,42.88,Arenales,residencial,media,False,1
+212,642,4475487081,232184258,19.36,Arenales,residencial,alta,False,1
+213,640,232184258,3173678722,34.95,Arenales,residencial,baja,True,1
+214,128,3173678722,192905378,10.17,Arenales,residencial,media,True,1
+215,128,192905378,3173678722,10.17,Arenales,residencial,media,False,2
+216,640,3173678722,232184258,34.95,Arenales,residencial,baja,True,2
+217,641,232184258,3176732821,46.86,Arenales,residencial,baja,True,1
+218,1076,3176732821,4475487072,33.33,Arenales,residencial,media,False,1
+219,633,4475487072,231794366,20.66,Arenales,residencial,baja,True,1
+220,632,231794366,3173678713,8.2,Montevideo,residencial,alta,False,1
+221,638,3173678713,232108487,109.27,Montevideo,comercial,media,False,1
+222,637,232108487,3077604533,8.06,Montevideo,residencial,alta,False,2
+223,1072,3077604533,3173678664,53.13,Montevideo,comercial,baja,True,2
+224,635,3173678664,232108455,10.08,Montevideo,residencial,baja,True,2
+225,167,232108455,192910283,96.66,Paraná,residencial,media,False,2
+226,166,192910283,195738211,114.29,Juncal,residencial,baja,True,2
+227,164,195738211,192909732,199.58,Uruguay,comercial,media,False,1
+228,165,192909732,11955985005,110.92,Uruguay,comercial,alta,False,1
+229,428,11955985005,195722029,12.13,Uruguay,comercial,media,False,1
+230,426,195722029,11955972151,12.28,Avenida Santa Fe,comercial,baja,True,1
+231,1235,11955972151,11955972149,95.81,Avenida Santa Fe,comercial,media,True,1
+232,1235,11955972149,11955972151,95.81,Avenida Santa Fe,comercial,media,False,2
+233,426,11955972151,195722029,12.28,Avenida Santa Fe,comercial,baja,True,2
+234,427,195722029,11955972152,7.9,Avenida Santa Fe,comercial,media,False,1
+235,1236,11955972152,11955972155,109.82,Avenida Santa Fe,comercial,media,False,1
+236,391,11955972155,195721766,10.5,Avenida Santa Fe,comercial,alta,False,1
+237,390,195721766,11955972153,7.68,Avenida Santa Fe,comercial,alta,False,1
+238,1237,11955972153,11955972157,116.48,Avenida Santa Fe,comercial,alta,False,1
+239,422,11955972157,195722009,9.09,Avenida Santa Fe,comercial,media,False,1
+240,423,195722009,11955972158,7.18,Avenida Santa Fe,comercial,baja,True,1
+241,1096,11955972158,4293917809,74.16,Avenida Santa Fe,comercial,alta,True,1
+242,1096,4293917809,11955972158,74.16,Avenida Santa Fe,comercial,alta,False,2
+243,423,11955972158,195722009,7.18,Avenida Santa Fe,comercial,baja,True,2
+244,425,195722009,11955985064,15.06,Libertad,comercial,baja,True,1
+245,158,11955985064,192908454,131.47,Libertad,comercial,alta,False,1
+246,157,192908454,11806416965,10.79,Libertad,residencial,baja,True,1
+247,1184,11806416965,6672693032,52.82,Libertad,residencial,alta,False,1
+248,1181,6672693032,6672693023,59.78,Libertad,residencial,alta,False,1
+249,145,6672693023,192906559,7.29,Libertad,residencial,baja,True,1
+250,147,192906559,14229680574,105.46,Libertad,residencial,media,False,1
+251,1148,14229680574,4971556116,8.39,Libertad,residencial,baja,True,1
+252,236,4971556116,195645519,9.44,Libertad,residencial,baja,True,1
+253,237,195645519,14229680577,11.04,Avenida Córdoba,residencial,baja,True,1
+254,1154,14229680577,4971564633,118.02,Avenida Córdoba,residencial,alta,False,1
+255,657,4971564633,237634150,11.79,Avenida Córdoba,residencial,media,False,1
+256,658,237634150,11806416914,13.21,Cerrito,residencial,alta,False,1
+257,1229,11806416914,11806410365,102.13,Cerrito,residencial,alta,False,1
+258,671,11806410365,237634204,11.28,Cerrito,residencial,media,False,1
+259,672,237634204,11806416961,10.75,Cerrito,residencial,baja,True,1
+260,1185,11806416961,6672693034,48.6,Cerrito,residencial,media,True,1
+261,1185,6672693034,11806416961,48.6,Cerrito,residencial,media,False,2
+262,672,11806416961,237634204,10.75,Cerrito,residencial,baja,True,2
+263,670,237634204,6672693025,9.05,Paraguay,residencial,baja,True,1
+264,1182,6672693025,9561644857,5.49,Paraguay,residencial,media,False,1
+265,1193,9561644857,9561631090,26.54,Paraguay,residencial,baja,True,1
+266,1183,9561631090,6672693028,30.89,Paraguay,residencial,media,False,1
+267,146,6672693028,192906559,65.47,Paraguay,residencial,alta,False,1
+268,144,192906559,195645552,133.3,Paraguay,residencial,alta,False,1
+269,239,195645552,195645561,130.71,Paraguay,residencial,alta,False,1
+270,242,195645561,195645577,137.91,Uruguay,residencial,media,False,1
+271,247,195645577,11955985057,135.36,Uruguay,comercial,media,True,1
+272,247,11955985057,195645577,135.36,Uruguay,comercial,media,False,2
+273,245,195645577,195645588,128.39,Marcelo T. de Alvear,residencial,media,False,1
+274,156,195645588,192908454,136.51,Marcelo T. de Alvear,residencial,alta,False,1
+275,159,192908454,12244916338,62.1,Marcelo T. de Alvear,residencial,baja,True,1
+276,1225,12244916338,11806410351,51.6,Marcelo T. de Alvear,residencial,baja,True,1
+277,917,11806410351,1320979601,9.18,Marcelo T. de Alvear,residencial,media,False,1
+278,666,1320979601,237634192,14.14,Marcelo T. de Alvear,residencial,media,False,1
+279,668,237634192,11806410333,7.0,Cerrito,residencial,baja,True,1
+280,1133,11806410333,4952035887,4.3,Cerrito,residencial,media,True,1
+281,1133,4952035887,11806410333,4.3,Cerrito,residencial,media,False,2
+282,668,11806410333,237634192,7.0,Cerrito,residencial,baja,True,2
+283,669,237634192,11806416936,7.63,Marcelo T. de Alvear,residencial,media,True,1
+284,669,11806416936,237634192,7.63,Marcelo T. de Alvear,residencial,media,False,2
+285,667,237634192,4952035897,12.59,Cerrito,residencial,media,False,1
+286,1066,4952035897,3053655455,102.83,Cerrito,comercial,media,False,1
+287,663,3053655455,237634175,34.44,Cerrito,comercial,alta,False,1
+288,13,237634175,32385176,26.15,Avenida Santa Fe,residencial,media,True,1
+289,14,32385176,2407436694,15.03,Avenida Santa Fe,residencial,baja,True,1
+290,1011,2407436694,3352200451,13.14,Avenida Santa Fe,residencial,media,True,1
+291,1011,3352200451,2407436694,13.14,Avenida Santa Fe,residencial,media,False,2
+292,14,2407436694,32385176,15.03,Avenida Santa Fe,residencial,baja,True,2
+293,15,32385176,3053655464,13.54,Avenida 9 de Julio,residencial,media,False,1
+294,890,3053655464,1167258270,52.06,Avenida 9 de Julio,residencial,alta,False,1
+295,891,1167258270,4562188387,54.96,,comercial,baja,True,1
+296,1070,4562188387,3053655484,106.24,Cerrito,comercial,media,False,1
+297,665,3053655484,237634175,13.89,Cerrito,comercial,media,False,1
+298,13,237634175,32385176,26.15,Avenida Santa Fe,residencial,media,False,2
+299,16,32385176,3053655478,35.17,Avenida 9 de Julio,residencial,baja,True,1
+300,1068,3053655478,4952035896,100.51,Avenida 9 de Julio,residencial,media,False,1
+301,434,4952035896,195722103,13.2,Avenida 9 de Julio,residencial,baja,True,1
+302,433,195722103,2407436696,16.31,Marcelo T. de Alvear,residencial,media,True,1
+303,433,2407436696,195722103,16.31,Marcelo T. de Alvear,residencial,media,False,2
+304,435,195722103,11806410335,9.02,Avenida 9 de Julio,residencial,media,False,1
+305,1130,11806410335,4952035886,2.7,Avenida 9 de Julio,residencial,alta,False,1
+306,1131,4952035886,11806416958,103.19,Avenida 9 de Julio,residencial,media,False,1
+307,444,11806416958,195722136,12.05,Avenida 9 de Julio,residencial,alta,False,1
+308,442,195722136,2407436698,15.79,Paraguay,residencial,alta,True,1
+309,442,2407436698,195722136,15.79,Paraguay,residencial,alta,False,2
+310,443,195722136,11806410363,11.3,Avenida 9 de Julio,residencial,media,False,1
+311,1228,11806410363,11806416911,101.72,Avenida 9 de Julio,residencial,media,False,1
+312,455,11806416911,195722195,15.01,Avenida 9 de Julio,residencial,media,False,1
+313,456,195722195,11890527532,12.99,Avenida 9 de Julio,residencial,media,True,1
+314,456,11890527532,195722195,12.99,Avenida 9 de Julio,residencial,media,False,2
+315,454,195722195,2407436700,16.24,Avenida Córdoba,residencial,media,False,1
+316,1016,2407436700,3352200461,5.25,Avenida Córdoba,residencial,baja,True,1
+317,918,3352200461,1320979690,10.22,Avenida Córdoba,residencial,baja,True,1
+318,450,1320979690,195722177,11.02,Avenida Córdoba,residencial,baja,True,1
+319,452,195722177,11890527536,13.6,Avenida 9 de Julio,residencial,media,True,1
+320,452,11890527536,195722177,13.6,Avenida 9 de Julio,residencial,media,False,2
+321,451,195722177,11806416907,15.51,Avenida 9 de Julio,residencial,media,False,1
+322,1227,11806416907,11806410360,102.63,Avenida 9 de Julio,residencial,alta,False,1
+323,447,11806410360,195722154,12.51,Avenida 9 de Julio,residencial,baja,True,1
+324,446,195722154,2407436697,12.56,Paraguay,residencial,alta,True,1
+325,446,2407436697,195722154,12.56,Paraguay,residencial,alta,False,2
+326,448,195722154,11806416954,10.6,Avenida 9 de Julio,residencial,media,False,1
+327,1091,11806416954,3484971434,47.2,Avenida 9 de Julio,residencial,baja,True,1
+328,1090,3484971434,4952035882,58.01,Avenida 9 de Julio,residencial,alta,False,1
+329,1129,4952035882,11806410340,2.51,Avenida 9 de Julio,residencial,baja,True,1
+330,439,11806410340,195722127,9.7,Avenida 9 de Julio,residencial,media,False,1
+331,438,195722127,4952035892,10.75,Avenida 9 de Julio,residencial,media,True,1
+332,438,4952035892,195722127,10.75,Avenida 9 de Julio,residencial,media,False,2
+333,440,195722127,11997163622,8.85,Marcelo T. de Alvear,residencial,alta,False,1
+334,897,11997163622,1167258285,16.86,Marcelo T. de Alvear,residencial,media,False,1
+335,896,1167258285,11806410343,8.7,,residencial,media,True,1
+336,1128,11806410343,4952035881,2.87,,residencial,media,True,1
+337,1128,4952035881,11806410343,2.87,,residencial,media,False,2
+338,896,11806410343,1167258285,8.7,,residencial,media,False,2
+339,751,1167258285,237683249,13.01,Marcelo T. de Alvear,residencial,baja,True,1
+340,754,237683249,11806410348,12.16,Marcelo T. de Alvear,residencial,media,True,1
+341,754,11806410348,237683249,12.16,Marcelo T. de Alvear,residencial,media,False,2
+342,753,237683249,11806410346,6.67,Carlos Pellegrini,residencial,media,False,1
+343,1127,11806410346,4952035880,3.25,Carlos Pellegrini,residencial,media,False,1
+344,1126,4952035880,11328575889,63.92,Carlos Pellegrini,comercial,media,False,1
+345,1208,11328575889,11806416951,44.36,Carlos Pellegrini,residencial,media,False,1
+346,717,11806416951,237634464,10.57,Carlos Pellegrini,residencial,baja,True,1
+347,716,237634464,11806410357,9.6,Carlos Pellegrini,residencial,baja,True,1
+348,1226,11806410357,11806416904,106.47,Carlos Pellegrini,comercial,media,True,1
+349,1226,11806416904,11806410357,106.47,Carlos Pellegrini,comercial,media,False,2
+350,716,11806410357,237634464,9.6,Carlos Pellegrini,residencial,baja,True,2
+351,715,237634464,11406791631,11.16,Paraguay,residencial,alta,False,1
+352,1210,11406791631,11890527527,41.75,Paraguay,residencial,media,False,1
+353,330,11890527527,195721138,85.72,Paraguay,comercial,alta,False,1
+354,331,195721138,14229680563,127.96,Suipacha,comercial,alta,False,1
+355,1137,14229680563,4965152628,6.29,Suipacha,residencial,media,False,1
+356,324,4965152628,195721117,8.21,Suipacha,residencial,media,False,1
+357,327,195721117,14229680564,8.46,Suipacha,residencial,baja,True,1
+358,42,14229680564,81600858,117.72,Suipacha,comercial,media,False,1
+359,41,81600858,12240508469,57.87,Viamonte,comercial,alta,False,1
+360,38,12240508469,81600857,76.37,Viamonte,comercial,media,False,1
+361,37,81600857,437567240,130.39,Esmeralda,comercial,media,False,1
+362,835,437567240,9892458932,33.74,Avenida Córdoba,comercial,baja,True,1
+363,342,9892458932,195721258,97.54,Avenida Córdoba,comercial,media,False,1
+364,341,195721258,9892458931,84.64,Avenida Córdoba,comercial,alta,False,1
+365,143,9892458931,192905780,51.58,Avenida Córdoba,comercial,alta,False,1
+366,142,192905780,1123544686,54.68,Avenida Córdoba,comercial,baja,True,1
+367,868,1123544686,922076920,52.12,Avenida Córdoba,comercial,baja,True,1
+368,869,922076920,4965166007,10.16,San Martín,comercial,baja,True,1
+369,901,4965166007,1282173438,58.59,San Martín,comercial,alta,True,1
+370,901,1282173438,4965166007,58.59,San Martín,comercial,alta,False,2
+371,869,4965166007,922076920,10.16,San Martín,comercial,baja,True,2
+372,870,922076920,11592570139,8.97,Avenida Córdoba,comercial,alta,True,1
+373,870,11592570139,922076920,8.97,Avenida Córdoba,comercial,alta,False,2
+374,762,922076920,244891975,74.21,San Martín,comercial,media,False,1
+375,610,244891975,205498211,55.66,San Martín,residencial,alta,False,1
+376,609,205498211,205498212,119.84,Paraguay,comercial,media,True,1
+377,612,205498212,3174780034,76.91,Paraguay,residencial,media,False,1
+378,807,3174780034,303890931,11.76,Paraguay,residencial,media,False,1
+379,808,303890931,4909450144,11.15,Paraguay,residencial,baja,True,1
+380,1120,4909450144,4909450164,7.61,Paraguay,residencial,alta,False,1
+381,797,4909450164,303889639,8.46,Paraguay,residencial,baja,True,1
+382,796,303889639,2321135322,13.3,Paraguay,residencial,media,False,1
+383,1006,2321135322,4921521787,9.68,Avenida Leandro N. Alem,residencial,alta,False,1
+384,1097,4921521787,4466680381,129.43,Avenida Leandro N. Alem,residencial,alta,False,1
+385,1007,4466680381,2321135325,14.95,Avenida Leandro N. Alem,comercial,baja,True,1
+386,1009,2321135325,4824082970,9.42,Avenida Córdoba,comercial,baja,True,1
+387,878,4824082970,971304926,25.3,Avenida Córdoba,residencial,media,True,1
+388,878,971304926,4824082970,25.3,Avenida Córdoba,residencial,media,False,2
+389,1009,4824082970,2321135325,9.42,Avenida Córdoba,comercial,baja,True,2
+390,1008,2321135325,4466680790,14.67,Avenida Leandro N. Alem,comercial,media,False,1
+391,1098,4466680790,14211224195,102.64,Avenida Leandro N. Alem,comercial,alta,False,1
+392,27,14211224195,81600850,11.55,Avenida Leandro N. Alem,residencial,media,False,1
+393,26,81600850,14211224189,5.66,Avenida Leandro N. Alem,residencial,media,True,1
+394,26,14211224189,81600850,5.66,Avenida Leandro N. Alem,residencial,media,False,2
+395,24,81600850,2321135326,10.53,Viamonte,residencial,baja,True,1
+396,1010,2321135326,4909450135,5.72,Viamonte,residencial,alta,False,1
+397,812,4909450135,303891096,6.02,Viamonte,residencial,baja,True,1
+398,815,303891096,14211224194,13.24,Avenida Leandro N. Alem,residencial,media,True,1
+399,815,14211224194,303891096,13.24,Avenida Leandro N. Alem,residencial,media,False,2
+400,813,303891096,14211224192,6.7,Avenida Leandro N. Alem,residencial,baja,True,1
+401,1242,14211224192,14211533217,112.98,Avenida Leandro N. Alem,residencial,alta,False,1
+402,819,14211533217,303891097,9.19,Avenida Leandro N. Alem,residencial,baja,True,1
+403,817,303891097,14211533213,6.69,Avenida Leandro N. Alem,residencial,media,True,1
+404,1243,14211533213,14212023281,120.36,Avenida Leandro N. Alem,residencial,alta,True,1
+405,1194,14212023281,9615091866,6.38,Avenida Leandro N. Alem,residencial,media,True,1
+406,820,9615091866,303891132,3.04,Avenida Leandro N. Alem,residencial,baja,True,1
+407,821,303891132,14212023280,8.91,Avenida Leandro N. Alem,residencial,alta,True,1
+408,821,14212023280,303891132,8.91,Avenida Leandro N. Alem,residencial,alta,False,2
+409,820,303891132,9615091866,3.04,Avenida Leandro N. Alem,residencial,baja,True,2
+410,1194,9615091866,14212023281,6.38,Avenida Leandro N. Alem,residencial,media,False,2
+411,1243,14212023281,14211533213,120.36,Avenida Leandro N. Alem,residencial,alta,False,2
+412,817,14211533213,303891097,6.69,Avenida Leandro N. Alem,residencial,media,False,2
+413,818,303891097,14211533215,3.55,Tucumán,residencial,baja,True,1
+414,213,14211533215,194496212,54.82,Tucumán,residencial,media,False,1
+415,214,194496212,14233984122,68.39,Tucumán,residencial,media,True,1
+416,600,14233984122,199509343,53.94,Tucumán,residencial,media,True,1
+417,600,199509343,14233984122,53.94,Tucumán,residencial,media,False,2
+418,214,14233984122,194496212,68.39,Tucumán,residencial,media,False,2
+419,212,194496212,9615091867,132.5,25 de Mayo,residencial,media,False,1
+420,565,9615091867,195754670,2.4,25 de Mayo,residencial,baja,True,1
+421,372,195754670,195721650,124.61,25 de Mayo,residencial,media,False,1
+422,374,195721650,11990562963,54.7,Avenida Corrientes,comercial,media,True,1
+423,374,11990562963,195721650,54.7,Avenida Corrientes,comercial,media,False,2
+424,373,195721650,301084867,124.96,Avenida Corrientes,comercial,media,True,1
+425,94,301084867,180516416,126.91,Avenida Corrientes,comercial,media,True,1
+426,91,180516416,181119222,123.83,San Martín,comercial,baja,True,1
+427,102,181119222,199509328,129.75,San Martín,comercial,alta,False,1
+428,599,199509328,922076922,131.7,San Martín,comercial,alta,False,1
+429,871,922076922,1123544697,51.81,Viamonte,comercial,media,True,1
+430,871,1123544697,922076922,51.81,Viamonte,comercial,media,False,2
+431,873,922076922,11592618640,104.6,Viamonte,comercial,media,False,1
+432,31,11592618640,81600853,26.35,Viamonte,residencial,alta,False,1
+433,30,81600853,205498214,127.42,Reconquista,comercial,media,False,1
+434,615,205498214,11592570140,8.47,Avenida Córdoba,residencial,media,True,1
+435,615,11592570140,205498214,8.47,Avenida Córdoba,residencial,media,False,2
+436,613,205498214,244891974,65.33,Reconquista,residencial,media,False,1
+437,761,244891974,1283952830,103.23,Tres Sargentos,residencial,baja,True,1
+438,908,1283952830,2321135323,37.59,Avenida Leandro N. Alem,residencial,alta,True,1
+439,805,2321135323,303890931,10.54,Avenida Leandro N. Alem,residencial,media,True,1
+440,806,303890931,3174780018,8.57,Avenida Leandro N. Alem,residencial,media,True,1
+441,806,3174780018,303890931,8.57,Avenida Leandro N. Alem,residencial,media,False,2
+442,805,303890931,2321135323,10.54,Avenida Leandro N. Alem,residencial,media,False,2
+443,908,2321135323,1283952830,37.59,Avenida Leandro N. Alem,residencial,alta,False,2
+444,909,1283952830,3362852906,37.75,Avenida Leandro N. Alem,residencial,alta,False,1
+445,1085,3362852906,4921521796,55.5,Avenida Leandro N. Alem,comercial,media,False,1
+446,811,4921521796,303891095,15.99,Avenida Leandro N. Alem,comercial,baja,True,1
+447,772,303891095,256203143,16.6,Avenida Córdoba,comercial,media,False,1
+448,773,256203143,4466680388,14.82,,comercial,media,True,1
+449,773,4466680388,256203143,14.82,,comercial,media,False,2
+450,182,256203143,192913582,127.83,25 de Mayo,comercial,alta,False,1
+451,183,192913582,14211224193,40.08,Viamonte,residencial,media,True,1
+452,814,14211224193,303891096,3.79,Viamonte,residencial,media,True,1
+453,814,303891096,14211224193,3.79,Viamonte,residencial,media,False,2
+454,183,14211224193,192913582,40.08,Viamonte,residencial,media,False,2
+455,28,192913582,81600853,116.94,Viamonte,comercial,media,False,1
+456,29,81600853,199509343,132.47,Reconquista,residencial,media,False,1
+457,598,199509343,199509328,128.78,Tucumán,comercial,alta,False,1
+458,155,199509328,192907675,122.57,Tucumán,comercial,baja,True,1
+459,154,192907675,195721278,130.78,Tucumán,comercial,alta,False,1
+460,343,195721278,195721290,129.87,Maipú,comercial,media,False,1
+461,345,195721290,195721312,123.16,Maipú,comercial,baja,True,1
+462,348,195721312,2958884534,99.94,Avenida Corrientes,comercial,media,False,1
+463,493,2958884534,195722416,32.44,Avenida Corrientes,comercial,baja,True,1
+464,93,195722416,180516416,126.07,Avenida Corrientes,comercial,alta,False,1
+465,94,180516416,301084867,126.91,Avenida Corrientes,comercial,media,False,2
+466,360,301084867,195721467,125.02,Reconquista,comercial,alta,True,1
+467,360,195721467,301084867,125.02,Reconquista,comercial,alta,False,2
+468,373,301084867,195721650,124.96,Avenida Corrientes,comercial,media,False,2
+469,371,195721650,195721632,130.92,25 de Mayo,comercial,alta,False,1
+470,361,195721632,195721516,127.48,Sarmiento,comercial,alta,False,1
+471,357,195721516,195721425,127.96,Sarmiento,comercial,media,True,1
+472,358,195721425,195721531,127.93,San Martín,comercial,media,False,1
+473,364,195721531,2481986719,72.26,San Martín,residencial,media,False,1
+474,367,2481986719,195721560,55.87,San Martín,residencial,baja,True,1
+475,366,195721560,195721814,127.78,Bartolomé Mitre,comercial,media,False,1
+476,399,195721814,199509260,50.11,Bartolomé Mitre,comercial,media,False,1
+477,592,199509260,967130604,60.34,Avenida Presidente Roque Sáenz Peña,comercial,media,True,1
+478,592,967130604,199509260,60.34,Avenida Presidente Roque Sáenz Peña,comercial,media,False,2
+479,579,199509260,199509028,82.9,Bartolomé Mitre,residencial,media,True,1
+480,579,199509028,199509260,82.9,Bartolomé Mitre,residencial,media,False,2
+481,590,199509260,199509246,100.9,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+482,591,199509246,199509318,105.03,Avenida Presidente Roque Sáenz Peña,comercial,media,True,1
+483,594,199509318,199509275,53.06,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+484,352,199509275,195721363,99.58,Esmeralda,comercial,media,False,1
+485,353,195721363,4707765614,111.85,Sarmiento,comercial,alta,False,1
+486,1118,4707765614,11519480935,9.58,Sarmiento,residencial,baja,True,1
+487,409,11519480935,195721912,7.27,Sarmiento,residencial,baja,True,1
+488,410,195721912,12472980305,8.26,Avenida Presidente Roque Sáenz Peña,residencial,media,True,1
+489,410,12472980305,195721912,8.26,Avenida Presidente Roque Sáenz Peña,residencial,media,False,2
+490,174,195721912,192911844,127.03,Suipacha,comercial,alta,True,1
+491,175,192911844,304977538,84.82,Teniente General Juan Domingo Perón,comercial,media,False,1
+492,734,304977538,237634547,53.91,Teniente General Juan Domingo Perón,residencial,alta,False,1
+493,735,237634547,1967842485,15.31,Teniente General Juan Domingo Perón,residencial,alta,False,1
+494,974,1967842485,11570710137,12.11,Teniente General Juan Domingo Perón,residencial,alta,False,1
+495,584,11570710137,199509077,9.29,Teniente General Juan Domingo Perón,residencial,baja,True,1
+496,583,199509077,4954010957,11.81,Avenida 9 de Julio,residencial,baja,True,1
+497,1055,4954010957,3043449778,106.14,Avenida 9 de Julio,residencial,alta,False,1
+498,519,3043449778,195722645,13.6,Avenida 9 de Julio,residencial,media,False,1
+499,518,195722645,2407444846,14.83,Bartolomé Mitre,residencial,media,True,1
+500,1023,2407444846,3352212062,5.39,Bartolomé Mitre,residencial,baja,True,1
+501,1024,3352212062,2407444847,8.95,Bartolomé Mitre,residencial,baja,True,1
+502,314,2407444847,195721010,13.37,Bartolomé Mitre,residencial,media,True,1
+503,314,195721010,2407444847,13.37,Bartolomé Mitre,residencial,media,False,2
+504,1024,2407444847,3352212062,8.95,Bartolomé Mitre,residencial,baja,True,2
+505,1023,3352212062,2407444846,5.39,Bartolomé Mitre,residencial,baja,True,2
+506,518,2407444846,195722645,14.83,Bartolomé Mitre,residencial,media,False,2
+507,520,195722645,3176992773,12.37,Avenida 9 de Julio,residencial,baja,True,1
+508,1079,3176992773,14231509730,97.2,Avenida 9 de Julio,residencial,media,False,1
+509,479,14231509730,195722307,14.82,Avenida 9 de Julio,residencial,alta,False,1
+510,478,195722307,4516459231,11.73,Avenida 9 de Julio,residencial,media,True,1
+511,478,4516459231,195722307,11.73,Avenida 9 de Julio,residencial,media,False,2
+512,476,195722307,1967842461,10.33,Rivadavia,residencial,media,True,1
+513,476,1967842461,195722307,10.33,Rivadavia,residencial,media,False,2
+514,477,195722307,2407444848,13.68,Rivadavia,residencial,media,False,1
+515,1025,2407444848,3352212066,9.55,Rivadavia,residencial,media,False,1
+516,1026,3352212066,2407444849,5.53,Rivadavia,residencial,baja,True,1
+517,472,2407444849,195722284,13.58,Rivadavia,residencial,media,False,1
+518,473,195722284,4516459229,11.69,Avenida 9 de Julio,residencial,alta,True,1
+519,473,4516459229,195722284,11.69,Avenida 9 de Julio,residencial,alta,False,2
+520,474,195722284,11263724356,27.04,Rivadavia,residencial,baja,True,1
+521,698,11263724356,237634332,7.96,Rivadavia,residencial,media,False,1
+522,699,237634332,14231509734,9.99,Cerrito,residencial,media,True,1
+523,699,14231509734,237634332,9.99,Cerrito,residencial,media,False,2
+524,696,237634332,4516459226,11.5,Lima,residencial,media,True,1
+525,696,4516459226,237634332,11.5,Lima,residencial,media,False,2
+526,697,237634332,11263724355,10.7,Rivadavia,residencial,baja,True,1
+527,301,11263724355,195720936,127.57,Rivadavia,residencial,media,False,1
+528,303,195720936,14235413250,88.99,Libertad,residencial,media,False,1
+529,1241,14235413250,13427829762,33.67,Libertad,residencial,media,False,1
+530,292,13427829762,195720875,3.54,Libertad,residencial,baja,True,1
+531,290,195720875,195720904,133.76,Libertad,residencial,baja,True,1
+532,297,195720904,11570710141,130.17,Teniente General Juan Domingo Perón,residencial,alta,False,1
+533,691,11570710141,237634305,8.92,Teniente General Juan Domingo Perón,residencial,alta,False,1
+534,689,237634305,4954010962,9.52,Cerrito,residencial,media,False,1
+535,1056,4954010962,3043449779,114.48,Cerrito,residencial,alta,False,1
+536,693,3043449779,237634317,11.0,Cerrito,residencial,baja,True,1
+537,694,237634317,3176992762,12.03,Cerrito,residencial,media,True,1
+538,694,3176992762,237634317,12.03,Cerrito,residencial,media,False,2
+539,695,237634317,13427829755,9.57,Bartolomé Mitre,residencial,baja,True,1
+540,1239,13427829755,12079900736,27.36,Bartolomé Mitre,residencial,media,False,1
+541,291,12079900736,195720875,101.61,Bartolomé Mitre,residencial,alta,False,1
+542,293,195720875,13427829764,3.79,Bartolomé Mitre,residencial,media,False,1
+543,296,13427829764,195720889,125.25,Bartolomé Mitre,residencial,alta,False,1
+544,295,195720889,243460959,42.7,Bartolomé Mitre,residencial,alta,False,1
+545,760,243460959,243460960,132.48,Rodolfo Rivarola,residencial,media,True,1
+546,760,243460960,243460959,132.48,Rodolfo Rivarola,residencial,media,False,2
+547,515,243460959,195722623,85.32,Bartolomé Mitre,residencial,alta,False,1
+548,514,195722623,195722792,130.09,Uruguay,residencial,alta,True,1
+549,522,195722792,4519453506,108.18,Rivadavia,residencial,media,False,1
+550,220,4519453506,195567802,15.53,Rivadavia,residencial,alta,False,1
+551,221,195567802,14231708713,10.31,Rivadavia,residencial,baja,True,1
+552,825,14231708713,315981296,84.93,Rivadavia,residencial,alta,True,1
+553,825,315981296,14231708713,84.93,Rivadavia,residencial,alta,False,2
+554,221,14231708713,195567802,10.31,Rivadavia,residencial,baja,True,2
+555,218,195567802,315981335,16.72,Presidente Luis Sáenz Peña,residencial,media,True,1
+556,218,315981335,195567802,16.72,Presidente Luis Sáenz Peña,residencial,media,False,2
+557,219,195567802,1399347915,102.02,Paraná,residencial,alta,False,1
+558,513,1399347915,195722597,33.37,Paraná,residencial,media,False,1
+559,511,195722597,809645680,38.8,Bartolomé Mitre,residencial,baja,True,1
+560,867,809645680,809645676,66.34,Bartolomé Mitre,comercial,media,False,1
+561,510,809645676,195722577,36.14,Bartolomé Mitre,comercial,baja,True,1
+562,283,195722577,195720589,128.76,Bartolomé Mitre,comercial,alta,False,1
+563,282,195720589,195720567,134.63,Rodríguez Peña,residencial,media,False,1
+564,280,195720567,195720555,129.55,Teniente General Juan Domingo Perón,comercial,alta,False,1
+565,281,195720555,195722577,131.27,Montevideo,comercial,alta,False,1
+566,222,195722577,195568388,143.34,Montevideo,comercial,alta,False,1
+567,225,195568388,14231953072,9.11,Avenida Rivadavia,residencial,alta,True,1
+568,225,14231953072,195568388,9.11,Avenida Rivadavia,residencial,alta,False,2
+569,223,195568388,3453380639,13.95,Virrey Cevallos,residencial,media,False,1
+570,958,3453380639,1957798512,2.43,Virrey Cevallos,residencial,baja,True,1
+571,959,1957798512,4948032137,81.42,Virrey Cevallos,residencial,media,False,1
+572,955,4948032137,1957798511,10.77,Virrey Cevallos,residencial,baja,True,1
+573,957,1957798511,14231674395,11.46,Avenida Hipólito Yrigoyen,residencial,media,True,1
+574,1124,14231674395,4948032135,102.82,Avenida Hipólito Yrigoyen,residencial,media,True,1
+575,1124,4948032135,14231674395,102.82,Avenida Hipólito Yrigoyen,residencial,media,False,2
+576,957,14231674395,1957798511,11.46,Avenida Hipólito Yrigoyen,residencial,media,False,2
+577,956,1957798511,4948032138,8.36,Avenida Hipólito Yrigoyen,residencial,baja,True,1
+578,1125,4948032138,14228638235,119.96,Avenida Hipólito Yrigoyen,residencial,alta,False,1
+579,110,14228638235,181125746,7.26,Avenida Hipólito Yrigoyen,residencial,media,False,1
+580,109,181125746,4475815447,14.83,Presidente Luis Sáenz Peña,residencial,baja,True,1
+581,1109,4475815447,14232425978,40.99,Presidente Luis Sáenz Peña,comercial,media,False,1
+582,76,14232425978,180487513,14.1,Presidente Luis Sáenz Peña,residencial,media,False,1
+583,75,180487513,4948032123,10.11,Avenida de Mayo,residencial,baja,True,1
+584,530,4948032123,195722945,86.12,Avenida de Mayo,comercial,alta,False,1
+585,524,195722945,195722827,64.15,San José,residencial,media,False,1
+586,108,195722827,181125746,123.96,Hipólito Yrigoyen,residencial,alta,True,1
+587,108,181125746,195722827,123.96,Hipólito Yrigoyen,residencial,alta,False,2
+588,523,195722827,195722901,129.1,Hipólito Yrigoyen,residencial,media,False,1
+589,305,195722901,195720954,62.9,Santiago del Estero,comercial,media,True,1
+590,306,195720954,195722945,128.99,Avenida de Mayo,comercial,media,False,1
+591,521,195722945,195722792,66.93,San José,residencial,media,False,1
+592,514,195722792,195722623,130.09,Uruguay,residencial,alta,False,2
+593,516,195722623,1399347909,116.61,Bartolomé Mitre,residencial,media,False,1
+594,512,1399347909,195722597,13.3,Bartolomé Mitre,residencial,alta,False,1
+595,279,195722597,195720551,133.09,Paraná,residencial,alta,False,1
+596,278,195720551,195720555,137.93,Teniente General Juan Domingo Perón,comercial,media,False,1
+597,260,195720555,195645663,131.65,Montevideo,comercial,alta,False,1
+598,261,195645663,14227488844,121.86,Montevideo,comercial,media,False,1
+599,509,14227488844,195722554,11.01,Montevideo,comercial,baja,True,1
+600,508,195722554,6383087155,8.8,Montevideo,comercial,media,False,1
+601,1168,6383087155,14227488849,12.0,Avenida Corrientes,comercial,baja,True,1
+602,1248,14227488849,14227488836,117.84,Avenida Corrientes,comercial,alta,False,1
+603,1167,14227488836,6383087154,8.93,Avenida Corrientes,comercial,baja,True,1
+604,1165,6383087154,13323756099,6.42,Paraná,comercial,baja,True,1
+605,172,13323756099,192910284,122.02,Paraná,comercial,media,False,1
+606,171,192910284,195738096,121.16,Lavalle,residencial,alta,False,1
+607,381,195738096,195721716,122.36,Uruguay,residencial,alta,False,1
+608,379,195721716,195721701,122.06,Tucumán,residencial,alta,False,1
+609,380,195721701,195722513,137.71,Tucumán,residencial,media,False,1
+610,502,195722513,195722490,122.14,Montevideo,comercial,media,False,2
+611,51,195722490,81600868,137.83,Viamonte,comercial,media,False,1
+612,50,81600868,195721701,120.69,Paraná,comercial,media,False,1
+613,169,195721701,192910284,129.91,Paraná,residencial,alta,False,1
+614,170,192910284,195722531,139.88,Lavalle,comercial,media,False,1
+615,507,195722531,14227488853,119.48,Montevideo,comercial,media,False,1
+616,1169,14227488853,6383087155,10.06,Montevideo,comercial,media,False,1
+617,1170,6383087155,14227488857,9.31,Avenida Corrientes,comercial,media,False,1
+618,1244,14227488857,14227266228,109.27,Avenida Corrientes,comercial,alta,False,1
+619,1171,14227266228,6383087156,10.89,Avenida Corrientes,comercial,baja,True,1
+620,207,6383087156,194479376,7.61,Rodríguez Peña,comercial,alta,False,1
+621,208,194479376,14227266223,9.35,Rodríguez Peña,comercial,baja,True,1
+622,263,14227266223,195645679,121.17,Rodríguez Peña,comercial,alta,False,1
+623,190,195645679,192915180,130.9,Sarmiento,residencial,baja,True,1
+624,191,192915180,14227266243,127.2,Avenida Callao,comercial,media,True,1
+625,191,14227266243,192915180,127.2,Avenida Callao,comercial,media,False,2
+626,96,192915180,181113587,126.68,Avenida Callao,comercial,alta,False,1
+627,95,181113587,181138949,133.17,Avenida Callao,comercial,alta,True,1
+628,118,181138949,195720589,125.53,Bartolomé Mitre,comercial,alta,False,1
+629,204,195720589,194479373,144.36,Rodríguez Peña,residencial,alta,False,1
+630,206,194479373,315915983,8.15,Avenida Rivadavia,residencial,alta,True,1
+631,823,315915983,12079927878,39.58,Avenida Rivadavia,residencial,alta,True,1
+632,823,12079927878,315915983,39.58,Avenida Rivadavia,residencial,alta,False,2
+633,206,315915983,194479373,8.15,Avenida Rivadavia,residencial,alta,False,2
+634,205,194479373,256204408,69.31,Avenida Rivadavia,residencial,media,False,1
+635,774,256204408,1957798499,23.33,10 de Diciembre de 1983,residencial,media,True,1
+636,824,1957798499,315917305,72.74,10 de Diciembre de 1983,residencial,baja,True,1
+637,776,315917305,256204414,32.36,10 de Diciembre de 1983,residencial,media,True,1
+638,777,256204414,2665197993,32.79,Hipólito Yrigoyen,residencial,media,True,1
+639,193,2665197993,192919061,37.55,Hipólito Yrigoyen,residencial,baja,True,1
+640,192,192919061,2665197991,16.45,Avenida Entre Ríos,residencial,baja,True,1
+641,1045,2665197991,14235690748,2.37,Avenida Entre Ríos,residencial,alta,True,1
+642,1045,14235690748,2665197991,2.37,Avenida Entre Ríos,residencial,alta,False,2
+643,192,2665197991,192919061,16.45,Avenida Entre Ríos,residencial,baja,True,2
+644,193,192919061,2665197993,37.55,Hipólito Yrigoyen,residencial,baja,True,2
+645,777,2665197993,256204414,32.79,Hipólito Yrigoyen,residencial,media,False,2
+646,776,256204414,315917305,32.36,10 de Diciembre de 1983,residencial,media,False,2
+647,824,315917305,1957798499,72.74,10 de Diciembre de 1983,residencial,baja,True,2
+648,774,1957798499,256204408,23.33,10 de Diciembre de 1983,residencial,media,False,2
+649,775,256204408,2665197989,41.73,Avenida Rivadavia,residencial,media,False,1
+650,78,2665197989,180495464,17.25,Avenida Rivadavia,residencial,baja,True,1
+651,79,180495464,2665197994,14.69,Avenida Entre Ríos,residencial,baja,True,1
+652,1046,2665197994,4948032131,5.98,Avenida Entre Ríos,residencial,media,True,1
+653,1046,4948032131,2665197994,5.98,Avenida Entre Ríos,residencial,media,False,2
+654,79,2665197994,180495464,14.69,Avenida Entre Ríos,residencial,baja,True,2
+655,77,180495464,181138949,139.31,Avenida Callao,comercial,media,False,1
+656,95,181138949,181113587,133.17,Avenida Callao,comercial,alta,False,2
+657,97,181113587,195720567,127.77,Teniente General Juan Domingo Perón,residencial,media,False,1
+658,262,195720567,195645679,129.31,Rodríguez Peña,residencial,media,False,1
+659,258,195645679,195645663,131.8,Sarmiento,comercial,media,False,1
+660,259,195645663,195645692,133.45,Sarmiento,comercial,media,False,1
+661,266,195645692,14235413236,50.19,Paraná,residencial,media,False,1
+662,1247,14235413236,14227488831,75.08,Paraná,comercial,media,False,1
+663,308,14227488831,195720976,11.93,Paraná,comercial,baja,True,1
+664,307,195720976,6383087154,9.01,Paraná,comercial,media,False,1
+665,1166,6383087154,14227488826,8.09,Avenida Corrientes,comercial,baja,True,1
+666,1246,14227488826,14227709631,103.03,Avenida Corrientes,comercial,media,False,1
+667,1088,14227709631,3407651880,13.22,Avenida Corrientes,comercial,media,False,1
+668,1086,3407651880,14227709622,7.77,Avenida Corrientes,comercial,baja,True,1
+669,1250,14227709622,14227709606,112.66,Avenida Corrientes,comercial,media,False,1
+670,1163,14227709606,6383087152,9.54,Avenida Corrientes,residencial,alta,False,1
+671,1162,6383087152,14227665195,6.97,Avenida Corrientes,comercial,baja,True,1
+672,1249,14227665195,14227665188,111.9,Avenida Corrientes,comercial,alta,True,1
+673,1249,14227665188,14227665195,111.9,Avenida Corrientes,comercial,alta,False,2
+674,1162,14227665195,6383087152,6.97,Avenida Corrientes,comercial,baja,True,2
+675,1164,6383087152,14227709610,7.37,Talcahuano,residencial,media,True,1
+676,1164,14227709610,6383087152,7.37,Talcahuano,residencial,media,False,2
+677,286,6383087152,195720841,7.94,Talcahuano,residencial,baja,True,1
+678,287,195720841,14227665200,10.71,Talcahuano,residencial,baja,True,1
+679,271,14227665200,195645716,127.81,Talcahuano,residencial,alta,False,1
+680,270,195645716,195645729,129.97,Sarmiento,residencial,alta,False,1
+681,272,195645729,195720904,127.17,Libertad,residencial,alta,False,1
+682,188,195720904,192914325,129.79,Teniente General Juan Domingo Perón,residencial,media,False,1
+683,189,192914325,243460960,42.08,Teniente General Juan Domingo Perón,residencial,media,False,1
+684,277,243460960,195720531,84.32,Teniente General Juan Domingo Perón,residencial,media,False,1
+685,268,195720531,195645708,129.32,Uruguay,residencial,media,True,1
+686,268,195645708,195720531,129.32,Uruguay,residencial,media,False,2
+687,275,195720531,195720551,131.71,Teniente General Juan Domingo Perón,residencial,alta,False,1
+688,265,195720551,195645692,127.75,Paraná,comercial,media,False,1
+689,264,195645692,195645708,129.49,Sarmiento,comercial,media,False,1
+690,267,195645708,195645716,131.87,Sarmiento,residencial,alta,False,1
+691,186,195645716,192914325,128.85,Talcahuano,residencial,alta,False,1
+692,187,192914325,195720889,132.7,Talcahuano,residencial,alta,False,1
+693,294,195720889,195720920,128.6,Talcahuano,residencial,alta,False,1
+694,298,195720920,195720936,130.03,Rivadavia,residencial,media,False,1
+695,302,195720936,13324140598,55.35,Salta,residencial,alta,False,1
+696,527,13324140598,195722892,13.19,Salta,residencial,media,False,1
+697,526,195722892,11263724348,124.8,Avenida de Mayo,comercial,alta,True,1
+698,705,11263724348,237634390,12.61,Avenida de Mayo,comercial,media,True,1
+699,704,237634390,4516459215,15.68,Lima,residencial,media,True,1
+700,704,4516459215,237634390,15.68,Lima,residencial,media,False,2
+701,703,237634390,4515726881,14.32,Lima,residencial,baja,True,1
+702,1110,4515726881,4515726873,42.29,Lima,residencial,alta,False,1
+703,701,4515726873,237634380,9.67,Lima,residencial,media,False,1
+704,484,237634380,195722351,36.57,Hipólito Yrigoyen,residencial,baja,True,1
+705,486,195722351,4515534416,9.64,Avenida 9 de Julio,residencial,media,True,1
+706,486,4515534416,195722351,9.64,Avenida 9 de Julio,residencial,media,False,2
+707,484,195722351,237634380,36.57,Hipólito Yrigoyen,residencial,baja,True,2
+708,700,237634380,4515702039,9.48,Lima,residencial,alta,True,1
+709,700,4515702039,237634380,9.48,Lima,residencial,alta,False,2
+710,702,237634380,13427829769,9.59,Hipólito Yrigoyen,residencial,media,False,1
+711,529,13427829769,195722924,128.07,Hipólito Yrigoyen,residencial,media,False,1
+712,528,195722924,195722901,129.42,Hipólito Yrigoyen,residencial,media,False,1
+713,305,195722901,195720954,62.9,Santiago del Estero,comercial,media,False,2
+714,304,195720954,195722892,129.29,Avenida de Mayo,comercial,alta,False,1
+715,526,195722892,11263724348,124.8,Avenida de Mayo,comercial,alta,False,2
+716,705,11263724348,237634390,12.61,Avenida de Mayo,comercial,media,False,2
+717,531,237634390,195737973,36.36,Avenida de Mayo,residencial,baja,True,1
+718,533,195737973,4515726883,16.92,Avenida 9 de Julio,residencial,media,True,1
+719,533,4515726883,195737973,16.92,Avenida 9 de Julio,residencial,media,False,2
+720,532,195737973,2407444851,13.6,Avenida de Mayo,residencial,baja,True,1
+721,1028,2407444851,3352212069,5.88,Avenida de Mayo,residencial,media,False,1
+722,1027,3352212069,2407444850,9.72,Avenida de Mayo,residencial,baja,True,1
+723,481,2407444850,195722327,13.26,Avenida de Mayo,residencial,media,False,1
+724,483,195722327,4516459220,16.71,Avenida 9 de Julio,residencial,media,True,1
+725,483,4516459220,195722327,16.71,Avenida 9 de Julio,residencial,media,False,2
+726,482,195722327,4515726885,17.07,Avenida 9 de Julio,residencial,media,True,1
+727,1112,4515726885,4515726878,38.53,Avenida 9 de Julio,residencial,media,True,1
+728,491,4515726878,195722373,11.85,Avenida 9 de Julio,residencial,baja,True,1
+729,489,195722373,3076141280,26.69,Hipólito Yrigoyen,residencial,baja,True,1
+730,706,3076141280,237634439,9.4,Hipólito Yrigoyen,residencial,media,True,1
+731,707,237634439,4515702041,9.75,Bernardo de Irigoyen,residencial,alta,True,1
+732,707,4515702041,237634439,9.75,Bernardo de Irigoyen,residencial,alta,False,2
+733,706,237634439,3076141280,9.4,Hipólito Yrigoyen,residencial,media,False,2
+734,489,3076141280,195722373,26.69,Hipólito Yrigoyen,residencial,baja,True,2
+735,491,195722373,4515726878,11.85,Avenida 9 de Julio,residencial,baja,True,2
+736,1112,4515726878,4515726885,38.53,Avenida 9 de Julio,residencial,media,False,2
+737,482,4515726885,195722327,17.07,Avenida 9 de Julio,residencial,media,False,2
+738,480,195722327,1967842465,10.64,Avenida de Mayo,residencial,baja,True,1
+739,709,1967842465,237634449,25.55,Avenida de Mayo,residencial,media,False,1
+740,420,237634449,195721990,138.53,Avenida de Mayo,comercial,alta,False,1
+741,421,195721990,13326070369,12.78,Tacuarí,comercial,baja,True,1
+742,414,13326070369,195721948,53.43,Tacuarí,comercial,baja,True,1
+743,413,195721948,237634458,138.44,Rivadavia,residencial,alta,False,1
+744,714,237634458,4516459235,9.74,Bernardo de Irigoyen,residencial,baja,True,1
+745,1117,4516459235,4516459224,43.73,Bernardo de Irigoyen,residencial,alta,True,1
+746,1117,4516459224,4516459235,43.73,Bernardo de Irigoyen,residencial,alta,False,2
+747,714,4516459235,237634458,9.74,Bernardo de Irigoyen,residencial,baja,True,2
+748,712,237634458,237634552,125.23,Carlos Pellegrini,residencial,alta,False,1
+749,739,237634552,3641737065,117.94,Carlos Pellegrini,residencial,media,True,1
+750,739,3641737065,237634552,117.94,Carlos Pellegrini,residencial,media,False,2
+751,405,237634552,195721845,137.35,Bartolomé Mitre,residencial,media,False,1
+752,404,195721845,195721948,126.88,Suipacha,comercial,media,False,1
+753,412,195721948,195721964,129.69,Rivadavia,residencial,alta,False,1
+754,401,195721964,195721831,128.54,Esmeralda,residencial,alta,True,1
+755,402,195721831,199509028,125.85,Bartolomé Mitre,residencial,alta,False,1
+756,577,199509028,199509038,129.79,Maipú,comercial,alta,False,1
+757,580,199509038,199509054,64.72,Chacabuco,comercial,media,False,1
+758,418,199509054,195721977,129.5,Avenida de Mayo,comercial,media,False,1
+759,376,195721977,195721657,65.83,Piedras,comercial,media,True,1
+760,376,195721657,195721977,65.83,Piedras,comercial,media,False,2
+761,417,195721977,195721990,129.01,Avenida de Mayo,comercial,alta,False,1
+762,377,195721990,195721678,66.92,Tacuarí,comercial,baja,True,1
+763,375,195721678,195721657,130.64,Hipólito Yrigoyen,comercial,media,False,1
+764,114,195721657,181125823,129.14,Hipólito Yrigoyen,comercial,alta,False,1
+765,116,181125823,199509054,66.07,Chacabuco,comercial,media,False,1
+766,106,199509054,181122615,132.74,Avenida de Mayo,comercial,alta,False,1
+767,107,181122615,11285225594,49.69,Avenida de Mayo,comercial,alta,False,1
+768,1207,11285225594,14212423163,44.91,Avenida de Mayo,residencial,baja,True,1
+769,840,14212423163,456045873,1.05,Avenida de Mayo,residencial,baja,True,1
+770,70,456045873,180487511,42.9,Avenida de Mayo,residencial,baja,True,1
+771,72,180487511,1399347930,20.08,Bolívar,residencial,baja,True,1
+772,932,1399347930,7234412430,35.89,Bolívar,residencial,baja,True,1
+773,198,7234412430,192919501,17.6,Bolívar,residencial,media,True,1
+774,195,192919501,695808696,18.49,Bolívar,residencial,baja,True,1
+775,866,695808696,14228273523,10.72,Bolívar,residencial,alta,True,1
+776,866,14228273523,695808696,10.72,Bolívar,residencial,alta,False,2
+777,195,695808696,192919501,18.49,Bolívar,residencial,baja,True,2
+778,196,192919501,3348610474,17.56,Hipólito Yrigoyen,residencial,baja,True,1
+779,1083,3348610474,9862262204,57.26,Hipólito Yrigoyen,residencial,media,True,1
+780,1083,9862262204,3348610474,57.26,Hipólito Yrigoyen,residencial,media,False,2
+781,196,3348610474,192919501,17.56,Hipólito Yrigoyen,residencial,baja,True,2
+782,197,192919501,3769703987,31.81,Avenida Presidente Julio A. Roca,comercial,baja,True,1
+783,939,3769703987,1485388568,106.85,Avenida Presidente Julio A. Roca,comercial,media,False,1
+784,938,1485388568,1485388572,22.23,Avenida Presidente Julio A. Roca,residencial,alta,True,1
+785,938,1485388572,1485388568,22.23,Avenida Presidente Julio A. Roca,residencial,alta,False,2
+786,940,1485388568,10224867342,22.78,Avenida Presidente Julio A. Roca,residencial,media,False,1
+787,1202,10224867342,12022156483,2.26,Avenida Presidente Julio A. Roca,residencial,media,False,1
+788,945,12022156483,1485388574,8.66,Avenida Presidente Julio A. Roca,residencial,baja,True,1
+789,942,1485388574,1485388576,21.88,Avenida Presidente Julio A. Roca,residencial,baja,True,1
+790,571,1485388576,195754727,9.6,Avenida Presidente Julio A. Roca,residencial,alta,True,1
+791,570,195754727,1485388575,8.04,Avenida Presidente Julio A. Roca,residencial,baja,True,1
+792,947,1485388575,10224867339,15.52,Adolfo Alsina,residencial,baja,True,1
+793,585,10224867339,199509136,102.45,Adolfo Alsina,residencial,alta,True,1
+794,585,199509136,10224867339,102.45,Adolfo Alsina,residencial,alta,False,2
+795,947,10224867339,1485388575,15.52,Adolfo Alsina,residencial,baja,True,2
+796,570,1485388575,195754727,8.04,Avenida Presidente Julio A. Roca,residencial,baja,True,2
+797,571,195754727,1485388576,9.6,Avenida Presidente Julio A. Roca,residencial,alta,False,2
+798,942,1485388576,1485388574,21.88,Avenida Presidente Julio A. Roca,residencial,baja,True,2
+799,944,1485388574,10224867338,16.1,Adolfo Alsina,residencial,baja,True,1
+800,623,10224867338,205500349,99.1,Adolfo Alsina,comercial,baja,True,1
+801,587,205500349,199509144,130.63,Adolfo Alsina,comercial,media,False,1
+802,588,199509144,7234412484,124.36,Defensa,residencial,media,True,1
+803,588,7234412484,199509144,124.36,Defensa,residencial,media,False,2
+804,586,199509144,199509154,127.02,Adolfo Alsina,residencial,media,False,1
+805,589,199509154,11619452601,121.55,Balcarce,residencial,alta,False,1
+806,113,11619452601,181125820,10.7,Balcarce,residencial,baja,True,1
+807,112,181125820,11106925991,15.75,Avenida Hipólito Yrigoyen,residencial,baja,True,1
+808,975,11106925991,1969386160,9.21,Avenida Hipólito Yrigoyen,residencial,media,False,1
+809,976,1969386160,11619452613,94.24,Avenida Hipólito Yrigoyen,residencial,media,False,1
+810,217,11619452613,194504394,7.91,Avenida Hipólito Yrigoyen,residencial,baja,True,1
+811,216,194504394,7234412485,6.12,Avenida Hipólito Yrigoyen,residencial,media,False,1
+812,934,7234412485,1399347931,63.23,Avenida Hipólito Yrigoyen,residencial,media,False,1
+813,936,1399347931,7234412487,40.38,Avenida Hipólito Yrigoyen,residencial,alta,False,1
+814,200,7234412487,192919501,18.06,Avenida Hipólito Yrigoyen,residencial,baja,True,1
+815,198,192919501,7234412430,17.6,Bolívar,residencial,media,False,2
+816,932,7234412430,1399347930,35.89,Bolívar,residencial,baja,True,2
+817,933,1399347930,7234412486,31.55,Bolívar,residencial,media,True,1
+818,933,7234412486,1399347930,31.55,Bolívar,residencial,media,False,2
+819,72,1399347930,180487511,20.08,Bolívar,residencial,baja,True,2
+820,71,180487511,1399347927,9.13,Bolívar,residencial,baja,True,1
+821,930,1399347927,2319247942,30.78,Bolívar,residencial,alta,False,1
+822,100,2319247942,181119220,14.51,Bolívar,residencial,media,False,1
+823,101,181119220,11749412464,20.79,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+824,991,11749412464,2319247939,13.64,Avenida Presidente Roque Sáenz Peña,residencial,media,True,1
+825,991,2319247939,11749412464,13.64,Avenida Presidente Roque Sáenz Peña,residencial,media,False,2
+826,1051,11749412464,2920189002,85.06,Rivadavia,comercial,media,False,1
+827,495,2920189002,195722425,32.7,Rivadavia,comercial,baja,True,1
+828,494,195722425,199509038,131.44,Rivadavia,comercial,alta,False,1
+829,415,199509038,195721964,127.71,Rivadavia,comercial,alta,False,1
+830,401,195721964,195721831,128.54,Esmeralda,residencial,alta,False,2
+831,400,195721831,195721845,130.93,Bartolomé Mitre,residencial,media,False,1
+832,173,195721845,192911844,127.96,Suipacha,comercial,alta,False,1
+833,174,192911844,195721912,127.03,Suipacha,comercial,alta,False,2
+834,408,195721912,304977556,84.64,Sarmiento,comercial,alta,False,1
+835,730,304977556,237634534,53.71,Sarmiento,residencial,media,False,1
+836,732,237634534,5922643543,69.86,Carlos Pellegrini,residencial,alta,False,1
+837,983,5922643543,1978999211,18.19,Carlos Pellegrini,residencial,baja,True,1
+838,965,1978999211,1957853692,19.58,Carlos Pellegrini,residencial,media,False,1
+839,966,1957853692,2426029360,16.44,Avenida Presidente Roque Sáenz Peña,residencial,baja,True,1
+840,1041,2426029360,2426029347,5.93,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+841,1042,2426029347,12558364906,6.38,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+842,771,12558364906,246724132,16.78,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+843,770,246724132,4466585774,15.73,Avenida Corrientes,residencial,baja,True,1
+844,1040,4466585774,2426029333,6.45,Avenida Corrientes,residencial,baja,True,1
+845,1039,2426029333,2426029319,5.37,Avenida Corrientes,residencial,media,False,1
+846,963,2426029319,1957835090,19.08,Avenida Corrientes,residencial,alta,False,1
+847,962,1957835090,2426029299,16.55,Avenida Corrientes,residencial,alta,True,1
+848,962,2426029299,1957835090,16.55,Avenida Corrientes,residencial,alta,False,2
+849,961,1957835090,1957865399,49.17,Avenida Corrientes,comercial,baja,True,1
+850,973,1957865399,12532421421,39.4,Avenida Corrientes,comercial,media,False,1
+851,411,12532421421,195721930,57.78,Avenida Corrientes,comercial,alta,False,1
+852,350,195721930,195721339,127.67,Avenida Corrientes,comercial,media,False,1
+853,349,195721339,195721363,139.58,Esmeralda,comercial,alta,False,1
+854,351,195721363,195721388,131.03,Sarmiento,comercial,alta,False,1
+855,355,195721388,2958877734,63.2,Maipú,residencial,baja,True,1
+856,576,2958877734,199509024,67.05,Maipú,residencial,media,False,1
+857,575,199509024,199509318,86.58,Teniente General Juan Domingo Perón,comercial,alta,False,1
+858,591,199509318,199509246,105.03,Avenida Presidente Roque Sáenz Peña,comercial,media,False,2
+859,574,199509246,199509024,64.33,Maipú,comercial,media,False,1
+860,398,199509024,195721803,131.02,Teniente General Juan Domingo Perón,comercial,alta,False,1
+861,363,195721803,195721531,127.32,Teniente General Juan Domingo Perón,comercial,alta,False,1
+862,179,195721531,192913030,128.2,Teniente General Juan Domingo Perón,residencial,alta,False,1
+863,180,192913030,195721597,129.32,Reconquista,residencial,baja,True,1
+864,369,195721597,11619452606,120.6,Reconquista,residencial,alta,False,1
+865,979,11619452606,1969386175,14.31,Reconquista,residencial,media,False,1
+866,977,1969386175,2739278747,5.46,Avenida Rivadavia,residencial,media,True,1
+867,1047,2739278747,4466707487,95.98,Avenida Rivadavia,residencial,alta,True,1
+868,1100,4466707487,4867386574,15.0,Avenida Rivadavia,residencial,media,True,1
+869,1100,4867386574,4466707487,15.0,Avenida Rivadavia,residencial,media,False,2
+870,1047,4466707487,2739278747,95.98,Avenida Rivadavia,residencial,alta,False,2
+871,977,2739278747,1969386175,5.46,Avenida Rivadavia,residencial,media,False,2
+872,978,1969386175,6758084951,6.72,Avenida Rivadavia,residencial,media,False,1
+873,1188,6758084951,14228177000,39.72,Avenida Rivadavia,residencial,media,False,1
+874,1251,14228177000,14228416603,8.29,Avenida Rivadavia,residencial,baja,True,1
+875,929,14228416603,1399347918,19.79,Avenida Rivadavia,residencial,alta,False,1
+876,927,1399347918,2319247940,40.72,Avenida Rivadavia,residencial,media,False,1
+877,99,2319247940,181119220,9.6,Avenida Rivadavia,residencial,media,False,1
+878,98,181119220,195721560,135.55,San Martín,residencial,media,False,1
+879,365,195721560,195721597,128.15,Bartolomé Mitre,residencial,alta,False,1
+880,368,195721597,195721618,125.88,Bartolomé Mitre,residencial,alta,False,1
+881,370,195721618,214922497,101.97,25 de Mayo,residencial,alta,True,1
+882,370,214922497,195721618,101.97,25 de Mayo,residencial,alta,False,2
+883,184,195721618,192913584,130.26,25 de Mayo,residencial,alta,False,1
+884,177,192913584,192913030,127.67,Teniente General Juan Domingo Perón,residencial,alta,False,1
+885,178,192913030,195721516,128.09,Reconquista,comercial,media,False,1
+886,357,195721516,195721425,127.96,Sarmiento,comercial,media,False,2
+887,356,195721425,195721409,126.41,Sarmiento,comercial,alta,False,1
+888,354,195721409,195721388,129.99,Sarmiento,comercial,media,False,1
+889,347,195721388,195721312,139.15,Maipú,comercial,alta,False,1
+890,346,195721312,195721339,129.88,Avenida Corrientes,comercial,alta,False,1
+891,319,195721339,195721048,123.37,Esmeralda,comercial,baja,True,1
+892,320,195721048,437567239,128.57,Esmeralda,comercial,media,False,1
+893,36,437567239,81600857,127.7,Esmeralda,comercial,media,False,1
+894,32,81600857,81600856,129.32,Viamonte,comercial,media,False,1
+895,35,81600856,922076923,131.75,Viamonte,comercial,alta,True,1
+896,35,922076923,81600856,131.75,Viamonte,comercial,alta,False,2
+897,33,81600856,195721258,128.93,Maipú,comercial,alta,False,1
+898,340,195721258,195721232,133.5,Maipú,comercial,media,False,1
+899,337,195721232,195721212,134.56,Paraguay,comercial,alta,False,1
+900,339,195721212,3184666766,142.48,Esmeralda,comercial,media,False,1
+901,332,3184666766,195721154,135.46,Marcelo T. de Alvear,comercial,alta,True,1
+902,332,195721154,3184666766,135.46,Marcelo T. de Alvear,comercial,alta,False,2
+903,163,3184666766,192908459,136.08,Marcelo T. de Alvear,comercial,alta,False,1
+904,161,192908459,680642167,36.15,Maipú,residencial,alta,True,1
+905,161,680642167,192908459,36.15,Maipú,residencial,alta,False,2
+906,160,192908459,195721232,145.64,Maipú,comercial,alta,False,1
+907,148,195721232,192906560,137.64,Paraguay,comercial,media,False,1
+908,149,192906560,205498211,103.13,Paraguay,comercial,alta,False,1
+909,609,205498211,205498212,119.84,Paraguay,comercial,media,False,2
+910,605,205498212,205498209,128.02,Reconquista,comercial,media,False,1
+911,607,205498209,14211513991,54.54,Marcelo T. de Alvear,comercial,media,True,1
+912,607,14211513991,205498209,54.54,Marcelo T. de Alvear,comercial,media,False,2
+913,606,205498209,258581429,131.06,Reconquista,comercial,media,False,1
+914,786,258581429,303890929,27.12,Doctor Ricardo Rojas,residencial,alta,True,1
+915,800,303890929,9809390034,11.49,Avenida Leandro N. Alem,residencial,baja,True,1
+916,1122,9809390034,4921521811,120.91,Avenida Leandro N. Alem,residencial,media,False,1
+917,803,4921521811,303890930,7.53,Avenida Leandro N. Alem,residencial,baja,True,1
+918,802,303890930,4921521805,9.71,Avenida Leandro N. Alem,residencial,alta,True,1
+919,802,4921521805,303890930,9.71,Avenida Leandro N. Alem,residencial,alta,False,2
+920,801,303890930,4921521799,7.53,Marcelo T. de Alvear,residencial,media,False,1
+921,1121,4921521799,4909450162,5.3,Marcelo T. de Alvear,residencial,media,False,1
+922,799,4909450162,303889640,8.09,Marcelo T. de Alvear,residencial,alta,False,1
+923,798,303889640,2321135320,14.67,Ingeniero Enrique Butty,residencial,baja,True,1
+924,1000,2321135320,4921521802,17.4,Avenida Leandro N. Alem,residencial,baja,True,1
+925,1004,4921521802,2321135321,73.81,Avenida Leandro N. Alem,residencial,media,False,1
+926,1002,2321135321,3174780035,15.09,Avenida Leandro N. Alem,residencial,media,True,1
+927,1002,3174780035,2321135321,15.09,Avenida Leandro N. Alem,residencial,media,False,2
+928,1003,2321135321,4824082969,7.69,Ingeniero Enrique Butty,residencial,media,False,1
+929,790,4824082969,258585975,40.87,Ingeniero Enrique Butty,residencial,baja,True,1
+930,789,258585975,4824082968,56.91,Ingeniero Enrique Butty,residencial,media,False,1
+931,999,4824082968,2321135320,14.93,Ingeniero Enrique Butty,residencial,baja,True,1
+932,1001,2321135320,4921521808,15.06,Avenida Leandro N. Alem,residencial,alta,False,1
+933,997,4921521808,2321135318,52.11,Avenida Leandro N. Alem,residencial,baja,True,1
+934,996,2321135318,4824082967,8.5,Carlos M. Della Paolera,residencial,media,False,1
+935,1119,4824082967,9809390103,9.39,Carlos M. Della Paolera,residencial,baja,True,1
+936,1197,9809390103,9809366879,28.14,Carlos M. Della Paolera,residencial,media,False,1
+937,1196,9809366879,9809366882,13.12,Carlos M. Della Paolera,residencial,baja,True,1
+938,1198,9809366882,9809390101,13.08,Carlos M. Della Paolera,residencial,baja,True,1
+939,1199,9809390101,9809366895,21.77,Carlos M. Della Paolera,residencial,baja,True,1
+940,948,9809366895,1624713501,8.3,Carlos M. Della Paolera,residencial,media,True,1
+941,948,1624713501,9809366895,8.3,Carlos M. Della Paolera,residencial,media,False,2
+942,1199,9809366895,9809390101,21.77,Carlos M. Della Paolera,residencial,baja,True,2
+943,1198,9809390101,9809366882,13.08,Carlos M. Della Paolera,residencial,baja,True,2
+944,1196,9809366882,9809366879,13.12,Carlos M. Della Paolera,residencial,baja,True,2
+945,1105,9809366879,4475226030,11.48,Carlos M. Della Paolera,residencial,media,False,1
+946,1106,4475226030,9809366897,6.7,Carlos M. Della Paolera,residencial,media,False,1
+947,950,9809366897,1637538205,45.65,Carlos M. Della Paolera,residencial,media,False,1
+948,949,1637538205,2321135315,13.64,Carlos M. Della Paolera,residencial,baja,True,1
+949,994,2321135315,4909410429,9.26,Avenida Leandro N. Alem,residencial,baja,True,1
+950,992,4909410429,2321135313,38.49,Avenida Leandro N. Alem,residencial,media,False,1
+951,993,2321135313,9896487736,49.77,Avenida Leandro N. Alem,residencial,media,False,1
+952,877,9896487736,971304858,28.71,Avenida Leandro N. Alem,residencial,baja,True,1
+953,876,971304858,1282173485,35.83,Avenida Leandro N. Alem,residencial,baja,True,1
+954,68,1282173485,180474730,15.15,Avenida Leandro N. Alem,residencial,media,False,1
+955,67,180474730,680664368,37.05,San Martín,residencial,media,True,1
+956,857,680664368,1282173633,35.24,San Martín,residencial,baja,True,1
+957,907,1282173633,1633441882,58.6,San Martín,residencial,media,True,1
+958,907,1633441882,1282173633,58.6,San Martín,residencial,media,False,2
+959,857,1282173633,680664368,35.24,San Martín,residencial,baja,True,2
+960,67,680664368,180474730,37.05,San Martín,residencial,media,False,2
+961,66,180474730,667537031,115.97,Avenida Del Libertador,residencial,alta,False,1
+962,854,667537031,6533328513,7.6,Avenida Del Libertador,residencial,baja,True,1
+963,1178,6533328513,6533328515,41.64,Avenida Crucero Belgrano,residencial,media,True,1
+964,1179,6533328515,6533328517,11.67,Avenida Crucero Belgrano,residencial,baja,True,1
+965,852,6533328517,649553454,25.01,,residencial,alta,True,1
+966,851,649553454,6533328512,8.89,Avenida Maipú,residencial,baja,True,1
+967,64,6533328512,180474729,29.64,Avenida Maipú,residencial,baja,True,1
+968,63,180474729,6533328508,38.37,Avenida Del Libertador,residencial,baja,True,1
+969,951,6533328508,1768231840,4.82,Avenida Del Libertador,residencial,alta,True,1
+970,951,1768231840,6533328508,4.82,Avenida Del Libertador,residencial,alta,False,2
+971,63,6533328508,180474729,38.37,Avenida Del Libertador,residencial,baja,True,2
+972,62,180474729,4582237861,32.75,Avenida Doctor José María Ramos Mejía,residencial,baja,True,1
+973,910,4582237861,1292630255,3.51,Avenida Doctor José María Ramos Mejía,residencial,media,True,1
+974,910,1292630255,4582237861,3.51,Avenida Doctor José María Ramos Mejía,residencial,media,False,2
+975,62,4582237861,180474729,32.75,Avenida Doctor José María Ramos Mejía,residencial,baja,True,2
+976,60,180474729,4582237859,26.64,Avenida Doctor José María Ramos Mejía,residencial,media,True,1
+977,60,4582237859,180474729,26.64,Avenida Doctor José María Ramos Mejía,residencial,media,False,2
+978,64,180474729,6533328512,29.64,Avenida Maipú,residencial,baja,True,2
+979,851,6533328512,649553454,8.89,Avenida Maipú,residencial,baja,True,2
+980,852,649553454,6533328517,25.01,,residencial,alta,False,2
+981,1179,6533328517,6533328515,11.67,Avenida Crucero Belgrano,residencial,baja,True,2
+982,1178,6533328515,6533328513,41.64,Avenida Crucero Belgrano,residencial,media,False,2
+983,854,6533328513,667537031,7.6,Avenida Del Libertador,residencial,baja,True,2
+984,853,667537031,2305874078,117.61,Avenida Del Libertador,residencial,media,False,1
+985,904,2305874078,1282173539,18.94,San Martín,residencial,media,True,1
+986,904,1282173539,2305874078,18.94,San Martín,residencial,media,False,2
+987,989,2305874078,2338588894,15.25,Avenida Leandro N. Alem,residencial,baja,True,1
+988,788,2338588894,258581430,74.65,Avenida Leandro N. Alem,residencial,baja,True,1
+989,787,258581430,303890929,79.23,Avenida Leandro N. Alem,residencial,media,False,1
+990,786,303890929,258581429,27.12,Doctor Ricardo Rojas,residencial,alta,False,2
+991,782,258581429,258581428,100.4,Doctor Ricardo Rojas,residencial,media,False,1
+992,783,258581428,616083267,27.55,Doctor Ricardo Rojas,residencial,baja,True,1
+993,848,616083267,4468092317,27.42,Florida,residencial,baja,True,1
+994,105,4468092317,181119225,41.5,Florida,residencial,media,False,1
+995,103,181119225,258581428,64.15,San Martín,residencial,alta,False,1
+996,784,258581428,14233448115,37.79,San Martín,residencial,alta,False,1
+997,898,14233448115,1182998923,37.6,San Martín,residencial,baja,True,1
+998,603,1182998923,205498207,56.34,San Martín,comercial,alta,False,1
+999,602,205498207,205498544,102.82,Marcelo T. de Alvear,comercial,baja,True,1
+1000,619,205498544,442355199,48.7,Marcelo T. de Alvear,comercial,baja,True,1
+1001,838,442355199,1625193934,38.71,Marcelo T. de Alvear,comercial,media,True,1
+1002,838,1625193934,442355199,38.71,Marcelo T. de Alvear,comercial,media,False,2
+1003,619,442355199,205498544,48.7,Marcelo T. de Alvear,comercial,baja,True,2
+1004,618,205498544,442355196,14.58,Florida,residencial,media,False,1
+1005,837,442355196,11603201327,5.75,Florida,residencial,baja,True,1
+1006,906,11603201327,1282173582,28.37,Florida,residencial,media,True,1
+1007,906,1282173582,11603201327,28.37,Florida,residencial,media,False,2
+1008,837,11603201327,442355196,5.75,Florida,residencial,baja,True,2
+1009,836,442355196,2623535831,49.17,Avenida Santa Fe,comercial,baja,True,1
+1010,1044,2623535831,11603201350,65.42,Avenida Santa Fe,comercial,alta,False,1
+1011,622,11603201350,205500335,47.41,Avenida Santa Fe,residencial,media,False,1
+1012,621,205500335,11603201349,8.68,Avenida Santa Fe,residencial,media,False,1
+1013,1187,11603201349,6685602530,11.35,Avenida Santa Fe,residencial,baja,True,1
+1014,1158,6685602530,5731510257,72.74,Avenida Santa Fe,residencial,baja,True,1
+1015,780,5731510257,256244956,16.53,Avenida Santa Fe,residencial,baja,True,1
+1016,779,256244956,2623546051,4.64,Avenida Santa Fe,residencial,media,True,1
+1017,779,2623546051,256244956,4.64,Avenida Santa Fe,residencial,media,False,2
+1018,781,256244956,11603201340,11.82,Avenida Maipú,residencial,media,False,1
+1019,1159,11603201340,5732694568,37.61,Avenida Maipú,residencial,alta,False,1
+1020,1160,5732694568,11603201367,35.94,Avenida Maipú,residencial,baja,True,1
+1021,1104,11603201367,4467090755,12.05,Avenida Maipú,residencial,baja,True,1
+1022,1103,4467090755,5731510264,13.25,Arenales,residencial,media,False,1
+1023,616,5731510264,205498535,30.1,Arenales,residencial,media,False,1
+1024,617,205498535,13901610080,8.72,Basavilbaso,residencial,baja,True,1
+1025,203,13901610080,193819257,141.54,Basavilbaso,residencial,media,False,1
+1026,202,193819257,2956317872,112.41,Juncal,residencial,alta,True,1
+1027,202,2956317872,193819257,112.41,Juncal,residencial,alta,False,2
+1028,201,193819257,195738167,137.38,Juncal,residencial,alta,False,1
+1029,558,195738167,195738150,137.12,Juncal,comercial,media,False,1
+1030,334,195738150,195721185,140.01,Suipacha,comercial,media,True,1
+1031,336,195721185,4562188496,124.74,Arenales,comercial,media,False,1
+1032,746,4562188496,237656130,17.06,Arenales,residencial,baja,True,1
+1033,745,237656130,3053645998,9.39,Carlos Pellegrini,residencial,baja,True,1
+1034,1060,3053645998,3053655465,106.73,Carlos Pellegrini,comercial,alta,False,1
+1035,748,3053655465,237683235,15.26,Carlos Pellegrini,residencial,baja,True,1
+1036,749,237683235,3053655487,14.69,Carlos Pellegrini,residencial,baja,True,1
+1037,887,3053655487,1167258263,63.01,Carlos Pellegrini,residencial,alta,True,1
+1038,889,1167258263,7008217518,14.71,Carlos Pellegrini,residencial,media,True,1
+1039,889,7008217518,1167258263,14.71,Carlos Pellegrini,residencial,media,False,2
+1040,887,1167258263,3053655487,63.01,Carlos Pellegrini,residencial,alta,False,2
+1041,749,3053655487,237683235,14.69,Carlos Pellegrini,residencial,baja,True,2
+1042,9,237683235,32385175,44.36,Avenida Santa Fe,residencial,media,False,1
+1043,10,32385175,682385670,16.49,Avenida 9 de Julio,residencial,alta,False,1
+1044,864,682385670,2418499751,49.19,,residencial,media,False,1
+1045,1032,2418499751,4562188493,57.75,,residencial,baja,True,1
+1046,859,4562188493,682385655,12.8,,residencial,media,False,1
+1047,860,682385655,11890527566,12.87,,residencial,media,True,1
+1048,863,11890527566,682385657,2.69,,residencial,media,True,1
+1049,863,682385657,11890527566,2.69,,residencial,media,False,2
+1050,860,11890527566,682385655,12.87,,residencial,media,False,2
+1051,858,682385655,1295503817,15.74,Arenales,residencial,media,False,1
+1052,548,1295503817,195738050,15.57,Arenales,residencial,baja,True,1
+1053,549,195738050,3189430577,9.76,,residencial,baja,True,1
+1054,1080,3189430577,11890622587,3.89,,residencial,baja,True,1
+1055,1195,11890622587,9708548914,12.65,,residencial,baja,True,1
+1056,1065,9708548914,3053646024,1.66,,residencial,media,True,1
+1057,1065,3053646024,9708548914,1.66,,residencial,media,False,2
+1058,1195,9708548914,11890622587,12.65,,residencial,baja,True,2
+1059,1080,11890622587,3189430577,3.89,,residencial,baja,True,2
+1060,549,3189430577,195738050,9.76,,residencial,baja,True,2
+1061,550,195738050,3189430578,10.81,Arenales,residencial,baja,True,1
+1062,1081,3189430578,11890622588,4.25,Arenales,residencial,baja,True,1
+1063,547,11890622588,195738038,27.75,Arenales,residencial,media,True,1
+1064,546,195738038,11890622576,6.07,Avenida 9 de Julio,residencial,baja,True,1
+1065,1062,11890622576,3053646011,3.38,Avenida 9 de Julio,residencial,alta,True,1
+1066,1062,3053646011,11890622576,3.38,Avenida 9 de Julio,residencial,alta,False,2
+1067,546,11890622576,195738038,6.07,Avenida 9 de Julio,residencial,baja,True,2
+1068,545,195738038,4562188388,7.63,Avenida 9 de Julio,residencial,media,True,1
+1069,545,4562188388,195738038,7.63,Avenida 9 de Julio,residencial,media,False,2
+1070,547,195738038,11890622588,27.75,Arenales,residencial,media,False,2
+1071,1081,11890622588,3189430578,4.25,Arenales,residencial,baja,True,2
+1072,550,3189430578,195738050,10.81,Arenales,residencial,baja,True,2
+1073,552,195738050,11890622570,11.15,Avenida 9 de Julio,residencial,media,False,1
+1074,1059,11890622570,3053645993,2.84,Avenida 9 de Julio,residencial,media,False,1
+1075,913,3053645993,1295503791,32.9,Avenida 9 de Julio,residencial,alta,False,1
+1076,912,1295503791,3043447636,86.34,Avenida 9 de Julio,residencial,media,False,1
+1077,540,3043447636,195738022,21.14,Avenida 9 de Julio,residencial,baja,True,1
+1078,542,195738022,3189430573,11.92,Juncal,residencial,media,True,1
+1079,542,3189430573,195738022,11.92,Juncal,residencial,media,False,2
+1080,543,195738022,11890527522,8.5,Juncal,residencial,baja,True,1
+1081,743,11890527522,237654537,24.94,Juncal,residencial,media,False,1
+1082,740,237654537,3043447639,9.12,Carlos Pellegrini,residencial,baja,True,1
+1083,911,3043447639,1295503786,49.1,Carlos Pellegrini,residencial,alta,True,1
+1084,911,1295503786,3043447639,49.1,Carlos Pellegrini,residencial,alta,False,2
+1085,740,3043447639,237654537,9.12,Carlos Pellegrini,residencial,baja,True,2
+1086,741,237654537,3043447649,10.17,Carlos Pellegrini,residencial,media,True,1
+1087,741,3043447649,237654537,10.17,Carlos Pellegrini,residencial,media,False,2
+1088,742,237654537,3171120388,14.23,Juncal,residencial,baja,True,1
+1089,559,3171120388,195738150,125.49,Juncal,comercial,media,False,1
+1090,334,195738150,195721185,140.01,Suipacha,comercial,media,False,2
+1091,335,195721185,297251647,66.17,Suipacha,comercial,alta,False,1
+1092,791,297251647,297251638,132.25,Sargento Cabral,residencial,media,False,1
+1093,793,297251638,2623546059,51.19,Esmeralda,residencial,alta,True,1
+1094,793,2623546059,297251638,51.19,Esmeralda,residencial,alta,False,2
+1095,792,297251638,1282173505,38.55,Esmeralda,residencial,media,False,1
+1096,21,1282173505,32385207,12.82,Esmeralda,residencial,alta,False,1
+1097,17,32385207,32385206,133.12,Avenida Santa Fe,comercial,media,False,1
+1098,20,32385206,11997163626,98.91,Avenida Santa Fe,comercial,media,True,1
+1099,20,11997163626,32385206,98.91,Avenida Santa Fe,comercial,media,False,2
+1100,18,32385206,195721154,142.92,Suipacha,comercial,media,False,1
+1101,328,195721154,195721138,133.68,Suipacha,comercial,alta,False,1
+1102,329,195721138,195721212,135.66,Paraguay,comercial,alta,False,1
+1103,338,195721212,437567240,140.71,Esmeralda,comercial,media,False,1
+1104,834,437567240,5487650397,10.38,Avenida Córdoba,comercial,media,False,1
+1105,1157,5487650397,14229680562,118.28,Avenida Córdoba,comercial,alta,False,1
+1106,326,14229680562,195721117,7.1,Avenida Córdoba,residencial,baja,True,1
+1107,325,195721117,14229680560,9.12,Avenida Córdoba,residencial,media,False,1
+1108,1200,14229680560,9892458938,114.96,Avenida Córdoba,comercial,baja,True,1
+1109,718,9892458938,237634470,15.81,Avenida Córdoba,residencial,baja,True,1
+1110,720,237634470,11890527538,11.16,Carlos Pellegrini,residencial,baja,True,1
+1111,1230,11890527538,11806416918,7.03,Carlos Pellegrini,residencial,baja,True,1
+1112,1221,11806416918,11806410316,102.01,Carlos Pellegrini,comercial,media,False,1
+1113,723,11806410316,237634480,12.81,Carlos Pellegrini,comercial,media,False,1
+1114,724,237634480,11997178592,11.0,Viamonte,comercial,baja,True,1
+1115,8,11997178592,32382580,24.99,Viamonte,residencial,baja,True,1
+1116,7,32382580,11806410319,12.89,Avenida 9 de Julio,residencial,media,True,1
+1117,7,11806410319,32382580,12.89,Avenida 9 de Julio,residencial,media,False,2
+1118,5,32382580,2426029204,10.77,Viamonte,residencial,alta,True,1
+1119,1034,2426029204,3352200464,5.08,Viamonte,residencial,baja,True,1
+1120,1017,3352200464,2407436702,9.8,Viamonte,residencial,media,True,1
+1121,561,2407436702,195754628,15.11,Viamonte,residencial,baja,True,1
+1122,563,195754628,11806410325,13.02,Avenida 9 de Julio,residencial,media,True,1
+1123,563,11806410325,195754628,13.02,Avenida 9 de Julio,residencial,media,False,2
+1124,564,195754628,11997178594,10.84,Viamonte,residencial,media,True,1
+1125,675,11997178594,237634221,26.39,Viamonte,residencial,baja,True,1
+1126,673,237634221,11806410303,11.78,Cerrito,residencial,baja,True,1
+1127,884,11806410303,1135635735,39.45,Cerrito,residencial,alta,True,1
+1128,884,1135635735,11806410303,39.45,Cerrito,residencial,alta,False,2
+1129,673,11806410303,237634221,11.78,Cerrito,residencial,baja,True,2
+1130,674,237634221,11806410330,11.95,Cerrito,residencial,alta,True,1
+1131,674,11806410330,237634221,11.95,Cerrito,residencial,alta,False,2
+1132,675,237634221,11997178594,26.39,Viamonte,residencial,baja,True,2
+1133,564,11997178594,195754628,10.84,Viamonte,residencial,media,False,2
+1134,562,195754628,11806410306,12.13,Avenida 9 de Julio,residencial,media,True,1
+1135,562,11806410306,195754628,12.13,Avenida 9 de Julio,residencial,media,False,2
+1136,561,195754628,2407436702,15.11,Viamonte,residencial,baja,True,2
+1137,1017,2407436702,3352200464,9.8,Viamonte,residencial,media,False,2
+1138,1034,3352200464,2426029204,5.08,Viamonte,residencial,baja,True,2
+1139,5,2426029204,32382580,10.77,Viamonte,residencial,alta,False,2
+1140,8,32382580,11997178592,24.99,Viamonte,residencial,baja,True,2
+1141,724,11997178592,237634480,11.0,Viamonte,comercial,baja,True,2
+1142,722,237634480,11806410313,9.97,Carlos Pellegrini,comercial,baja,True,1
+1143,1218,11806410313,11806410291,104.38,Carlos Pellegrini,comercial,alta,True,1
+1144,726,11806410291,237634493,12.53,Carlos Pellegrini,residencial,baja,True,1
+1145,727,237634493,11997178598,29.79,Tucumán,residencial,baja,True,1
+1146,464,11997178598,195722232,8.69,Tucumán,residencial,alta,True,1
+1147,461,195722232,2426029218,12.38,Tucumán,residencial,media,True,1
+1148,1035,2426029218,3352200467,8.18,Tucumán,residencial,baja,True,1
+1149,1018,3352200467,2407436703,7.4,Tucumán,residencial,media,True,1
+1150,457,2407436703,195722209,14.11,Tucumán,residencial,baja,True,1
+1151,458,195722209,11406791645,10.76,Avenida 9 de Julio,residencial,baja,True,1
+1152,1213,11406791645,11590367273,109.44,Avenida 9 de Julio,residencial,baja,True,1
+1153,471,11590367273,195722267,9.31,Avenida 9 de Julio,residencial,alta,False,1
+1154,470,195722267,2418492962,14.33,Lavalle,residencial,baja,True,1
+1155,1031,2418492962,3352200470,8.38,Lavalle,residencial,baja,True,1
+1156,1036,3352200470,2426029234,6.44,Lavalle,residencial,media,True,1
+1157,83,2426029234,180511752,12.26,Lavalle,residencial,baja,True,1
+1158,84,180511752,4466580329,9.61,Lavalle,residencial,media,True,1
+1159,923,4466580329,1399347828,6.68,Lavalle,residencial,media,True,1
+1160,921,1399347828,1399347826,7.07,Lavalle,comercial,media,True,1
+1161,922,1399347826,1978999226,25.98,Lavalle,comercial,media,True,1
+1162,987,1978999226,12056304000,7.86,Carlos Pellegrini,comercial,media,True,1
+1163,987,12056304000,1978999226,7.86,Carlos Pellegrini,comercial,media,False,2
+1164,922,1978999226,1399347826,25.98,Lavalle,comercial,media,False,2
+1165,921,1399347826,1399347828,7.07,Lavalle,comercial,media,False,2
+1166,923,1399347828,4466580329,6.68,Lavalle,residencial,media,False,2
+1167,84,4466580329,180511752,9.61,Lavalle,residencial,media,False,2
+1168,83,180511752,2426029234,12.26,Lavalle,residencial,baja,True,2
+1169,1036,2426029234,3352200470,6.44,Lavalle,residencial,media,False,2
+1170,1031,3352200470,2418492962,8.38,Lavalle,residencial,baja,True,2
+1171,470,2418492962,195722267,14.33,Lavalle,residencial,baja,True,2
+1172,81,195722267,180511140,10.47,Avenida 9 de Julio,residencial,baja,True,1
+1173,82,180511140,246715637,7.15,Avenida 9 de Julio,residencial,media,False,1
+1174,763,246715637,2092750890,77.58,Avenida 9 de Julio,residencial,media,False,1
+1175,988,2092750890,4952035828,82.64,Cerrito,comercial,media,False,1
+1176,682,4952035828,237634253,8.24,Cerrito,residencial,baja,True,1
+1177,681,237634253,1399347829,19.74,Lavalle,residencial,alta,True,1
+1178,681,1399347829,237634253,19.74,Lavalle,residencial,alta,False,2
+1179,684,237634253,11590367272,7.76,Cerrito,residencial,media,False,1
+1180,919,11590367272,1399347825,3.81,Cerrito,residencial,media,False,1
+1181,920,1399347825,11997178605,54.7,Cerrito,residencial,media,False,1
+1182,1214,11997178605,11406791646,53.33,Cerrito,residencial,media,False,1
+1183,677,11406791646,237634239,10.72,Cerrito,residencial,baja,True,1
+1184,679,237634239,11997178601,10.1,Tucumán,residencial,media,False,1
+1185,460,11997178601,195722209,25.89,Tucumán,residencial,media,False,1
+1186,457,195722209,2407436703,14.11,Tucumán,residencial,baja,True,2
+1187,1018,2407436703,3352200467,7.4,Tucumán,residencial,media,False,2
+1188,1035,3352200467,2426029218,8.18,Tucumán,residencial,baja,True,2
+1189,461,2426029218,195722232,12.38,Tucumán,residencial,media,False,2
+1190,464,195722232,11997178598,8.69,Tucumán,residencial,alta,False,2
+1191,727,11997178598,237634493,29.79,Tucumán,residencial,baja,True,2
+1192,725,237634493,11406791639,9.7,Carlos Pellegrini,residencial,alta,True,1
+1193,725,11406791639,237634493,9.7,Carlos Pellegrini,residencial,alta,False,2
+1194,726,237634493,11806410291,12.53,Carlos Pellegrini,residencial,baja,True,2
+1195,1218,11806410291,11806410313,104.38,Carlos Pellegrini,comercial,alta,False,2
+1196,722,11806410313,237634480,9.97,Carlos Pellegrini,comercial,baja,True,2
+1197,721,237634480,11806410301,12.36,Viamonte,comercial,baja,True,1
+1198,40,11806410301,81600858,127.61,Viamonte,comercial,media,False,1
+1199,39,81600858,195721092,129.53,Suipacha,comercial,media,False,1
+1200,322,195721092,11590367282,35.97,Suipacha,comercial,baja,True,1
+1201,1216,11590367282,11590367280,16.0,Suipacha,residencial,media,False,1
+1202,318,11590367280,195721032,77.96,Suipacha,comercial,alta,False,1
+1203,317,195721032,195721930,125.13,Suipacha,comercial,alta,False,1
+1204,406,195721930,195721912,143.62,Suipacha,comercial,media,False,1
+1205,407,195721912,304977539,99.16,Avenida Presidente Roque Sáenz Peña,comercial,alta,False,1
+1206,822,304977539,10724871211,23.4,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+1207,1093,10724871211,3803960907,32.98,Avenida Presidente Roque Sáenz Peña,comercial,baja,True,1
+1208,967,3803960907,1957853692,26.31,Avenida Presidente Roque Sáenz Peña,residencial,media,False,1
+1209,964,1957853692,1978999207,11.59,Avenida 9 de Julio,residencial,media,False,1
+1210,982,1978999207,3043451071,88.01,Avenida 9 de Julio,residencial,media,False,1
+1211,568,3043451071,195754686,10.42,Avenida 9 de Julio,residencial,media,False,1
+1212,569,195754686,14231509742,8.84,Sarmiento,residencial,baja,True,1
+1213,924,14231509742,1399347852,16.26,Sarmiento,residencial,media,True,1
+1214,924,1399347852,14231509742,16.26,Sarmiento,residencial,media,False,2
+1215,569,14231509742,195754686,8.84,Sarmiento,residencial,baja,True,2
+1216,567,195754686,3043451064,9.6,Avenida 9 de Julio,residencial,media,True,1
+1217,1057,3043451064,11522092964,12.77,Avenida 9 de Julio,residencial,alta,True,1
+1218,1057,11522092964,3043451064,12.77,Avenida 9 de Julio,residencial,alta,False,2
+1219,567,3043451064,195754686,9.6,Avenida 9 de Julio,residencial,media,False,2
+1220,566,195754686,2407444842,14.53,Sarmiento,residencial,alta,False,1
+1221,1019,2407444842,3352212055,8.23,Sarmiento,residencial,baja,True,1
+1222,1020,3352212055,2407444843,7.42,Sarmiento,residencial,baja,True,1
+1223,309,2407444843,195720994,13.2,Sarmiento,residencial,media,False,1
+1224,312,195720994,14231509738,25.27,Sarmiento,residencial,baja,True,1
+1225,686,14231509738,237634293,7.95,Sarmiento,residencial,alta,False,1
+1226,687,237634293,14231509745,9.56,Cerrito,residencial,baja,True,1
+1227,1094,14231509745,3803960908,62.5,Cerrito,comercial,media,False,1
+1228,980,3803960908,1978999204,25.9,Cerrito,residencial,baja,True,1
+1229,981,1978999204,4954011008,28.81,Cerrito,residencial,baja,True,1
+1230,972,4954011008,1957855912,15.24,Avenida 9 de Julio,residencial,baja,True,1
+1231,765,1957855912,246724119,19.83,Avenida Corrientes,residencial,baja,True,1
+1232,768,246724119,4466595797,16.72,,residencial,media,False,1
+1233,1071,4466595797,3075566576,21.02,Avenida Corrientes,residencial,alta,True,1
+1234,1071,3075566576,4466595797,21.02,Avenida Corrientes,residencial,alta,False,2
+1235,971,4466595797,1957855912,20.18,Avenida Corrientes,residencial,media,False,1
+1236,972,1957855912,4954011008,15.24,Avenida 9 de Julio,residencial,baja,True,2
+1237,986,4954011008,1978999225,29.69,Avenida 9 de Julio,residencial,baja,True,1
+1238,985,1978999225,3043451068,87.9,Avenida 9 de Julio,residencial,media,False,1
+1239,311,3043451068,195720994,9.53,Avenida 9 de Julio,residencial,media,False,1
+1240,310,195720994,3043451066,10.15,Avenida 9 de Julio,residencial,media,False,1
+1241,1058,3043451066,11518695272,17.9,Avenida 9 de Julio,residencial,media,False,1
+1242,1136,11518695272,4954010981,88.47,Avenida 9 de Julio,residencial,baja,True,1
+1243,3,4954010981,32382075,10.7,Avenida 9 de Julio,residencial,media,False,1
+1244,2,32382075,3641737064,12.48,Avenida 9 de Julio,residencial,media,True,1
+1245,2,3641737064,32382075,12.48,Avenida 9 de Julio,residencial,media,False,2
+1246,1,32382075,2407444845,14.18,Teniente General Juan Domingo Perón,residencial,media,True,1
+1247,1,2407444845,32382075,14.18,Teniente General Juan Domingo Perón,residencial,media,False,2
