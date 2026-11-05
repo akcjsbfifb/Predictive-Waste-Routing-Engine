@@ -6,10 +6,12 @@
 # pandas/numpy: tabla de tramos y variables sintéticas (Poisson vía numpy).
 # scikit-learn: solo el chequeo de sanity en scripts/validate_dataset.py.
 # networkx: lo trae osmnx; grafo no dirigido y GraphML.
+# rustworkx: emparejamiento de costo mínimo del cartero chino (Edmonds, en Rust).
 osmnx==2.1.1
 pandas==3.1.0
 numpy==2.5.4
 scikit-learn==1.9.1
 networkx==3.7
+rustworkx==0.18.1
 geopandas==1.2.0
 shapely==2.2.0

@@ -63,7 +63,7 @@ def _informe(columna: str, prioridades: tuple[str, ...], tramos: int, resultado,
     print(f"tramos a cubrir: {tramos}")
     print(f"componentes de ese subgrafo: {resultado.componentes}")
     print(f"vértices de grado impar: {resultado.impares}")
-    print("emparejamiento: networkx.min_weight_matching")
+    print("emparejamiento: rustworkx.max_weight_matching")
     print(f"componentes después de emparejar: {resultado.componentes_tras_emparejar}")
     print(f"copias agregadas: {resultado.agregadas}")
     print(f"metros de los tramos a cubrir: {resultado.costo_cubrir_m:.1f}")

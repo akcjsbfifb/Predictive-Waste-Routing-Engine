@@ -3,7 +3,7 @@
 Si esas calles forman un subgrafo conexo, el largo que se agrega es el mínimo
 del cartero chino: vértices de grado impar, caminos mínimos con Dijkstra,
 emparejamiento de costo mínimo y duplicación de esos caminos. El
-emparejamiento lo resuelve ``networkx.min_weight_matching``.
+emparejamiento lo resuelve ``rustworkx`` (el algoritmo de Edmonds, en Rust).
 
 Si el subgrafo no es conexo, el mismo emparejamiento puede unir componentes
 cuando conviene cruzar de una a otra por el grafo completo. Las que siguen
@@ -21,7 +21,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 
-import networkx as nx
+import rustworkx as rx
 
 from backend.routing.dijkstra import dijkstra, dijkstra_multi, reconstruir
 from backend.routing.hierholzer import hierholzer
@@ -189,15 +189,26 @@ def _distancias(
 
 
 def _emparejar(nodos: list[int], distancias: dict[tuple[int, int], float]) -> list[tuple[int, int]]:
-    """Emparejamiento de costo mínimo. Lo calcula networkx.min_weight_matching."""
-    grafo = nx.Graph()
-    grafo.add_nodes_from(nodos)
+    """Emparejamiento de costo mínimo.
+
+    ``rustworkx`` busca el peso máximo, así que cada distancia entra negada.
+    Van en milímetros enteros porque la librería pide enteros.
+    """
+    grafo = rx.PyGraph()
+    indice = {nodo: grafo.add_node(nodo) for nodo in nodos}
     for (u, v), distancia in distancias.items():
-        grafo.add_edge(u, v, weight=distancia)
-    parejas = nx.min_weight_matching(grafo, weight="weight")
+        grafo.add_edge(indice[u], indice[v], distancia)
+    parejas = rx.max_weight_matching(
+        grafo,
+        max_cardinality=True,
+        weight_fn=lambda distancia: -round(distancia * 1000),
+    )
     if len(parejas) != len(nodos) // 2:
         raise RuntimeError("el emparejamiento no cubre todos los vértices de grado impar")
-    return [(u, v) if u < v else (v, u) for u, v in parejas]
+    return [
+        (grafo[i], grafo[j]) if grafo[i] < grafo[j] else (grafo[j], grafo[i])
+        for i, j in parejas
+    ]
 
 
 def _copias_para_conectar(
