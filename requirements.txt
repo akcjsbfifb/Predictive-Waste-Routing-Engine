@@ -4,9 +4,10 @@
 # osmnx: descarga y simplificación de la red vial de OpenStreetMap.
 # geopandas/shapely/pyproj: los trae osmnx; hacen falta para el join espacial.
 # pandas/numpy: tabla de tramos y variables sintéticas (Poisson vía numpy).
-# scikit-learn: solo el chequeo de sanity en scripts/validate_dataset.py.
+# scikit-learn: el SVM que se sirve, y el chequeo de scripts/validate_dataset.py.
 # networkx: lo trae osmnx; grafo no dirigido y GraphML.
 # rustworkx: emparejamiento de costo mínimo del cartero chino (Edmonds, en Rust).
+# fastapi/uvicorn: el API. joblib: data/processed/svm.joblib. httpx: tests/test_api.py.
 osmnx==2.1.1
 pandas==3.1.0
 numpy==2.5.4
@@ -15,3 +16,7 @@ networkx==3.7
 rustworkx==0.18.1
 geopandas==1.2.0
 shapely==2.2.0
+joblib==1.6.0
+fastapi==0.162.0
+uvicorn==0.54.0
+httpx==0.28.1
