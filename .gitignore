@@ -27,6 +27,17 @@ __pycache__/
 .env
 *.key
 
+# Ediciones del usuario (el CSV base no se toca)
+data/overrides.sqlite
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
 # IDE y sistema
 .idea/
 .vscode/
