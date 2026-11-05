@@ -1,6 +1,6 @@
 # Recolección de residuos
 
-Trabajo práctico de Lógica y Teoría de Grafos. Este repositorio es solo esa consigna (la última del enunciado). La lógica va en Python (`backend/`). El frontend va a ser Next.js en `frontend/`. Esta etapa genera el grafo y el dataset. Todavía no están el modelo, Hierholzer ni la API.
+Trabajo práctico de Lógica y Teoría de Grafos. Este repositorio es solo esa consigna (la última del enunciado). La lógica va en Python (`backend/`). El frontend es Next.js en `frontend/`.
 
 ## Consigna
 
@@ -36,17 +36,43 @@ uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python scripts/validate_dataset.py
 ```
 
-Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se versiona) y escribe `data/processed/tramos.csv`, `nodos.csv` y `grafo.graphml`. La semilla está en `backend/config.py` (`SEED`).
+Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se versiona) y escribe `data/processed/tramos.csv`, `nodos.csv` y `grafo.graphml`. La semilla está en `backend/config.py` (`SEED`). `cerca_escuela_hospital` y `feria_o_evento` no salen de ese comando: las agrega `notebooks/tramos.ipynb`. Si se vuelve a generar el CSV, hay que volver a correr ese notebook y después:
+
+```bash
+.venv/bin/python -m backend.model.train
+```
+
+Eso ajusta el SVM (`C=1`, kernel `rbf`) con el corte del notebook y escribe `data/processed/svm.joblib`. El API no reentrena.
+
+El circuito, aparte, sobre el CSV que ya existe:
+
+```bash
+.venv/bin/python -m backend.routing.build_route --prioridades alta
+```
+
+Escribe `output/recorrido.csv` y `output/recorrido.html`. No es el servidor.
+
+## Correr
+
+El navegador habla solo con Next, en `/api/...`. Next reenvía eso a `http://api:8000`. En los dos compose el servicio se llama `api`.
+
+```bash
+docker compose -f compose.dev.yaml up --build
+docker compose -f compose.yaml up --build
+```
+
+El primero es local: publica el `3000` y el `8000`, monta el código y recarga solo. El segundo es el de producción (Coolify). Solo publica `web`. Las ediciones van a un SQLite en el volume `overrides`.
 
 ## Estructura
 
 ```text
-backend/          lógica Python (hoy: dataset; después: modelo, grafos, API)
-frontend/         Next.js, todavía vacío
+backend/          dataset, SVM, circuito y API
+frontend/         Next.js
 data/raw/         CSV de contenedores, no se versiona
 data/cache/       extracto OSM, no se versiona
-data/processed/   salidas
-scripts/validate_dataset.py
+data/processed/   tramos, grafo y svm.joblib
+compose.yaml      producción (Coolify)
+compose.dev.yaml  local, con recarga
 ```
 
 ## Dependencias
@@ -54,5 +80,6 @@ scripts/validate_dataset.py
 - `osmnx`: baja y simplifica la red de OpenStreetMap.
 - `geopandas` y `shapely`: join espacial de contenedores y tipo de zona. Las trae osmnx.
 - `pandas` y `numpy`: tabla de tramos y el muestreo Poisson de las columnas sintéticas.
-- `scikit-learn`: solo el chequeo de `scripts/validate_dataset.py` (un Random Forest de diagnóstico, no el modelo que se entrega).
+- `scikit-learn`: el SVM que sirve el API, y el chequeo de `scripts/validate_dataset.py`.
 - `networkx`: grafo y GraphML. Lo trae osmnx.
+- `fastapi` y `uvicorn`: el API. Las ediciones de las seis columnas van a SQLite.
