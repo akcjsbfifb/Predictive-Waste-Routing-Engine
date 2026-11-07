@@ -1,1 +1,1 @@
-"""SVM ya elegido. El request no lo vuelve a entrenar."""
+"""Regresión logística entrenada offline. El request no reentrena."""

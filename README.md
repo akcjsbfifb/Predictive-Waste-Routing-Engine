@@ -44,7 +44,7 @@ Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se
 .venv/bin/python -m backend.model.train
 ```
 
-Eso ajusta el SVM (`C=1`, kernel `rbf`) con el corte del notebook y escribe `data/processed/svm.joblib`. El API no reentrena.
+Eso ajusta el clasificador con el corte del notebook y escribe `data/processed/model.joblib`. El API no reentrena.
 
 El circuito, aparte, sobre el CSV que ya existe:
 
@@ -72,7 +72,7 @@ backend/          dataset, SVM, circuito y API
 frontend/         Next.js
 data/raw/         CSV de contenedores, no se versiona
 data/cache/       extracto OSM, no se versiona
-data/processed/   tramos, grafo y svm.joblib
+data/processed/   tramos, grafo y model.joblib
 compose.yaml      producción (Coolify)
 compose.dev.yaml  local, con recarga
 ```

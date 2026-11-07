@@ -1,8 +1,8 @@
-"""Entrena el SVM una vez y lo guarda en data/processed/svm.joblib.
+"""Entrena la regresión logística y la guarda en data/processed/model.joblib.
 
 Mismo corte que el notebook: 20 % de test, stratify, random_state=42.
-Se ajusta solo con el train. El test se mira para comprobar que el
-archivo coincide con el notebook (accuracy 0,829 y F1 macro 0,821).
+Se ajusta solo con el train. El test comprueba que el artefacto coincide
+con el notebook actualizado (accuracy 0,754 y F1 macro 0,755).
 
 Correr desde la raíz, con el venv ya instalado:
 
@@ -18,10 +18,12 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import train_test_split
 
-from backend.model.pipeline import COLUMNAS, OBJETIVO, pipeline_svm
+from backend.model.pipeline import COLUMNAS, OBJETIVO, pipeline_logistic
 
 RAIZ = Path(__file__).resolve().parents[2]
-SALIDA = RAIZ / "data" / "processed" / "svm.joblib"
+SALIDA = RAIZ / "data" / "processed" / "model.joblib"
+UMBRAL_ACCURACY = 0.754
+UMBRAL_F1 = 0.755
 
 
 def main() -> None:
@@ -38,12 +40,12 @@ def main() -> None:
         random_state=42,
         stratify=y,
     )
-    modelo = pipeline_svm()
+    modelo = pipeline_logistic()
     modelo.fit(X_train, y_train)
     predicho = modelo.predict(X_test)
     accuracy = accuracy_score(y_test, predicho)
     f1 = f1_score(y_test, predicho, average="macro")
-    if round(accuracy, 3) != 0.829 or round(f1, 3) != 0.821:
+    if round(accuracy, 3) != UMBRAL_ACCURACY or round(f1, 3) != UMBRAL_F1:
         raise SystemExit(
             f"el test no coincide con el notebook: accuracy {accuracy:.3f} f1 {f1:.3f}"
         )

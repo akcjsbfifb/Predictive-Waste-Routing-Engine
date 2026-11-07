@@ -1,4 +1,4 @@
-"""El API predice con el SVM guardado y no reescribe el CSV."""
+"""El API predice con el joblib guardado y no reescribe el CSV."""
 
 from __future__ import annotations
 
