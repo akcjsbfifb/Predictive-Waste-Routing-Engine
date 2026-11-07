@@ -25,6 +25,9 @@ def synthesize(frame: pd.DataFrame, seed: int | None = None) -> pd.DataFrame:
     day_lambda = day_lambda + config.DAYS_CONTAINER_BUMP * containers
     days = rng.poisson(day_lambda)
     days = np.clip(days, 0, config.DAYS_MAX).astype(int)
+    # Dominio: sin contenedor mapeado no hay "días desde última recolección" medible aquí.
+    days = np.where(containers > 0, days, 0).astype(int)
+    has_container = containers > 0
 
     complaint_lambda = np.exp(
         config.COMPLAINTS_INTERCEPT
@@ -32,7 +35,13 @@ def synthesize(frame: pd.DataFrame, seed: int | None = None) -> pd.DataFrame:
         + config.COMPLAINTS_COEF_DAYS * days
         + np.array([config.COMPLAINTS_ZONE[zone] for zone in zones])
     )
+    # Dominio: quejas vecinales solo sobre tramos con al menos un contenedor mapeado.
+    # Sin esto, intercept + días + zona bastan para Poisson > 0 con contenedores = 0.
+    complaint_lambda = np.where(has_container, complaint_lambda, 0.0)
     complaints = rng.poisson(complaint_lambda).astype(int)
+    # Con contenedor, días y quejas no pueden quedar en 0 tras Poisson.
+    days = np.where(has_container & (days < 1), 1, days).astype(int)
+    complaints = np.where(has_container & (complaints < 1), 1, complaints).astype(int)
 
     zone_weight = np.array([config.PRIORITY_WEIGHTS["zona"][zone] for zone in zones])
     log_containers = np.log1p(containers)

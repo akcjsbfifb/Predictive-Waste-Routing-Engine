@@ -58,6 +58,8 @@ def main() -> None:
     _check_priority_shares(frame)
     _check_zones(frame)
     _check_numeric(frame)
+    _check_quejas_implica_contenedores(frame)
+    _check_dias_implica_contenedores(frame)
     _sanity_model(frame)
     _check_reproducible(frame)
     print("\n".join(warnings) if warnings else "sin advertencias")
@@ -146,6 +148,35 @@ def _check_zones(frame: pd.DataFrame) -> None:
         got = float(shares.get(name, 0.0))
         if got < config.ZONE_MIN_SHARE_WARN:
             warnings.append(f"advertencia: tipo_zona={name} es {got:.1%} (< {config.ZONE_MIN_SHARE_WARN:.0%})")
+
+
+def _check_quejas_implica_contenedores(frame: pd.DataFrame) -> None:
+    """Invariante de dominio: historico_quejas_vecinales > 0 solo si hay contenedor en el tramo."""
+    bad = (frame["historico_quejas_vecinales"] > 0) & (frame["cantidad_contenedores"] <= 0)
+    n = int(bad.sum())
+    if n:
+        sample = frame.loc[bad, ["tramo_id", "nombre_calle", "cantidad_contenedores", "historico_quejas_vecinales"]].head(5)
+        errors.append(
+            f"quejas>0 con cantidad_contenedores==0: {n} filas (ej.):\n{sample.to_string(index=False)}"
+        )
+    else:
+        print("invariante quejas↔contenedores: ok (0 filas con quejas y sin contenedor)")
+
+
+def _check_dias_implica_contenedores(frame: pd.DataFrame) -> None:
+    """Invariante de dominio: dias_desde_ultima_recoleccion > 0 solo si hay contenedor en el tramo."""
+    bad = (frame["dias_desde_ultima_recoleccion"] > 0) & (frame["cantidad_contenedores"] <= 0)
+    n = int(bad.sum())
+    if n:
+        sample = frame.loc[
+            bad,
+            ["tramo_id", "nombre_calle", "cantidad_contenedores", "dias_desde_ultima_recoleccion"],
+        ].head(5)
+        errors.append(
+            f"dias>0 con cantidad_contenedores<=0: {n} filas (ej.):\n{sample.to_string(index=False)}"
+        )
+    else:
+        print("invariante dias↔contenedores: ok (0 filas con dias y sin contenedor)")
 
 
 def _check_numeric(frame: pd.DataFrame) -> None:
