@@ -1,7 +1,25 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  ColorPicker,
+  ColorPickerArea,
+  ColorPickerAreaThumb,
+  ColorPickerContent,
+  ColorPickerControl,
+  ColorPickerEyeDropperTrigger,
+  ColorPickerInput,
+  ColorPickerSlider,
+  ColorPickerSwatchPreview,
+  ColorPickerTransparencyGrid,
+  ColorPickerTrigger,
+  ColorPickerView,
+  parseColor,
+} from "@/components/ui/color-picker";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { Spinner } from "@/components/ui/spinner";
 import { CAMPOS, type Edicion, type Prioridad, type Recorrido, type Tramo } from "./tipos";
 
 const Mapa = dynamic(() => import("./mapa"), {
@@ -10,9 +28,18 @@ const Mapa = dynamic(() => import("./mapa"), {
 });
 
 const ZONAS = ["residencial", "comercial", "industrial"];
+const CIRCUITO_INICIAL = "#1d4ed8";
 
 function metros(valor: number): string {
   return `${new Intl.NumberFormat("es-AR", { maximumFractionDigits: 1 }).format(valor)} m`;
+}
+
+function estiloMuestraCircuito(color: string): CSSProperties {
+  try {
+    return { background: parseColor(color).toString("hsla") };
+  } catch {
+    return { background: CIRCUITO_INICIAL };
+  }
 }
 
 function edicionDe(tramo: Tramo): Edicion {
@@ -47,6 +74,14 @@ export function Visor() {
   const [error, setError] = useState<string | null>(null);
   const [verCircuito, setVerCircuito] = useState(false);
   const [verRepetidos, setVerRepetidos] = useState(false);
+  const [colorCircuito, setColorCircuito] = useState(CIRCUITO_INICIAL);
+  const [pickerListo, setPickerListo] = useState(false);
+
+  useEffect(() => {
+    setPickerListo(true);
+  }, []);
+
+  const muestraCircuito = useMemo(() => estiloMuestraCircuito(colorCircuito), [colorCircuito]);
 
   const cargar = useCallback(async () => {
     setCargando(true);
@@ -150,29 +185,118 @@ export function Visor() {
 
   return (
     <main className="app">
+      <div className="mapa">
+        <Mapa
+          tramos={tramos}
+          seleccionado={seleccionado}
+          recorrido={recorrido}
+          paso={paso}
+          verCircuito={verCircuito}
+          verRepetidos={verRepetidos}
+          colorCircuito={colorCircuito}
+          onSelect={elegir}
+        />
+        <div className="controles-mapa">
+          <div className="controles-mapa-fila">
+            <button
+              type="button"
+              className={`capas ${verCircuito ? "on" : ""}`}
+              onClick={() => alternarCapa("circuito")}
+            >
+              <i className="muestra" style={muestraCircuito} />
+              Ver circuito
+            </button>
+            {pickerListo && (
+            <ColorPicker
+              className="picker-circuito w-full max-w-xs"
+              value={colorCircuito}
+              onValueChange={(details) => setColorCircuito(details.valueAsString)}
+              format="hsla"
+              positioning={{ placement: "bottom-start" }}
+            >
+              <ColorPickerControl>
+                <InputGroup>
+                  <ColorPickerTrigger asChild>
+                    <InputGroupAddon>
+                      <ColorPickerSwatchPreview />
+                    </InputGroupAddon>
+                  </ColorPickerTrigger>
+                  <ColorPickerInput asChild channel="hex">
+                    <InputGroupInput className="font-mono uppercase" />
+                  </ColorPickerInput>
+                </InputGroup>
+              </ColorPickerControl>
+              <ColorPickerContent>
+                <ColorPickerArea>
+                  <ColorPickerAreaThumb />
+                </ColorPickerArea>
+                <ColorPickerView format="hsla">
+                  <div className="flex items-center gap-2">
+                    <ColorPickerEyeDropperTrigger />
+                    <div className="flex min-w-0 flex-1 flex-col gap-2">
+                      <ColorPickerSlider channel="hue" />
+                      <ColorPickerSlider channel="alpha">
+                        <ColorPickerTransparencyGrid />
+                      </ColorPickerSlider>
+                    </div>
+                  </div>
+                </ColorPickerView>
+              </ColorPickerContent>
+            </ColorPicker>
+            )}
+          </div>
+          <button
+            type="button"
+            className={`capas ${verRepetidos ? "on" : ""}`}
+            onClick={() => alternarCapa("repetidos")}
+          >
+            <i className="muestra repite" />
+            Más de una vez
+          </button>
+        </div>
+      </div>
+
       <aside className="panel">
         <h1>Recolección</h1>
         <p className="subtitulo">Microcentro de Buenos Aires. El circuito cubre solo prioridad alta.</p>
         <ul className="leyenda">
-          <li><i className="muestra alta" /> alta</li>
-          <li><i className="muestra media" /> media</li>
-          <li><i className="muestra baja" /> baja</li>
-          <li><i className="muestra actual" /> paso actual</li>
+          <li>
+            <i className="muestra alta" /> alta
+          </li>
+          <li>
+            <i className="muestra media" /> media
+          </li>
+          <li>
+            <i className="muestra baja" /> baja
+          </li>
+          <li>
+            <i className="muestra" style={muestraCircuito} /> circuito
+          </li>
+          <li>
+            <i className="muestra actual" /> paso actual
+          </li>
         </ul>
 
-        {cargando && <p className="vacio">Cargando calles…</p>}
+        {cargando && (
+          <p className="vacio flex items-center gap-2">
+            <Spinner className="size-4" aria-label="Cargando" />
+            Cargando calles…
+          </p>
+        )}
         {error && (
           <p className="error">
             {error}{" "}
             {tramos.length === 0 && (
-              <button type="button" className="secundario" onClick={() => void cargar()}>
+              <Button type="button" variant="outline" size="sm" onClick={() => void cargar()}>
                 Reintentar
-              </button>
+              </Button>
             )}
           </p>
         )}
 
-        {!cargando && !tramo && <p className="vacio">Elegí una calle en el mapa para cambiar sus datos.</p>}
+        {!cargando && !tramo && (
+          <p className="vacio">Elegí una calle en el mapa para cambiar sus datos.</p>
+        )}
 
         {tramo && form && (
           <form
@@ -262,18 +386,37 @@ export function Visor() {
               </label>
             </div>
             <div className="acciones">
-              <button type="submit" disabled={calculando || !entero(form)}>
-                {calculando ? "Calculando circuito…" : "Recalcular"}
-              </button>
+              <Button type="submit" disabled={calculando || !entero(form)} className="w-full">
+                {calculando ? (
+                  <>
+                    <Spinner />
+                    Calculando circuito…
+                  </>
+                ) : (
+                  "Recalcular"
+                )}
+              </Button>
             </div>
           </form>
         )}
 
         {!tramo && (
           <div className="acciones">
-            <button type="button" disabled={calculando || tramos.length === 0} onClick={() => void recalcular()}>
-              {calculando ? "Calculando circuito…" : "Recalcular"}
-            </button>
+            <Button
+              type="button"
+              disabled={calculando || tramos.length === 0}
+              className="w-full"
+              onClick={() => void recalcular()}
+            >
+              {calculando ? (
+                <>
+                  <Spinner />
+                  Calculando circuito…
+                </>
+              ) : (
+                "Recalcular"
+              )}
+            </Button>
           </div>
         )}
 
@@ -282,8 +425,8 @@ export function Visor() {
             <h2>Circuito</h2>
             <p className="costo">{metros(recorrido.costo_m)}</p>
             <p className="meta">
-              {altas} calles altas · {recorrido.pasos.length} pasos · {recorrido.repetidos.length} tramos
-              más de una vez
+              {altas} calles altas · {recorrido.pasos.length} pasos · {recorrido.repetidos.length} tramos más de una
+              vez
             </p>
             <div className="paso-ctrl">
               <label htmlFor="paso">
@@ -298,20 +441,20 @@ export function Visor() {
                 onChange={(evento) => setPaso(Number(evento.target.value))}
               />
               <div className="botones">
-                <button
+                <Button
                   type="button"
-                  className="secundario"
+                  variant="outline"
                   onClick={() => setPaso((actualPaso) => Math.max(actualPaso - 1, 0))}
                 >
                   Anterior
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
-                  className="secundario"
+                  variant="outline"
                   onClick={() => setPaso((actualPaso) => Math.min(actualPaso + 1, maxPaso))}
                 >
                   Siguiente
-                </button>
+                </Button>
               </div>
               <p className="detalle">
                 {actual.nombre_calle || `Tramo ${actual.tramo_id}`} · {metros(actual.distancia_m)}
@@ -322,35 +465,6 @@ export function Visor() {
           </section>
         )}
       </aside>
-      <div className="mapa">
-        <Mapa
-          tramos={tramos}
-          seleccionado={seleccionado}
-          recorrido={recorrido}
-          paso={paso}
-          verCircuito={verCircuito}
-          verRepetidos={verRepetidos}
-          onSelect={elegir}
-        />
-        <div className="controles-mapa">
-          <button
-            type="button"
-            className={verCircuito ? "on" : ""}
-            onClick={() => alternarCapa("circuito")}
-          >
-            <i className="muestra circuito" />
-            Ver circuito
-          </button>
-          <button
-            type="button"
-            className={verRepetidos ? "on" : ""}
-            onClick={() => alternarCapa("repetidos")}
-          >
-            <i className="muestra repite" />
-            Más de una vez
-          </button>
-        </div>
-      </div>
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { memo, useEffect, useMemo, useRef } from "react";
 import L from "leaflet";
 import { CircleMarker, MapContainer, Polyline, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { parseColor } from "@/components/ui/color-picker";
 import type { Paso, Prioridad, Recorrido, Tramo } from "./tipos";
 
 const COLOR: Record<Prioridad, string> = {
@@ -76,7 +77,28 @@ const Vertices = memo(function Vertices({ tramos }: { tramos: Tramo[] }) {
   );
 });
 
-const CircuitoCapa = memo(function CircuitoCapa({ pasos }: { pasos: Paso[] }) {
+function opcionesCircuito(colorCircuito: string): { color: string; opacity: number; weight: number } {
+  try {
+    const c = parseColor(colorCircuito);
+    const alpha = c.getChannelValue("alpha");
+    return {
+      color: c.toString("hex"),
+      opacity: typeof alpha === "number" && Number.isFinite(alpha) ? alpha : 1,
+      weight: 2.5,
+    };
+  } catch {
+    return { color: "#1d4ed8", opacity: 0.95, weight: 2.5 };
+  }
+}
+
+const CircuitoCapa = memo(function CircuitoCapa({
+  pasos,
+  colorCircuito,
+}: {
+  pasos: Paso[];
+  colorCircuito: string;
+}) {
+  const pathOptions = useMemo(() => opcionesCircuito(colorCircuito), [colorCircuito]);
   return (
     <>
       {pasos.map((paso, indice) => (
@@ -85,7 +107,7 @@ const CircuitoCapa = memo(function CircuitoCapa({ pasos }: { pasos: Paso[] }) {
           positions={paso.geometria}
           smoothFactor={0}
           interactive={false}
-          pathOptions={{ color: "#1d4ed8", weight: 2.5, opacity: 0.95 }}
+          pathOptions={pathOptions}
         />
       ))}
     </>
@@ -160,6 +182,7 @@ export default function Mapa({
   paso,
   verCircuito,
   verRepetidos,
+  colorCircuito,
   onSelect,
 }: {
   tramos: Tramo[];
@@ -168,6 +191,7 @@ export default function Mapa({
   paso: number;
   verCircuito: boolean;
   verRepetidos: boolean;
+  colorCircuito: string;
   onSelect: (tramoId: number) => void;
 }) {
   const limites = useMemo(
@@ -196,7 +220,9 @@ export default function Mapa({
       />
       <Limites tramos={tramos} />
       <Calles tramos={tramos} onSelect={onSelect} />
-      {recorrido && verCircuito && <CircuitoCapa pasos={recorrido.pasos} />}
+      {recorrido && verCircuito && (
+        <CircuitoCapa pasos={recorrido.pasos} colorCircuito={colorCircuito} />
+      )}
       {recorrido && verRepetidos && <RepetidosCapa pasos={recorrido.pasos} repetidos={recorrido.repetidos} />}
       <Vertices tramos={tramos} />
       {elegido && (
