@@ -36,6 +36,8 @@ uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python scripts/validate_dataset.py
 ```
 
+Para volver a calcular solo días, quejas y prioridad sin redescargar OSM: `.venv/bin/python scripts/resynthesize.py`.
+
 Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se versiona) y escribe `data/processed/tramos.csv`, `nodos.csv` y `grafo.graphml`. La semilla está en `backend/config.py` (`SEED`). `cerca_escuela_hospital` y `feria_o_evento` no salen de ese comando: las agrega `notebooks/tramos.ipynb`. Si se vuelve a generar el CSV, hay que volver a correr ese notebook y después:
 
 ```bash
