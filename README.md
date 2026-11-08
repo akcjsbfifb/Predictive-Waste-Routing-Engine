@@ -33,10 +33,10 @@ uv python install 3.12
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python -m backend.dataset.build_dataset
-.venv/bin/python scripts/validate_dataset.py
+.venv/bin/python backend/dataset/validate_dataset.py
 ```
 
-Para volver a calcular solo días, quejas y prioridad sin redescargar OSM: `.venv/bin/python scripts/resynthesize.py`.
+Para volver a calcular solo días, quejas y prioridad sin redescargar OSM: `.venv/bin/python backend/dataset/resynthesize.py`.
 
 Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se versiona) y escribe `data/processed/tramos.csv`, `nodos.csv` y `grafo.graphml`. La semilla está en `backend/config.py` (`SEED`). `cerca_escuela_hospital` y `feria_o_evento` no salen de ese comando: las agrega `notebooks/tramos.ipynb`. Si se vuelve a generar el CSV, hay que volver a correr ese notebook y después:
 
@@ -82,6 +82,6 @@ compose.dev.yaml  local, con recarga
 - `osmnx`: baja y simplifica la red de OpenStreetMap.
 - `geopandas` y `shapely`: join espacial de contenedores y tipo de zona. Las trae osmnx.
 - `pandas` y `numpy`: tabla de tramos y el muestreo Poisson de las columnas sintéticas.
-- `scikit-learn`: el SVM que sirve el API, y el chequeo de `scripts/validate_dataset.py`.
+- `scikit-learn`: el SVM que sirve el API, y el chequeo de `backend/dataset/validate_dataset.py`.
 - `networkx`: grafo y GraphML. Lo trae osmnx.
 - `fastapi` y `uvicorn`: el API. Las ediciones de las seis columnas van a SQLite.

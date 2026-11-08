@@ -83,7 +83,7 @@ score = 0,55 * dias
 
 La etiqueta no usa umbrales fijos sobre el score. Se ordenan los tramos por score y se corta para acercarse a alta 20 %, media 35 %, baja 45 % (`PRIORITY_SHARES`). El desvío 0,40 se eligió para que un Random Forest de diagnóstico, con split 80/20 y la misma semilla, quede cerca del 80 % de accuracy: aprende la estructura, pero no reconstruye la clase. Esas proporciones son una decisión de diseño, no una estadística del GCBA.
 
-El Random Forest de `scripts/validate_dataset.py` no es el modelo del práctico. Para volver a generar solo días, quejas y prioridad sin bajar OSM de nuevo: `.venv/bin/python scripts/resynthesize.py`.
+El Random Forest de `backend/dataset/validate_dataset.py` no es el modelo del práctico. Para volver a generar solo días, quejas y prioridad sin bajar OSM de nuevo: `.venv/bin/python backend/dataset/resynthesize.py`.
 
 ## Fuentes y licencias
 

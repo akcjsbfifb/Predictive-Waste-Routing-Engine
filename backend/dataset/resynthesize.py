@@ -4,7 +4,7 @@ No redescarga OSM ni corre build_dataset. No toca cerca_escuela_hospital ni feri
 
 Desde la raíz del repo:
 
-    .venv/bin/python scripts/resynthesize.py
+    .venv/bin/python backend/dataset/resynthesize.py
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import hashlib
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 

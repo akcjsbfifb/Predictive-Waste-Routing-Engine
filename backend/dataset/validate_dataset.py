@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -45,8 +45,8 @@ warnings: list[str] = []
 
 
 def main() -> None:
-    tramos_path = Path("data/processed/tramos.csv")
-    graph_path = Path("data/processed/grafo.graphml")
+    tramos_path = ROOT / "data" / "processed" / "tramos.csv"
+    graph_path = ROOT / "data" / "processed" / "grafo.graphml"
     if not tramos_path.is_file() or not graph_path.is_file():
         print("Faltan data/processed/tramos.csv o grafo.graphml. Corré build_dataset primero.")
         sys.exit(1)
