@@ -1,10 +1,11 @@
 "use client";
 
-import { memo, useEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import L from "leaflet";
 import { CircleMarker, MapContainer, Polyline, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Paso, Prioridad, Recorrido, Tramo } from "./tipos";
+import { parseColor } from "@/components/ui/color-picker";
+import type { Paso, Prioridad, Recorrido, Tramo } from "@/app/tipos";
 
 const COLOR: Record<Prioridad, string> = {
   alta: "#111111",
@@ -68,6 +69,7 @@ const Vertices = memo(function Vertices({ tramos }: { tramos: Tramo[] }) {
           key={`${punto[0]},${punto[1]}`}
           center={punto}
           radius={2.5}
+          pane="nodos"
           interactive={false}
           pathOptions={{ color: "#ffffff", weight: 1.5, fillColor: "#111111", fillOpacity: 1 }}
         />
@@ -76,7 +78,40 @@ const Vertices = memo(function Vertices({ tramos }: { tramos: Tramo[] }) {
   );
 });
 
-const CircuitoCapa = memo(function CircuitoCapa({ pasos }: { pasos: Paso[] }) {
+function opcionesColor(
+  color: string,
+  fallback: string,
+  weight: number,
+): { color: string; opacity: number; weight: number } {
+  try {
+    const c = parseColor(color);
+    const alpha = c.getChannelValue("alpha");
+    return {
+      color: c.toString("hex"),
+      opacity: typeof alpha === "number" && Number.isFinite(alpha) ? alpha : 1,
+      weight,
+    };
+  } catch {
+    return { color: fallback, opacity: 0.95, weight };
+  }
+}
+
+function opcionesCircuito(colorCircuito: string): { color: string; opacity: number; weight: number } {
+  return opcionesColor(colorCircuito, "#1d4ed8", 2.5);
+}
+
+function opcionesRepetidos(colorRepetidos: string): { color: string; opacity: number; weight: number } {
+  return opcionesColor(colorRepetidos, "#7c3aed", 6);
+}
+
+const CircuitoCapa = memo(function CircuitoCapa({
+  pasos,
+  colorCircuito,
+}: {
+  pasos: Paso[];
+  colorCircuito: string;
+}) {
+  const pathOptions = useMemo(() => opcionesCircuito(colorCircuito), [colorCircuito]);
   return (
     <>
       {pasos.map((paso, indice) => (
@@ -85,7 +120,7 @@ const CircuitoCapa = memo(function CircuitoCapa({ pasos }: { pasos: Paso[] }) {
           positions={paso.geometria}
           smoothFactor={0}
           interactive={false}
-          pathOptions={{ color: "#1d4ed8", weight: 2.5, opacity: 0.95 }}
+          pathOptions={pathOptions}
         />
       ))}
     </>
@@ -95,9 +130,11 @@ const CircuitoCapa = memo(function CircuitoCapa({ pasos }: { pasos: Paso[] }) {
 const RepetidosCapa = memo(function RepetidosCapa({
   pasos,
   repetidos,
+  colorRepetidos,
 }: {
   pasos: Paso[];
   repetidos: number[];
+  colorRepetidos: string;
 }) {
   const lineas = useMemo(() => {
     const marca = new Set(repetidos);
@@ -110,6 +147,7 @@ const RepetidosCapa = memo(function RepetidosCapa({
     }
     return unicos;
   }, [pasos, repetidos]);
+  const pathOptions = useMemo(() => opcionesRepetidos(colorRepetidos), [colorRepetidos]);
   return (
     <>
       {lineas.map((paso) => (
@@ -118,7 +156,7 @@ const RepetidosCapa = memo(function RepetidosCapa({
           positions={paso.geometria}
           smoothFactor={0}
           interactive={false}
-          pathOptions={{ color: "#7c3aed", weight: 6, opacity: 1 }}
+          pathOptions={pathOptions}
         />
       ))}
     </>
@@ -133,12 +171,51 @@ function caja(tramos: Tramo[]): L.LatLngBounds {
   return bounds;
 }
 
+function PaneNodos() {
+  const map = useMap();
+  const listo = useRef(false);
+  useLayoutEffect(() => {
+    if (listo.current) return;
+    if (!map.getPane("nodos")) {
+      const pane = map.createPane("nodos");
+      pane.style.zIndex = "650";
+    }
+    listo.current = true;
+  }, [map]);
+  return null;
+}
+
+function AjusteTamano() {
+  const map = useMap();
+  useEffect(() => {
+    const sync = () => {
+      map.invalidateSize({ animate: false, pan: false });
+    };
+    sync();
+    const id = window.requestAnimationFrame(() => window.requestAnimationFrame(sync));
+    window.addEventListener("resize", sync);
+    const contenedor = map.getContainer().parentElement;
+    const observador =
+      contenedor && typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => sync())
+        : null;
+    if (contenedor && observador) observador.observe(contenedor);
+    return () => {
+      window.cancelAnimationFrame(id);
+      window.removeEventListener("resize", sync);
+      observador?.disconnect();
+    };
+  }, [map]);
+  return null;
+}
+
 function Limites({ tramos }: { tramos: Tramo[] }) {
   const map = useMap();
   const listo = useRef(false);
   useEffect(() => {
     if (listo.current || tramos.length === 0) return;
     const aplicar = () => {
+      map.invalidateSize({ animate: false, pan: false });
       if (map.getSize().y < 40) return;
       const zona = caja(tramos);
       const alrededor = zona.pad(0.4);
@@ -160,6 +237,9 @@ export default function Mapa({
   paso,
   verCircuito,
   verRepetidos,
+  soloCircuito,
+  colorCircuito,
+  colorRepetidos,
   onSelect,
 }: {
   tramos: Tramo[];
@@ -168,12 +248,22 @@ export default function Mapa({
   paso: number;
   verCircuito: boolean;
   verRepetidos: boolean;
+  soloCircuito: boolean;
+  colorCircuito: string;
+  colorRepetidos: string;
   onSelect: (tramoId: number) => void;
 }) {
   const limites = useMemo(
     () => (tramos.length === 0 ? ALREDEDOR : caja(tramos).pad(0.4)),
     [tramos],
   );
+  const filtrarSoloCircuito = soloCircuito && verCircuito && recorrido !== null;
+  const tramosCircuito = useMemo(() => {
+    if (!filtrarSoloCircuito || !recorrido) return tramos;
+    const ids = new Set(recorrido.pasos.map((item) => item.tramo_id));
+    return tramos.filter((item) => ids.has(item.tramo_id));
+  }, [tramos, filtrarSoloCircuito, recorrido]);
+  const tramosMapa = filtrarSoloCircuito ? tramosCircuito : tramos;
   const elegido = tramos.find((item) => item.tramo_id === seleccionado) ?? null;
   const actual = recorrido?.pasos[paso];
 
@@ -194,11 +284,21 @@ export default function Mapa({
         noWrap
         bounds={limites}
       />
+      <AjusteTamano />
       <Limites tramos={tramos} />
-      <Calles tramos={tramos} onSelect={onSelect} />
-      {recorrido && verCircuito && <CircuitoCapa pasos={recorrido.pasos} />}
-      {recorrido && verRepetidos && <RepetidosCapa pasos={recorrido.pasos} repetidos={recorrido.repetidos} />}
-      <Vertices tramos={tramos} />
+      <PaneNodos />
+      <Calles tramos={tramosMapa} onSelect={onSelect} />
+      {recorrido && verCircuito && (
+        <CircuitoCapa pasos={recorrido.pasos} colorCircuito={colorCircuito} />
+      )}
+      {recorrido && verRepetidos && (
+        <RepetidosCapa
+          pasos={recorrido.pasos}
+          repetidos={recorrido.repetidos}
+          colorRepetidos={colorRepetidos}
+        />
+      )}
+      <Vertices tramos={tramosMapa} />
       {elegido && (
         <>
           <Polyline

@@ -41,6 +41,7 @@ frontend/out/
 # IDE y sistema
 .idea/
 .vscode/
+.agents/
 .DS_Store
 Thumbs.db
 
