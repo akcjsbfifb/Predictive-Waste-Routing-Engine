@@ -1,4 +1,4 @@
-"""FastAPI: prioridades del SVM y circuito de las calles altas.
+"""FastAPI: prioridades de la regresión logística y circuito de calles altas.
 
 Al arrancar carga el grafo, el CSV, el joblib y el SQLite. El CSV no se
 reescribe. Si no hay una fila en SQLite, vale el CSV.
@@ -25,7 +25,7 @@ from backend.routing.postman import circuito
 from backend.routing.view import _orientar
 
 RAIZ = Path(__file__).resolve().parents[2]
-MODELO = RAIZ / "data" / "processed" / "svm.joblib"
+MODELO = RAIZ / "data" / "processed" / "model.joblib"
 PRIORIDAD_CIRCUITO = "alta"
 
 

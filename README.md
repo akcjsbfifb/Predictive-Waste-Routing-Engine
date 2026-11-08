@@ -33,8 +33,10 @@ uv python install 3.12
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python -m backend.dataset.build_dataset
-.venv/bin/python scripts/validate_dataset.py
+.venv/bin/python backend/dataset/validate_dataset.py
 ```
+
+Para volver a calcular solo días, quejas y prioridad sin redescargar OSM: `.venv/bin/python backend/dataset/resynthesize.py`.
 
 Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se versiona) y escribe `data/processed/tramos.csv`, `nodos.csv` y `grafo.graphml`. La semilla está en `backend/config.py` (`SEED`). `cerca_escuela_hospital` y `feria_o_evento` no salen de ese comando: las agrega `notebooks/tramos.ipynb`. Si se vuelve a generar el CSV, hay que volver a correr ese notebook y después:
 
@@ -42,7 +44,7 @@ Eso baja las calles a `data/cache/` y los contenedores a `data/raw/` (ninguno se
 .venv/bin/python -m backend.model.train
 ```
 
-Eso ajusta el SVM (`C=1`, kernel `rbf`) con el corte del notebook y escribe `data/processed/svm.joblib`. El API no reentrena.
+Eso ajusta el clasificador con el corte del notebook y escribe `data/processed/model.joblib`. El API no reentrena.
 
 El circuito, aparte, sobre el CSV que ya existe:
 
@@ -70,7 +72,7 @@ backend/          dataset, SVM, circuito y API
 frontend/         Next.js
 data/raw/         CSV de contenedores, no se versiona
 data/cache/       extracto OSM, no se versiona
-data/processed/   tramos, grafo y svm.joblib
+data/processed/   tramos, grafo y model.joblib
 compose.yaml      producción (Coolify)
 compose.dev.yaml  local, con recarga
 ```
@@ -80,6 +82,6 @@ compose.dev.yaml  local, con recarga
 - `osmnx`: baja y simplifica la red de OpenStreetMap.
 - `geopandas` y `shapely`: join espacial de contenedores y tipo de zona. Las trae osmnx.
 - `pandas` y `numpy`: tabla de tramos y el muestreo Poisson de las columnas sintéticas.
-- `scikit-learn`: el SVM que sirve el API, y el chequeo de `scripts/validate_dataset.py`.
+- `scikit-learn`: el SVM que sirve el API, y el chequeo de `backend/dataset/validate_dataset.py`.
 - `networkx`: grafo y GraphML. Lo trae osmnx.
 - `fastapi` y `uvicorn`: el API. Las ediciones de las seis columnas van a SQLite.
