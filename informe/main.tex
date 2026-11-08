@@ -3,13 +3,17 @@
 \usepackage[spanish]{babel}
 \usepackage[margin=2.2cm,headheight=15pt]{geometry}
 \usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{needspace}
+\usepackage{xcolor}
 \usepackage{hyperref}
 
 \hypersetup{
-  colorlinks=true,
-  linkcolor=blue,
-  urlcolor=blue,
-  citecolor=blue
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green
 }
 
 \pagestyle{fancy}
@@ -34,7 +38,8 @@
 {\Large Trabajo práctico integrador}\\[1.4cm]
 {\Large Lógica y Teoría de Grafos}\\[2.6cm]
 Martín Moloeznik\\[0.35cm]
-Nicolás Paz Reyes\\[2.2cm]
+Nicolás Paz Reyes\\[0.75cm]
+\url{https://paz-reyes.moloeznik.me/}\\[1.45cm]
 8 de noviembre de 2026
 \end{center}
 \end{titlepage}
@@ -54,6 +59,8 @@ La zona de trabajo es un recorte de unos dos kilómetros de lado en el microcent
 La calle, el largo, el nombre, el tipo de zona y la cantidad de contenedores salen de fuentes públicas. Los días desde la última recolección, el historial de quejas y la prioridad de recolección los genera un script, con reglas fijas y semilla 42. Cerca del 20\,\% de los tramos queda en alta, el 35\,\% en media y el 45\,\% en baja. El corte es un ranking de un puntaje con ruido, así la clase no es una función cerrada de las otras columnas.
 
 El modelo, los datos y el circuito están en Python. El clasificador usa scikit-learn. El grafo de calles se arma con OpenStreetMap y queda guardado. Dijkstra y Hierholzer están implementados en el proyecto. El emparejamiento de costo mínimo del cartero chino lo resuelve rustworkx, con el algoritmo de Edmonds. La API, en FastAPI, carga el clasificador ya ajustado y arma el circuito con las prioridades que predice. El mapa del navegador consume esa API.
+
+Para correr el proyecto en local, los pasos están en \texttt{README.md}, secciones Setup y Correr. El comando de arranque es \texttt{docker compose -f compose.dev.yaml up --build}.
 
 \chapter{Los datos}
 
@@ -128,13 +135,58 @@ El bonus de zona de este puntaje es 0 en residencial, 0,40 en comercial y 0,20 e
 
 En una calle sin contenedores los días y las quejas son 0, así que el puntaje es el bonus de zona más el ruido. Dos calles con los mismos datos pueden caer una en baja y otra en media. Esa superposición aparece después en los errores del modelo.
 
+\subsection{De dónde sale cada columna}
+
+El dataset es mixto. Calles y contenedores son reales: OpenStreetMap y el CSV del GCBA, como se contó arriba. Días sin recolección, quejas vecinales, prioridad, y los dos sí o no de contexto no salen de esas fuentes.
+
+\path{backend/dataset/synthesize.py} usa semilla 42. Solo escribe días, quejas y prioridad. No crea ni modifica las columnas de cerca de escuela u hospital, ni de feria o evento. \path{backend/dataset/build_dataset.py} llama a esa función al armar el CSV por primera vez y tampoco agrega esas dos columnas.
+
+\path{backend/dataset/resynthesize.py} vuelve a correr el mismo \path{synthesize} sobre \path{data/processed/tramos.csv}. El motivo: había tramos sin contenedor con días o con quejas, y eso no tiene sentido: sin contenedor no hay una recolección que medir en el tramo. La regla queda explícita: sin contenedor, días y quejas en 0; con al menos uno, los dos conteos en 1 como mínimo. El script solo pisa esas tres columnas. Comprueba que las dos de contexto no cambien.
+
+Las columnas \texttt{cerca\_escuela\_hospital} y \texttt{feria\_o\_evento} son de contexto.
+\path{notebooks/tramos.ipynb} las genera con semilla 43. Corre después de días, quejas y prioridad.
+
+\path{backend/dataset/synthesize.py} y \path{backend/dataset/resynthesize.py} no las tocan. Si las columnas ya estaban en el archivo, el notebook las elimina y las vuelve a sortear. No reescribe días, quejas ni prioridad. Si se regenera el CSV, hay que volver a correr ese notebook.
+
+Para cada tramo se sortea un número $U$ uniforme en $[0,1)$. Cada columna vale 1 si $U$ es menor que la probabilidad de su \texttt{tipo\_zona}, y 0 si no. Eso es un Bernoulli. Para \texttt{cerca\_escuela\_hospital} las probabilidades son 0,08 en residencial, 0,05 en comercial y 0,03 en industrial. Para \texttt{feria\_o\_evento} son 0,04 en residencial, 0,16 en comercial y 0,06 en industrial.
+
+\begin{displaymath}
+\texttt{cerca\_escuela\_hospital} =
+\begin{cases}
+1 & \text{si } U < p_{\mathrm{cerca}}(\texttt{tipo\_zona}) \\
+0 & \text{en caso contrario}
+\end{cases}
+\end{displaymath}
+
+\begin{displaymath}
+\texttt{feria\_o\_evento} =
+\begin{cases}
+1 & \text{si } U < p_{\mathrm{feria}}(\texttt{tipo\_zona}) \\
+0 & \text{en caso contrario}
+\end{cases}
+\end{displaymath}
+
+En el CSV hay 859 tramos residenciales y 398 comerciales; industrial es 0. El valor esperado de \texttt{cerca\_escuela\_hospital} es $0{,}08 \cdot 859 + 0{,}05 \cdot 398 = 88{,}6$. El de \texttt{feria\_o\_evento} es $0{,}04 \cdot 859 + 0{,}16 \cdot 398 = 98{,}0$.
+
+\begin{displaymath}
+\mathbb{E}[\texttt{cerca\_escuela\_hospital}] = 88{,}6
+\qquad
+\mathbb{E}[\texttt{feria\_o\_evento}] = 98{,}0
+\end{displaymath}
+
+El sorteo dejó 95 y 97 en \path{data/processed/tramos.csv}. Esos dos números son el resultado del azar, no la probabilidad. Lo carga \path{backend/routing/load.py}. El archivo tiene 1257 filas. Un cambio en el visor queda en SQLite encima de ese CSV.
+
+En el visor, el formulario de una calle puede cambiar esos dos sí o no. El sorteo al azar de varias calles copia los valores que ya traía cada tramo y no los vuelve a tirar.
+
 \chapter{El modelo}
 
-El clasificador predice la prioridad de cada tramo. Se comparan regresión logística, árbol de decisión, k vecinos más cercanos y SVM. La comparación está en el notebook de modelos. El modelo elegido se mide una sola vez, en filas que no entraron en la elección.
+El clasificador predice la prioridad de cada tramo. Se comparan regresión logística, árbol de decisión, k vecinos más cercanos y SVM. La comparación está en \path{notebooks/modelos.ipynb}. El modelo elegido se mide una sola vez, en filas que no entraron en la elección.
 
 \section{Columnas}
 
-Entran los días sin recolección, la cantidad de contenedores, las quejas, el tipo de zona, y las dos columnas de contexto: cerca de escuela u hospital, y feria o evento. Los días, los contenedores, las quejas y la zona entran porque con eso se arma la etiqueta. Las otras dos quedan como contexto del tramo.
+Las features de entrada son seis columnas: días sin recolección, contenedores, quejas, tipo de zona, cerca de escuela u hospital, y feria o evento. La etiqueta es \texttt{prioridad\_recoleccion}; no es una feature.
+
+Las cuatro primeras entran porque con ellas se arma la etiqueta. Las otras dos son contexto del tramo; la fórmula de la prioridad no las usa.
 
 El identificador, el nombre de la calle, la distancia y el tipo de vía quedan afuera: no describen la urgencia de recolectar.
 
@@ -146,6 +198,12 @@ Ese 80\,\% se parte en cinco. Cada candidato se entrena cinco veces y cada vez v
 
 El F1 macro pesa las tres clases por igual. Baja es el 45\,\% de las filas, y el accuracy puede quedar alto acertando casi siempre esa clase. Una baseline que predice siempre la clase más frecuente marca el piso de esa comparación.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{imagenes/comparacion-modelos.png}
+\caption{F1 macro promedio en validación cruzada por modelo. La baseline marca el piso.}
+\end{figure}
+
 La regresión logística usa el ajuste por defecto, con un máximo de 5000 iteraciones. El árbol varía la profundidad y el mínimo de hojas, y no se escala. kNN varía la cantidad de vecinos, solo los impares. SVM varía el margen y el tipo de frontera, recta o curva. Logística, kNN y SVM escalan las columnas numéricas, para que la de números más grandes no pese solo por la escala. El tipo de zona pasa a columnas de ceros y unos. Escalar y codificar se ajustan solo con las filas de entrenamiento de cada ronda.
 
 \section{Resultado}
@@ -154,7 +212,35 @@ Con el F1 macro de esa validación, la regresión logística queda primera. El S
 
 El modelo que carga el servidor es la logística, con el ajuste por defecto y el tope de 5000 iteraciones.
 
-En el test llega a 0,754 de accuracy y 0,755 de F1 macro. Por clase:
+En el test llega a 0,754 de accuracy y 0,755 de F1 macro. Esas dos salen de la matriz de abajo. El soporte es 50 tramos altos, 88 medios y 114 bajos: 252 filas.
+
+\begin{displaymath}
+\mbox{precisión} = \frac{\mbox{VP}}{\mbox{VP} + \mbox{FP}}
+\qquad
+\mbox{recall} = \frac{\mbox{VP}}{\mbox{VP} + \mbox{FN}}
+\end{displaymath}
+
+\begin{displaymath}
+F_1 = \frac{2 \cdot \mbox{precisión} \cdot \mbox{recall}}{\mbox{precisión} + \mbox{recall}}
+\end{displaymath}
+
+\begin{displaymath}
+\mbox{accuracy} = \frac{45 + 44 + 101}{252} = 0{,}754
+\qquad
+F_{1,\mathrm{macro}} = \frac{0{,}874 + 0{,}587 + 0{,}805}{3} = 0{,}755
+\end{displaymath}
+
+El F1 macro es el promedio de los tres F1. El accuracy cuenta aciertos sobre 252 y premia acertar la clase grande: baja concentra 114 de 252. La baseline que siempre predice baja alcanza accuracy $0{,}452$ y F1 macro $0{,}208$, porque el F1 de alta y el de media son 0. Por eso el modelo se elige con F1 macro: las tres clases pesan igual.
+
+Alta: VP 45, FP 8, FN 5. Precisión $45/53 = 0{,}849$. Recall $45/50 = 0{,}900$. F1 $0{,}874$.
+
+Media: VP 44. Los FP son 5 más 13, en total 18. Los FN son 8 más 36, en total 44. Precisión $44/62 = 0{,}710$. Recall $44/88 = 0{,}500$. F1 $0{,}587$.
+
+Baja: VP 101, FP 36, FN 13. Precisión $101/137 = 0{,}737$. Recall $101/114 = 0{,}886$. F1 $0{,}805$.
+
+La baseline del test es un \texttt{DummyClassifier} con estrategia \texttt{most\_frequent}: siempre predice baja. En la validación cruzada ese piso de F1 macro queda en $0{,}207$.
+
+Por clase:
 
 \begin{center}
 \begin{tabular}{lccc}
@@ -165,7 +251,21 @@ baja & 0,737 & 0,886 & 0,805 \\
 \end{tabular}
 \end{center}
 
-El test tiene 50 tramos altos, 88 medios y 114 bajos. Alta se predice bien. En media, la mitad de los tramos del test no se reconoce, y muchos de esos quedan marcados como baja. Por eso la precisión de baja es más baja que su recall.
+El test tiene 50 tramos altos, 88 medios y 114 bajos. Alta se predice bien. En media, la mitad de los tramos del test no se reconoce, y muchos de esos quedan marcados como baja.
+
+\Needspace{16\baselineskip}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+ & predicha alta & predicha media & predicha baja \\
+real alta & 45 & 5 & 0 \\
+real media & 8 & 44 & 36 \\
+real baja & 0 & 13 & 101 \\
+\end{tabular}
+\caption{Matriz de confusión del test con regresión logística.}
+\end{table}
+
+La matriz cuenta tramos del test. La fila es la clase real, la columna es la clase predicha. La diagonal son aciertos. Fuera de la diagonal el modelo dijo otra clase. En esta matriz, alta y baja no se cruzan. 36 tramos reales de media quedan marcados como baja, y por eso la precisión de baja queda debajo de su recall.
 
 De los 1257 tramos, 848 no tienen contenedor y, por la regla del generador, tienen días 0 y quejas 0. Esas filas se reducen a unas pocas combinaciones de zona y de las dos columnas de contexto, y en cada combinación hay tramos bajos y tramos medios. La etiqueta es el bonus de zona más el ruido del puntaje: las mismas entradas corresponden a dos clases. Donde hay contenedor, días y quejas, el puntaje tiene señal y alta se predice con holgura.
 
@@ -206,5 +306,61 @@ Cuando el subgrafo de las altas es conexo, este armado es el cartero chino. Cuan
 Con el multigrafo conexo y con todos los grados pares, Hierholzer arma el circuito. La secuencia de esquinas empieza y termina en el mismo nodo. Cada copia de calle se usa una vez. Si una calle aparece dos veces en la lista, había dos copias y el camión la recorre en dos momentos del viaje.
 
 La aplicación muestra esa lista en orden, con el largo de cada paso y el largo total. Las calles que se recorren más de una vez quedan marcadas. El circuito vuelve al punto de partida y pasa al menos una vez por cada calle de prioridad alta.
+
+\chapter{Capturas del frontend}
+
+La aplicación está publicada en \url{https://paz-reyes.moloeznik.me/}. El mapa carga el microcentro. El color sigue la prioridad que predice el modelo: negra alta, naranja media, gris baja.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{imagenes/frontend-principal.png}
+\caption{Página principal: el grafo de calles, sin el circuito dibujado.}
+\end{figure}
+
+Al pulsar \emph{Ver circuito} se calcula el recorrido y se dibuja en azul. Con \emph{Mostrar solo el circuito} el panel lista el costo y los pasos. En esa vista el recorrido mide 40,8~km y cubre 254 calles altas. También se puede elegir una calle y cambiar sus datos de a una.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{imagenes/frontend-circuito.png}
+\caption{Circuito del camión, con el costo y el paso actual.}
+\end{figure}
+
+El sorteo elige tantas calles distintas como se indique, les asigna días, contenedores, quejas y zona al azar, y recalcula. Cerca de escuela u hospital, y feria o evento, se copian. Con 80 calles el recorrido pasa a 46,0~km y 312 calles altas. El trazo deja de ser el de antes.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{imagenes/frontend-sorteo.png}
+\caption{Después de sortear 80 calles y recalcular el circuito.}
+\end{figure}
+
+\chapter{Uso de inteligencia artificial}
+
+\section{Qué herramientas se usaron}
+
+Pendiente.
+
+\section{Para qué partes se usaron, y para cuáles no}
+
+Pendiente.
+
+\section{Ejemplos de prompts}
+
+Pendiente.
+
+\section{Casos en los que la IA se equivocó}
+
+Pendiente.
+
+\section{Reflexión}
+
+Pendiente.
+
+\chapter{Limitaciones conocidas y posibles extensiones}
+
+No se sumaron más datos de contenedores. El recorte ya deja afuera los que caen a más de 50 metros, y ampliar ese inventario no se hizo por el cómputo.
+
+El modelo confunde medias con bajas. En el test, 36 de los 88 tramos de prioridad media quedan marcados como baja. Alta y baja no se cruzan. Las calles obligatorias del circuito son las altas. Ese error cambia sobre todo qué calles medias quedan para unirlas.
+
+Hay un solo camión. Varios sería repartir las calles de prioridad alta entre vehículos. Queda fuera de este alcance.
 
 \end{document}

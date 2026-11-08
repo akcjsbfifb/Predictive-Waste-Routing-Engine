@@ -50,3 +50,10 @@ Thumbs.db
 *.pbf
 
 docs/
+
+# Informe LaTeX (artefactos de build; no versionar renders/fragmentos)
+informe/renders/
+informe/fragmentos/
+*.aux
+*.toc
+*.out
