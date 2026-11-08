@@ -193,9 +193,15 @@ export function Visor() {
     if (elegido) {
       const siguiente = edicionDe(elegido);
       setForm(siguiente);
-      valorAlFocoRef.current.dias = siguiente.dias_desde_ultima_recoleccion;
-      valorAlFocoRef.current.contenedores = siguiente.cantidad_contenedores;
-      valorAlFocoRef.current.quejas = siguiente.historico_quejas_vecinales;
+      if (typeof siguiente.dias_desde_ultima_recoleccion === "number") {
+        valorAlFocoRef.current.dias = siguiente.dias_desde_ultima_recoleccion;
+      }
+      if (typeof siguiente.cantidad_contenedores === "number") {
+        valorAlFocoRef.current.contenedores = siguiente.cantidad_contenedores;
+      }
+      if (typeof siguiente.historico_quejas_vecinales === "number") {
+        valorAlFocoRef.current.quejas = siguiente.historico_quejas_vecinales;
+      }
     }
   }, []);
 
