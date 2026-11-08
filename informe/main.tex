@@ -1,0 +1,210 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[spanish]{babel}
+\usepackage[margin=2.2cm,headheight=15pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyhead[R]{Trabajo práctico integrador}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[L]{\nouppercase{\leftmark}}%
+  \fancyhead[R]{Trabajo práctico integrador}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{4.5cm}
+\begin{center}
+{\Large Trabajo práctico integrador}\\[1.4cm]
+{\Large Lógica y Teoría de Grafos}\\[2.6cm]
+Martín Moloeznik\\[0.35cm]
+Nicolás Paz Reyes\\[2.2cm]
+8 de noviembre de 2026
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Planteo}
+
+El problema es el recorrido de un camión de residuos. A diferencia de un reparto, donde alcanza con visitar puntos, el camión recorre calles enteras. No todas las calles tienen la misma urgencia: en algunas hay contenedores y quejas, y en otras no hay nada que levantar. Hay que estimar qué tramos conviene recorrer primero y, con esa lista, armar un circuito que los cubra.
+
+El sistema tiene tres partes. Un mapa de calles, con datos medidos donde hay una fuente pública y datos generados donde no la hay. Un clasificador que asigna a cada tramo prioridad alta, media o baja. Un circuito que pasa por todas las calles de prioridad alta y une los tramos sueltos por un camino corto que, en lo posible, aprovecha calles de prioridad media. Si cambian los datos de una calle, la predicción puede cambiar y el circuito se calcula de nuevo.
+
+La zona es un grafo no dirigido. Cada nodo es una esquina y cada arista es un tramo de calle con su largo en metros. El camión recorre el tramo en cualquier sentido.
+
+La zona de trabajo es un recorte de unos dos kilómetros de lado en el microcentro de Buenos Aires, San Nicolás y el borde de Retiro y Monserrat, con un tope de unas 1500 aristas.
+
+La calle, el largo, el nombre, el tipo de zona y la cantidad de contenedores salen de fuentes públicas. Los días desde la última recolección, el historial de quejas y la prioridad de recolección los genera un script, con reglas fijas y semilla 42. Cerca del 20\,\% de los tramos queda en alta, el 35\,\% en media y el 45\,\% en baja. El corte es un ranking de un puntaje con ruido, así la clase no es una función cerrada de las otras columnas.
+
+El modelo, los datos y el circuito están en Python. El clasificador usa scikit-learn. El grafo de calles se arma con OpenStreetMap y queda guardado. Dijkstra y Hierholzer están implementados en el proyecto. El emparejamiento de costo mínimo del cartero chino lo resuelve rustworkx, con el algoritmo de Edmonds. La API, en FastAPI, carga el clasificador ya ajustado y arma el circuito con las prioridades que predice. El mapa del navegador consume esa API.
+
+\chapter{Los datos}
+
+\section{Búsqueda de una fuente con coordenadas}
+
+La búsqueda empezó por Rosario. El portal de datos abiertos de la municipalidad publica un dataset de contenedores de residuos domiciliarios. El 30 de octubre de 2026 el sitio no respondía: daba timeout o error 504, también desde el navegador. No apareció un CSV espejo con coordenadas.
+
+En OpenStreetMap, el centro de Rosario tiene 57 papeleras marcadas. Cubren cerca del 3\,\% de las calles de un recorte de ese tamaño, así que casi todos los tramos quedarían sin contenedor.
+
+La Plata no publica un inventario de contenedores con latitud y longitud. Hay un dataset genérico de residuos de 2020, sin geometría usable, y un mapa de focos de basura.
+
+\section{Contenedores de la Ciudad de Buenos Aires}
+
+La fuente publicada, con coordenadas y licencia Creative Commons Attribution, es la del Gobierno de la Ciudad de Buenos Aires. En Buenos Aires Data, dentro de ``Infraestructura de gestión de residuos'', el recurso es el de contenedores para residuos húmedos de la zona 1. El archivo es un CSV separado por punto y coma. Cada fila es un contenedor, con latitud y longitud. También trae una geometría en coordenadas planas de la Ciudad. La ubicación que se usa es la latitud y la longitud.
+
+A veces el número viene sin punto decimal, por ejemplo $-3461477$ en lugar de $-34{,}61477$. Al leer el archivo se divide por diez hasta que la latitud cae entre $-90$ y $90$ y la longitud entre $-180$ y $180$.
+
+La zona 1 llega también a Constitución, San Telmo y Puerto Madero. Ese polígono entero supera las 1500 aristas, así que el mapa queda en el microcentro. Cada contenedor se asigna a la calle más cercana si está a 50 metros o menos. El archivo trae 2292 contenedores y entran 887. Los otros 1405 quedan a más de 50 metros de todas las calles del recorte. El 32\,\% de los tramos tiene al menos un contenedor y el máximo en un tramo es 9. Si no hay ninguno, la cantidad queda en 0. El tramo guarda el conteo, no la posición de cada contenedor.
+
+\section{Calles}
+
+Las calles salen de OpenStreetMap, licencia ODbL. La red es la de autos: sin peatonales, sin ciclovías y sin calles de servicio. El servicio público de Overpass estaba saturado, así que el extracto se baja de la API de mapa de OpenStreetMap y el filtro se aplica después.
+
+El grafo de origen trae sentido de circulación. Para este problema se toma no dirigido: el camión recorre la calle. Se descartan los lazos de una esquina a sí misma. Si entre el mismo par de esquinas quedan dos aristas, queda la más corta. Después queda solo la componente conexa más grande, de modo que entre dos esquinas del mapa siempre hay un camino.
+
+El grafo tiene 986 esquinas y 1257 tramos. Cada tramo tiene un identificador entero, las dos esquinas con el menor número primero, el largo en metros, el tipo de vía y el nombre de la calle cuando OpenStreetMap lo trae. Las coordenadas de las esquinas van en otro archivo. El mismo identificador queda escrito en el grafo.
+
+\section{Tipo de zona}
+
+Cada tramo es residencial, comercial o industrial. En el microcentro OpenStreetMap casi no marca manzanas industriales, así que el tipo sale de lo mapeado en un buffer de 40 metros alrededor del tramo.
+
+El puntaje mira locales, usos del suelo comercial, amenities de comercio y edificios comerciales. Hace falta un puntaje de al menos 6 para comercial. Industrial exige uso industrial o un edificio industrial o depósito, con un puntaje de al menos 2 y no menor que el comercial. Si no hay señal, el tramo queda residencial.
+
+Sobre las 1257 calles hay 859 residenciales (68\,\%) y 398 comerciales (32\,\%). Industrial es 0\,\%.
+
+\section{Columnas generadas}
+
+Días sin recolección, quejas vecinales y la prioridad no están en los datos del GCBA. Las genera un script con semilla 42 y el generador de numpy. Con la misma semilla el resultado se repite.
+
+Otras dos columnas no entran en la fórmula de la prioridad: si el tramo está cerca de una escuela o un hospital, y si hay feria o evento. Son sí o no, con un sorteo de Bernoulli y otra semilla. Cerca del 8\,\% de los tramos marca cada una. El modelo las recibe como contexto del tramo. La etiqueta no las usa.
+
+\subsection{Días y quejas}
+
+Los días salen de un Poisson. La media depende de la zona y sube con la cantidad de contenedores: 3,2 en residencial, 2,0 en comercial y 4,5 en industrial, más 0,15 por cada contenedor. El resultado se recorta entre 0 y 10.
+
+Las quejas también salen de un Poisson. La tasa crece con los contenedores, con los días sin recolección y en zona comercial:
+
+\begin{displaymath}
+\begin{array}{l}
+\lambda = \exp(-0{,}4 + 0{,}35 \cdot \log(1 + \mbox{contenedores}) \\
+\quad + 0{,}12 \cdot \mbox{días} + b_{\mbox{zona}})
+\end{array}
+\end{displaymath}
+
+El bonus de zona es 0 en residencial, 0,55 en comercial y 0,15 en industrial.
+
+Sin contenedor no hay una recolección que medir en ese tramo, así que los días y las quejas quedan en 0. Con al menos un contenedor, los dos conteos quedan en 1 como mínimo.
+
+\subsection{La prioridad}
+
+La etiqueta es un corte por cantidad de filas. Primero se arma un puntaje:
+
+\begin{displaymath}
+\begin{array}{l}
+\mbox{puntaje} = 0{,}55 \cdot \mbox{días} + 0{,}70 \cdot \log(1 + \mbox{contenedores}) \\
+\quad + 0{,}45 \cdot \log(1 + \mbox{quejas}) + b_{\mbox{zona}} \\
+\quad + 0{,}18 \cdot \mbox{días} \cdot \log(1 + \mbox{contenedores}) + \mbox{ruido}
+\end{array}
+\end{displaymath}
+
+El bonus de zona de este puntaje es 0 en residencial, 0,40 en comercial y 0,20 en industrial. El ruido es normal, de desvío 0,40. Los tramos se ordenan de mayor a menor puntaje. El 20\,\% de arriba queda en alta, el 35\,\% siguiente en media y el resto en baja.
+
+En una calle sin contenedores los días y las quejas son 0, así que el puntaje es el bonus de zona más el ruido. Dos calles con los mismos datos pueden caer una en baja y otra en media. Esa superposición aparece después en los errores del modelo.
+
+\chapter{El modelo}
+
+El clasificador predice la prioridad de cada tramo. Se comparan regresión logística, árbol de decisión, k vecinos más cercanos y SVM. La comparación está en el notebook de modelos. El modelo elegido se mide una sola vez, en filas que no entraron en la elección.
+
+\section{Columnas}
+
+Entran los días sin recolección, la cantidad de contenedores, las quejas, el tipo de zona, y las dos columnas de contexto: cerca de escuela u hospital, y feria o evento. Los días, los contenedores, las quejas y la zona entran porque con eso se arma la etiqueta. Las otras dos quedan como contexto del tramo.
+
+El identificador, el nombre de la calle, la distancia y el tipo de vía quedan afuera: no describen la urgencia de recolectar.
+
+\section{Comparación}
+
+El 20\,\% de las filas queda aparte para el test y no entra en la elección. El corte es estratificado, así alta, media y baja mantienen su proporción, con semilla 42. Son 1005 filas para entrenar y elegir, y 252 para el test.
+
+Ese 80\,\% se parte en cinco. Cada candidato se entrena cinco veces y cada vez valida con una parte distinta. El número para comparar es el promedio del F1 macro. El desvío muestra cuánto se mueve ese promedio entre las cinco partes.
+
+El F1 macro pesa las tres clases por igual. Baja es el 45\,\% de las filas, y el accuracy puede quedar alto acertando casi siempre esa clase. Una baseline que predice siempre la clase más frecuente marca el piso de esa comparación.
+
+La regresión logística usa el ajuste por defecto, con un máximo de 5000 iteraciones. El árbol varía la profundidad y el mínimo de hojas, y no se escala. kNN varía la cantidad de vecinos, solo los impares. SVM varía el margen y el tipo de frontera, recta o curva. Logística, kNN y SVM escalan las columnas numéricas, para que la de números más grandes no pese solo por la escala. El tipo de zona pasa a columnas de ceros y unos. Escalar y codificar se ajustan solo con las filas de entrenamiento de cada ronda.
+
+\section{Resultado}
+
+Con el F1 macro de esa validación, la regresión logística queda primera. El SVM lineal queda muy cerca, dentro del desvío. El SVM de frontera curva, el árbol y kNN quedan por debajo. La baseline queda lejos de los cuatro.
+
+El modelo que carga el servidor es la logística, con el ajuste por defecto y el tope de 5000 iteraciones.
+
+En el test llega a 0,754 de accuracy y 0,755 de F1 macro. Por clase:
+
+\begin{center}
+\begin{tabular}{lccc}
+ & precisión & recall & F1 \\
+alta & 0,849 & 0,900 & 0,874 \\
+media & 0,710 & 0,500 & 0,587 \\
+baja & 0,737 & 0,886 & 0,805 \\
+\end{tabular}
+\end{center}
+
+El test tiene 50 tramos altos, 88 medios y 114 bajos. Alta se predice bien. En media, la mitad de los tramos del test no se reconoce, y muchos de esos quedan marcados como baja. Por eso la precisión de baja es más baja que su recall.
+
+De los 1257 tramos, 848 no tienen contenedor y, por la regla del generador, tienen días 0 y quejas 0. Esas filas se reducen a unas pocas combinaciones de zona y de las dos columnas de contexto, y en cada combinación hay tramos bajos y tramos medios. La etiqueta es el bonus de zona más el ruido del puntaje: las mismas entradas corresponden a dos clases. Donde hay contenedor, días y quejas, el puntaje tiene señal y alta se predice con holgura.
+
+La API usa ese ajuste. Para cada tramo predice la prioridad, y esa predicción elige las calles del circuito. Si se edita una calle, la predicción puede pasar de una clase a otra y el recorrido cambia.
+
+\chapter{El circuito}
+
+La salida del modelo es una prioridad por tramo. El camión cubre todas las calles de prioridad alta. Las de prioridad media entran cuando sirven para unir las altas. Las de prioridad baja se recorren cuando el camino de unión no tiene otra salida.
+
+\section{Calles a cubrir}
+
+El subgrafo de las calles altas queda en varias componentes, y en algunas esquinas llega una cantidad impar de esas calles. Un circuito euleriano pide un grafo conexo y grados pares en todas las esquinas. Hierholzer recorre cada arista una vez y vuelve al inicio cuando esas dos condiciones se cumplen. Si no se cumplen, se agregan copias de calles hasta dejar el multigrafo en esas condiciones.
+
+Esas copias son el empalme: el tramo que el camión recorre para pasar de una calle alta a otra. El costo del circuito suma los metros de las calles altas y los metros de los empalmes.
+
+\section{El camino de unión}
+
+Para pasar de una componente a otra se busca el camino más corto, en metros, sobre el grafo completo. Entre las formas cortas de unir, se toma la que pasa por la mayor cantidad de aristas de prioridad media, para recolectarlas en el mismo viaje. Una calle de prioridad baja entra en el empalme cuando forma parte de ese camino.
+
+El camino mínimo lo calcula Dijkstra. El peso de cada calle es su largo en metros.
+
+\section{Grados impares}
+
+Con esquinas de grado impar en el subgrafo de las altas no hay un circuito que pase por cada calle alta una sola vez. La cantidad de esas esquinas es par. Se calculan las distancias mínimas entre todas ellas con Dijkstra, sobre el grafo completo, y se emparejan de a dos de modo que la suma de esas distancias sea la menor posible. Cada pareja aporta su camino mínimo, y ese camino se copia una vez. Las dos esquinas impares pasan a tener grado par.
+
+El emparejamiento lo resuelve rustworkx con el algoritmo de Edmonds. La librería busca el peso máximo, así que cada distancia entra negada. Los metros pasan a milímetros porque el peso tiene que ser entero.
+
+\section{Componentes que siguen separadas}
+
+El emparejamiento une componentes cuando el camino entre dos esquinas impares cruza de una a otra. Las que siguen separadas, y también las que ya tenían todos los grados pares, se unen con el camino mínimo entre ellas.
+
+Ese empalme se agrega dos veces. Una sola copia dejaría las dos puntas con grado impar. Ida y vuelta mantiene los grados y conecta las componentes. Los empalmes siguen un árbol: se unen las componentes más cercanas y no se cierra un ciclo entre ellas. El multigrafo queda conexo. Si las calles altas ya formaban una sola componente, este paso no agrega calles.
+
+Cuando el subgrafo de las altas es conexo, este armado es el cartero chino. Cuando no lo es, el circuito cubre todas las altas y los empalmes son un árbol de caminos mínimos, calculado después del emparejamiento. En el cartero rural esos dos costos se miran juntos.
+
+\section{El recorrido}
+
+Con el multigrafo conexo y con todos los grados pares, Hierholzer arma el circuito. La secuencia de esquinas empieza y termina en el mismo nodo. Cada copia de calle se usa una vez. Si una calle aparece dos veces en la lista, había dos copias y el camión la recorre en dos momentos del viaje.
+
+La aplicación muestra esa lista en orden, con el largo de cada paso y el largo total. Las calles que se recorren más de una vez quedan marcadas. El circuito vuelve al punto de partida y pasa al menos una vez por cada calle de prioridad alta.
+
+\end{document}
