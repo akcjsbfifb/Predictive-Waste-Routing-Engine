@@ -185,6 +185,8 @@ F_1 = \frac{2 \cdot \mbox{precisión} \cdot \mbox{recall}}{\mbox{precisión} + \
 F_{1,\mathrm{macro}} = \frac{0{,}874 + 0{,}587 + 0{,}805}{3} = 0{,}755
 \end{displaymath}
 
+El F1 macro es el promedio de los tres F1. El accuracy cuenta aciertos sobre 252 y premia acertar la clase grande: baja concentra 114 de 252. La baseline que siempre predice baja alcanza accuracy $0{,}452$ y F1 macro $0{,}208$, porque el F1 de alta y el de media son 0. Por eso el modelo se elige con F1 macro: las tres clases pesan igual.
+
 Por clase:
 
 \begin{center}
