@@ -50,13 +50,13 @@ Nicolás Paz Reyes\\[0.75cm]
 
 El problema es el recorrido de un camión de residuos. A diferencia de un reparto, donde alcanza con visitar puntos, el camión recorre calles enteras. No todas las calles tienen la misma urgencia: en algunas hay contenedores y quejas, y en otras no hay nada que levantar. Hay que estimar qué tramos conviene recorrer primero y, con esa lista, armar un circuito que los cubra.
 
-El sistema tiene tres partes. Un mapa de calles, con datos medidos donde hay una fuente pública y datos generados donde no la hay. Un clasificador que asigna a cada tramo prioridad alta, media o baja. Un circuito que pasa por todas las calles de prioridad alta y une los tramos sueltos por un camino corto que, en lo posible, aprovecha calles de prioridad media. Si cambian los datos de una calle, la predicción puede cambiar y el circuito se calcula de nuevo.
+El sistema tiene tres partes. Un mapa de calles, con datos medidos donde hay una fuente pública y datos generados donde no la hay. Un clasificador que asigna a cada tramo prioridad alta, media o baja. Un circuito que pasa por todas las calles de prioridad alta y une los tramos sueltos por el camino más corto, en metros. En ese camino entran las calles que haya, sean de prioridad media o baja. Si cambian los datos de una calle, la predicción puede cambiar y el circuito se calcula de nuevo.
 
 La zona es un grafo no dirigido. Cada nodo es una esquina y cada arista es un tramo de calle con su largo en metros. El camión recorre el tramo en cualquier sentido.
 
 La zona de trabajo es un recorte de unos dos kilómetros de lado en el microcentro de Buenos Aires, San Nicolás y el borde de Retiro y Monserrat, con un tope de unas 1500 aristas.
 
-La calle, el largo, el nombre, el tipo de zona y la cantidad de contenedores salen de fuentes públicas. Los días desde la última recolección, el historial de quejas y la prioridad de recolección los genera un script, con reglas fijas y semilla 42. Cerca del 20\,\% de los tramos queda en alta, el 35\,\% en media y el 45\,\% en baja. El corte es un ranking de un puntaje con ruido, así la clase no es una función cerrada de las otras columnas.
+La calle, el largo, el nombre, el tipo de zona y la cantidad de contenedores salen de fuentes públicas. Los días desde la última recolección, el historial de quejas y la prioridad de recolección los genera un script, con reglas fijas. Cerca del 20\,\% de los tramos queda en alta, el 35\,\% en media y el 45\,\% en baja. El corte es un ranking de un puntaje con ruido, así la clase no es una función cerrada de las otras columnas.
 
 El modelo, los datos y el circuito están en Python. El clasificador usa scikit-learn. El grafo de calles se arma con OpenStreetMap y queda guardado. Dijkstra y Hierholzer están implementados en el proyecto. El emparejamiento de costo mínimo del cartero chino lo resuelve rustworkx, con el algoritmo de Edmonds. La API, en FastAPI, carga el clasificador ya ajustado y arma el circuito con las prioridades que predice. El mapa del navegador consume esa API.
 
@@ -98,9 +98,9 @@ Sobre las 1257 calles hay 859 residenciales (68\,\%) y 398 comerciales (32\,\%).
 
 \section{Columnas generadas}
 
-Días sin recolección, quejas vecinales y la prioridad no están en los datos del GCBA. Las genera un script con semilla 42 y el generador de numpy. Con la misma semilla el resultado se repite.
+Días sin recolección, quejas vecinales y la prioridad no están en los datos del GCBA. Las genera un script con el generador de numpy.
 
-Otras dos columnas no entran en la fórmula de la prioridad: si el tramo está cerca de una escuela o un hospital, y si hay feria o evento. Son sí o no, con un sorteo de Bernoulli y otra semilla. Cerca del 8\,\% de los tramos marca cada una. El modelo las recibe como contexto del tramo. La etiqueta no las usa.
+Otras dos columnas no entran en la fórmula de la prioridad: si el tramo está cerca de una escuela o un hospital, y si hay feria o evento. Las agrega \path{notebooks/tramos.ipynb}, con un sorteo de Bernoulli cuya probabilidad depende de la zona y no es la misma para las dos columnas. En el CSV, cerca del 8\,\% de los tramos marca cada una. El modelo las recibe igual.
 
 \subsection{Días y quejas}
 
@@ -135,48 +135,11 @@ El bonus de zona de este puntaje es 0 en residencial, 0,40 en comercial y 0,20 e
 
 En una calle sin contenedores los días y las quejas son 0, así que el puntaje es el bonus de zona más el ruido. Dos calles con los mismos datos pueden caer una en baja y otra en media. Esa superposición aparece después en los errores del modelo.
 
-\subsection{De dónde sale cada columna}
+\subsection{Cómo se generaron}
 
-El dataset es mixto. Calles y contenedores son reales: OpenStreetMap y el CSV del GCBA, como se contó arriba. Días sin recolección, quejas vecinales, prioridad, y los dos sí o no de contexto no salen de esas fuentes.
+Días sin recolección, quejas y prioridad los escribe \path{backend/dataset/synthesize.py}. La semilla está en \path{backend/config.py} y vale 42, así que volver a correr el script deja las mismas columnas. \path{backend/dataset/build_dataset.py} llama a esa función al armar el CSV. Calles y contenedores siguen saliendo de OpenStreetMap y del CSV del GCBA.
 
-\path{backend/dataset/synthesize.py} usa semilla 42. Solo escribe días, quejas y prioridad. No crea ni modifica las columnas de cerca de escuela u hospital, ni de feria o evento. \path{backend/dataset/build_dataset.py} llama a esa función al armar el CSV por primera vez y tampoco agrega esas dos columnas.
-
-\path{backend/dataset/resynthesize.py} vuelve a correr el mismo \path{synthesize} sobre \path{data/processed/tramos.csv}. El motivo: había tramos sin contenedor con días o con quejas, y eso no tiene sentido: sin contenedor no hay una recolección que medir en el tramo. La regla queda explícita: sin contenedor, días y quejas en 0; con al menos uno, los dos conteos en 1 como mínimo. El script solo pisa esas tres columnas. Comprueba que las dos de contexto no cambien.
-
-Las columnas \texttt{cerca\_escuela\_hospital} y \texttt{feria\_o\_evento} son de contexto.
-\path{notebooks/tramos.ipynb} las genera con semilla 43. Corre después de días, quejas y prioridad.
-
-\path{backend/dataset/synthesize.py} y \path{backend/dataset/resynthesize.py} no las tocan. Si las columnas ya estaban en el archivo, el notebook las elimina y las vuelve a sortear. No reescribe días, quejas ni prioridad. Si se regenera el CSV, hay que volver a correr ese notebook.
-
-Para cada tramo se sortea un número $U$ uniforme en $[0,1)$. Cada columna vale 1 si $U$ es menor que la probabilidad de su \texttt{tipo\_zona}, y 0 si no. Eso es un Bernoulli. Para \texttt{cerca\_escuela\_hospital} las probabilidades son 0,08 en residencial, 0,05 en comercial y 0,03 en industrial. Para \texttt{feria\_o\_evento} son 0,04 en residencial, 0,16 en comercial y 0,06 en industrial.
-
-\begin{displaymath}
-\texttt{cerca\_escuela\_hospital} =
-\begin{cases}
-1 & \text{si } U < p_{\mathrm{cerca}}(\texttt{tipo\_zona}) \\
-0 & \text{en caso contrario}
-\end{cases}
-\end{displaymath}
-
-\begin{displaymath}
-\texttt{feria\_o\_evento} =
-\begin{cases}
-1 & \text{si } U < p_{\mathrm{feria}}(\texttt{tipo\_zona}) \\
-0 & \text{en caso contrario}
-\end{cases}
-\end{displaymath}
-
-En el CSV hay 859 tramos residenciales y 398 comerciales; industrial es 0. El valor esperado de \texttt{cerca\_escuela\_hospital} es $0{,}08 \cdot 859 + 0{,}05 \cdot 398 = 88{,}6$. El de \texttt{feria\_o\_evento} es $0{,}04 \cdot 859 + 0{,}16 \cdot 398 = 98{,}0$.
-
-\begin{displaymath}
-\mathbb{E}[\texttt{cerca\_escuela\_hospital}] = 88{,}6
-\qquad
-\mathbb{E}[\texttt{feria\_o\_evento}] = 98{,}0
-\end{displaymath}
-
-El sorteo dejó 95 y 97 en \path{data/processed/tramos.csv}. Esos dos números son el resultado del azar, no la probabilidad. Lo carga \path{backend/routing/load.py}. El archivo tiene 1257 filas. Un cambio en el visor queda en SQLite encima de ese CSV.
-
-En el visor, el formulario de una calle puede cambiar esos dos sí o no. El sorteo al azar de varias calles copia los valores que ya traía cada tramo y no los vuelve a tirar.
+Sin contenedor no hay una recolección que medir en esa calle, y la función deja días y quejas en 0; con al menos un contenedor, los dos conteos quedan en 1 como mínimo. \path{backend/dataset/resynthesize.py} vuelve a correr esa misma función sobre el CSV ya armado, sin tocar las columnas de escuela u hospital ni de feria, y recalcula la prioridad.
 
 \chapter{El modelo}
 
@@ -192,7 +155,7 @@ El identificador, el nombre de la calle, la distancia y el tipo de vía quedan a
 
 \section{Comparación}
 
-El 20\,\% de las filas queda aparte para el test y no entra en la elección. El corte es estratificado, así alta, media y baja mantienen su proporción, con semilla 42. Son 1005 filas para entrenar y elegir, y 252 para el test.
+El 20\,\% de las filas queda aparte para el test y no entra en la elección. El corte es estratificado, así alta, media y baja mantienen su proporción. Son 1005 filas para entrenar y elegir, y 252 para el test.
 
 Ese 80\,\% se parte en cinco. Cada candidato se entrena cinco veces y cada vez valida con una parte distinta. El número para comparar es el promedio del F1 macro. El desvío muestra cuánto se mueve ese promedio entre las cinco partes.
 
@@ -265,15 +228,17 @@ real baja & 0 & 13 & 101 \\
 \caption{Matriz de confusión del test con regresión logística.}
 \end{table}
 
-La matriz cuenta tramos del test. La fila es la clase real, la columna es la clase predicha. La diagonal son aciertos. Fuera de la diagonal el modelo dijo otra clase. En esta matriz, alta y baja no se cruzan. 36 tramos reales de media quedan marcados como baja, y por eso la precisión de baja queda debajo de su recall.
+La matriz cuenta tramos del test. La fila es la clase real y la columna es la clase predicha. La diagonal son aciertos.
 
-De los 1257 tramos, 848 no tienen contenedor y, por la regla del generador, tienen días 0 y quejas 0. Esas filas se reducen a unas pocas combinaciones de zona y de las dos columnas de contexto, y en cada combinación hay tramos bajos y tramos medios. La etiqueta es el bonus de zona más el ruido del puntaje: las mismas entradas corresponden a dos clases. Donde hay contenedor, días y quejas, el puntaje tiene señal y alta se predice con holgura.
+El modelo se confunde entre media y baja. De los 88 tramos medios del test, 36 quedan marcados como baja, y 13 tramos bajos quedan marcados como media. Alta y baja no se cruzan: ningún tramo alto se predice bajo, ni al revés. Esos 36 hacen que la precisión de baja (0,737) quede debajo de su recall (0,886): el modelo marca como baja varias calles que eran medias.
 
-La API usa ese ajuste. Para cada tramo predice la prioridad, y esa predicción elige las calles del circuito. Si se edita una calle, la predicción puede pasar de una clase a otra y el recorrido cambia.
+Creemos que el motivo está en las calles sin contenedor. De los 1257 tramos, 848 no tienen ninguno y, por la regla del generador, tienen días 0 y quejas 0. El puntaje de esas filas es el bonus de zona más el ruido, y el corte por ranking las reparte entre baja y media. Las mismas entradas quedan con dos etiquetas distintas, y el modelo no tiene otra señal para separarlas. Donde hay contenedor, días y quejas, el puntaje distingue mejor y alta se predice con holgura.
+
+La API usa ese ajuste. El circuito se arma con las calles que el modelo marca como alta. Confundir media con baja no cambia ese conjunto ni el largo de las calles, así que no mueve el recorrido. Sí lo mueve un tramo que pasa de alta a media, o al revés: en el test son 5 altos marcados como media y 8 medios marcados como alta. Si se edita una calle y la predicción cruza ese corte, el recorrido se calcula de nuevo.
 
 \chapter{El circuito}
 
-La salida del modelo es una prioridad por tramo. El camión cubre todas las calles de prioridad alta. Las de prioridad media entran cuando sirven para unir las altas. Las de prioridad baja se recorren cuando el camino de unión no tiene otra salida.
+La salida del modelo es una prioridad por tramo. El camión tiene que pasar por todas las calles de prioridad alta. Las de prioridad media y baja entran solo si quedan en el camino que une esas calles.
 
 \section{Calles a cubrir}
 
@@ -283,9 +248,7 @@ Esas copias son el empalme: el tramo que el camión recorre para pasar de una ca
 
 \section{El camino de unión}
 
-Para pasar de una componente a otra se busca el camino más corto, en metros, sobre el grafo completo. Entre las formas cortas de unir, se toma la que pasa por la mayor cantidad de aristas de prioridad media, para recolectarlas en el mismo viaje. Una calle de prioridad baja entra en el empalme cuando forma parte de ese camino.
-
-El camino mínimo lo calcula Dijkstra. El peso de cada calle es su largo en metros.
+Para pasar de una componente a otra se busca el camino más corto, en metros, sobre el grafo completo. Lo calcula Dijkstra y el peso de cada calle es su largo. Si ese camino pasa por una calle media o por una baja, el camión la recorre igual: la prioridad no cambia el peso.
 
 \section{Grados impares}
 
@@ -293,13 +256,15 @@ Con esquinas de grado impar en el subgrafo de las altas no hay un circuito que p
 
 El emparejamiento lo resuelve rustworkx con el algoritmo de Edmonds. La librería busca el peso máximo, así que cada distancia entra negada. Los metros pasan a milímetros porque el peso tiene que ser entero.
 
+La primera versión usaba \texttt{networkx.min\_weight\_matching}. Es el mismo algoritmo de Edmonds, escrito en Python. Con 318 esquinas impares el emparejamiento arma un grafo completo de 50403 aristas, y el costo crece con el cubo de la cantidad de esquinas. En esa corrida el emparejamiento tardó 16,9 segundos, de los 17 que tardaba el circuito entero. rustworkx corre el mismo procedimiento en Rust. El emparejamiento pasó a 0,16 segundos y el circuito completo a 0,7. El largo de los caminos elegidos no cambió: 10780 metros en las dos versiones.
+
 \section{Componentes que siguen separadas}
 
 El emparejamiento une componentes cuando el camino entre dos esquinas impares cruza de una a otra. Las que siguen separadas, y también las que ya tenían todos los grados pares, se unen con el camino mínimo entre ellas.
 
 Ese empalme se agrega dos veces. Una sola copia dejaría las dos puntas con grado impar. Ida y vuelta mantiene los grados y conecta las componentes. Los empalmes siguen un árbol: se unen las componentes más cercanas y no se cierra un ciclo entre ellas. El multigrafo queda conexo. Si las calles altas ya formaban una sola componente, este paso no agrega calles.
 
-Cuando el subgrafo de las altas es conexo, este armado es el cartero chino. Cuando no lo es, el circuito cubre todas las altas y los empalmes son un árbol de caminos mínimos, calculado después del emparejamiento. En el cartero rural esos dos costos se miran juntos.
+Cuando el subgrafo de las altas es conexo, este armado es el cartero chino. Cuando no lo es, primero se emparejan los grados impares y después se unen las componentes que siguen sueltas con un árbol de caminos mínimos. Ese segundo paso conecta lo que el emparejamiento dejó separado; no busca, entre todos los circuitos que cubren las altas, el de menor largo.
 
 \section{El recorrido}
 
@@ -355,12 +320,10 @@ Pendiente.
 
 Pendiente.
 
-\chapter{Limitaciones conocidas y posibles extensiones}
+\chapter{Limitaciones}
 
-No se sumaron más datos de contenedores. El recorte ya deja afuera los que caen a más de 50 metros, y ampliar ese inventario no se hizo por el cómputo.
+El mapa es el microcentro. De los 2292 contenedores de la zona 1, 1405 quedan a más de 50 metros de las calles de ese recorte y no entran. Toda la zona 1 se iba del tope de unas 1500 aristas con el que se armó el grafo.
 
-El modelo confunde medias con bajas. En el test, 36 de los 88 tramos de prioridad media quedan marcados como baja. Alta y baja no se cruzan. Las calles obligatorias del circuito son las altas. Ese error cambia sobre todo qué calles medias quedan para unirlas.
-
-Hay un solo camión. Varios sería repartir las calles de prioridad alta entre vehículos. Queda fuera de este alcance.
+El modelo confunde medias con bajas, y ese intercambio no cambia el recorrido: el circuito solo obliga a pasar por las altas y el camino de unión se mide en metros. Lo que mueve el circuito es el cruce entre alta y media, que en el test son 5 altos marcados como media y 8 medios marcados como alta.
 
 \end{document}
