@@ -4,6 +4,7 @@
 \usepackage[margin=2.2cm,headheight=15pt]{geometry}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{amsmath,amssymb}
 \usepackage{needspace}
 \usepackage{xcolor}
@@ -28,6 +29,31 @@
   \renewcommand{\headrulewidth}{0.4pt}%
 }
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+
+\tikzset{
+  v/.style={circle,fill=black,inner sep=0pt,minimum size=3.6pt},
+  alta/.style={line width=1.05pt},
+  union/.style={line width=0.45pt},
+  elegida/.style={line width=1.2pt},
+  copia/.style={bend left=52},
+  peso/.style={midway,fill=white,inner sep=1.2pt,font=\scriptsize},
+  grado/.style={font=\scriptsize,text=black!70},
+  dist/.style={font=\scriptsize}
+}
+
+% altas: a-b 2, b-c 2, b-d 2, e-f 1, f-g 2, g-e 2
+% union: a-e 4 media, a-f 3 baja, d-g 5 media, c-e 6 media, b-e 7 baja
+% e-f peso 1 es la arista del triángulo (también el tramo bajo del camino a-f-e). Una sola arista, no dos.
+% Dijkstra desde a: a0 b2 c4 d4 e4 f3 g5. Se elige a-e (4, una media) y no a-f-e (3+1=4, dos bajas).
+\newcommand{\grafoCircuitoVertices}{%
+  \node[v,label=left:$a$] (a) at (0,2.6) {};
+  \node[v,label=above:$b$] (b) at (1.8,2.6) {};
+  \node[v,label=right:$c$] (c) at (3.6,2.6) {};
+  \node[v,label=below:$d$] (d) at (1.8,1.0) {};
+  \node[v,label=right:$e$] (e) at (6.2,1.0) {};
+  \node[v,label=above:$f$] (f) at (7.8,2.2) {};
+  \node[v,label=below:$g$] (g) at (7.8,-0.2) {};
+}
 
 \begin{document}
 
@@ -266,11 +292,13 @@ Ese empalme se agrega dos veces. Una sola copia dejaría las dos puntas con grad
 
 Cuando el subgrafo de las altas es conexo, este armado es el cartero chino. Cuando no lo es, primero se emparejan los grados impares y después se unen las componentes que siguen sueltas con un árbol de caminos mínimos. Ese segundo paso conecta lo que el emparejamiento dejó separado; no busca, entre todos los circuitos que cubren las altas, el de menor largo.
 
+
 \section{El recorrido}
 
 Con el multigrafo conexo y con todos los grados pares, Hierholzer arma el circuito. La secuencia de esquinas empieza y termina en el mismo nodo. Cada copia de calle se usa una vez. Si una calle aparece dos veces en la lista, había dos copias y el camión la recorre en dos momentos del viaje.
 
 La aplicación muestra esa lista en orden, con el largo de cada paso y el largo total. Las calles que se recorren más de una vez quedan marcadas. El circuito vuelve al punto de partida y pasa al menos una vez por cada calle de prioridad alta.
+
 
 \chapter{Capturas del frontend}
 
@@ -302,15 +330,22 @@ El sorteo elige tantas calles distintas como se indique, les asigna días, conte
 
 \section{Qué herramientas se usaron}
 
-Pendiente.
+Se usó \textbf{Cursor}: un editor con un agente en el chat que lee el repositorio y escribe o edita archivos. El código del proyecto se escribió así.
+
+Pensar y entender el problema no pasó por esa herramienta. Eso lo charló el grupo en Discord y en Persona.
 
 \section{Para qué partes se usaron, y para cuáles no}
 
-Pendiente.
+Sí se usó para el código entero: scripts de datos, notebooks, API, Dijkstra, Hierholzer y el emparejamiento, frontend, y este informe.
+
+No se usó para las decisiones. Ejemplos: un solo camión y no agrandar el grafo (Dijkstra en metros; la prioridad solo elige calles); fracciones 20/35/45 de la etiqueta; un tramo sin contenedor no puede tener días ni quejas. El agente escribió el parche después de que se lo marcaron.
 
 \section{Ejemplos de prompts}
 
-Pendiente.
+\begin{enumerate}
+  
+  \item \textbf{Notebooks de modelos, 4 de noviembre.} ``okey ahora lo que vamos a intentar hacer es en un notebook probar todos los modelos. PAra esto analiza todo el codigo de los modelos que nos interesan: Capaz que el notebook de procesamiento de datos nos puede llegar a servir. Lo mismo con el de regresion logistica, arboles de desicion y knn-svm y por ultimo los notebook de metricas y de validacion-cruzada. Asi que tu objetivo ahora es buscar todos esos notebooks, analizarlos con lo que te devuelven las subagentes de investigacion, luego los analizas, decidis y armas un plan. QUiero que haya un proceso completo con todo lo dado en la materia, desde el relevamiento de datos, adaptarlos si hay alguno que se tiene que adaptar(hablo de datos faltantes,escalado, etc.) , luego lo dado por los modelos, metricas, variables que usen los modelos. CUando mas completo mejor, asi tanto decidimos con todo el conocimiento posible, y tambien para hacer prguntas al profesor si algo no se entiende. Tus subagentes van a ser haiku 5.5 medium. Estos archivos estan en el siguiente directorio. Vas a hacerme preguntas si algo no entendes, no cierra o necesita que yo decida, luego la siguiente etapa seria hacer el plan, la siguiente etapa tareas y criterios de aceptacion asi los subagentes no alucinan.''
+\end{enumerate}
 
 \section{Casos en los que la IA se equivocó}
 
@@ -318,7 +353,9 @@ Pendiente.
 
 \section{Reflexión}
 
-Pendiente.
+Ayudó a escribir el código y el informe una vez que el número o la regla estaban fijados. No ayudó a elegir el problema ni a ver un dato que no cierra.
+
+La revisión la hace una persona: lee el PDF, mira el CSV o vuelve a correr el notebook.
 
 \chapter{Limitaciones}
 
