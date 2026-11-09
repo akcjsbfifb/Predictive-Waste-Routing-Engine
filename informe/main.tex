@@ -290,7 +290,7 @@ Pensar y entender el problema no pasó por esa herramienta. Eso lo charló el gr
 
 Sí se usó para el código entero: scripts de datos, notebooks, API, Dijkstra, Hierholzer y el emparejamiento, frontend, y este informe.
 
-No se usó para las decisiones. Ejemplos: un solo camión y no agrandar el grafo (Dijkstra en metros; la prioridad solo elige calles); fracciones 20/35/45 de la etiqueta; un tramo sin contenedor no puede tener días ni quejas. El agente escribió el parche después de que se lo marcaron.
+No se usó para las decisiones. El grupo fijó un solo camión y no agrandar el grafo, con Dijkstra en metros y la prioridad eligiendo solo qué calles entran al circuito; las fracciones 20/35/45 de la etiqueta; y que un tramo sin contenedor no puede tener días ni quejas. También se decidió qué modelos comparar, regresión logística, árbol, k vecinos y SVM, apartar un 20\,\% estratificado para el test y elegir con el F1 macro de la validación cruzada sobre el resto, mirando ese test una sola vez al final. El agente escribió el parche después de que se lo marcaron.
 
 \section{Ejemplos de prompts}
 
@@ -301,18 +301,18 @@ No se usó para las decisiones. Ejemplos: un solo camión y no agrandar el grafo
 
 \section{Casos en los que la IA se equivocó}
 
-Pendiente.
+Al redactar el informe, el agente escribió que al unir las calles de prioridad alta el camino pasaba por las de prioridad media cuando se podía. Ese paso no existe en el código: Dijkstra busca el camino más corto en metros, y una calle media o baja entra solo si queda en ese camino.
 
 \section{Reflexión}
 
-Ayudó a escribir el código y el informe una vez que el número o la regla estaban fijados. No ayudó a elegir el problema ni a ver un dato que no cierra.
+Ayudó a escribir el código y el informe una vez que el número o la regla estaban fijados, y ayudó muchísimo a dejar el frontend usable: armar esa interfaz en el mismo tiempo nos hubiera resultado imposible. También armó los Docker Compose y las partes más técnicas para desplegar el sistema en el VPS sin tener que resolver ese armado a mano. No ayudó a elegir el problema ni a ver un dato que no cierra, y sin una guía concreta de nuestro lado los agentes divagan o alucinan y terminan haciendo cualquier cosa.
 
 La revisión la hace una persona: lee el PDF, mira el CSV o vuelve a correr el notebook.
 
-\chapter{Limitaciones}
+\chapter{Limitaciones y posibles extensiones}
 
-El mapa es el microcentro, y de los 2292 contenedores de la zona 1, 1405 quedan a más de 50 metros de las calles de ese recorte y no entran, porque toda la zona 1 se iba del tope de unas 1500 aristas con el que se armó el grafo.
+Las limitaciones de este trabajo ya se contaron antes. En los datos, el mapa es el microcentro: de los 2292 contenedores de la zona 1, 1405 quedan a más de 50 metros de las calles de ese recorte y no entran, porque toda la zona 1 se iba del tope de unas 1500 aristas con el que se armó el grafo. En el modelo, la confusión entre media y baja no cambia el recorrido, porque el circuito solo obliga a pasar por las altas y el camino de unión se mide en metros; lo que sí lo mueve es el cruce entre alta y media, que en el test son 5 altos marcados como media y 8 medios marcados como alta.
 
-El modelo confunde medias con bajas, y ese intercambio no cambia el recorrido: el circuito solo obliga a pasar por las altas y el camino de unión se mide en metros. Lo que mueve el circuito es el cruce entre alta y media, que en el test son 5 altos marcados como media y 8 medios marcados como alta.
+Una extensión es pasar de un camión a $k$. Las calles de prioridad alta se repartirían entre los $k$ vehículos, por ejemplo para que cada uno cubra un largo parecido, y cada camión armaría su propio circuito con el mismo procedimiento de ahora: emparejar los grados impares de su parte y unir lo que quede separado con caminos mínimos.
 
 \end{document}
